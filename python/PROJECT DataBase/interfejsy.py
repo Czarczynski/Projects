@@ -560,7 +560,7 @@ class User_menu(QWidget):
                                                                 str(rekord[7]),
                                                                 str(rekord[8]),
                                                                 str(rekord[9]),
-                                                                str(rekord[10])))
+                                                                str(rekord[11])))
 
     def edit_data(self):
         self.child_win = Edit_data(self.user)
