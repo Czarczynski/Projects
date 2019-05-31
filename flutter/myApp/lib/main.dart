@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import './textChanger.dart';
 import './formTester.dart';
+import './saveChoise.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter',
       theme: ThemeData(brightness: Brightness.dark),
-      home: MyHomePage(title: 'Second App'),
+      home: MyHomePage(title: 'App'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  String _text = "Hello Wrold.", _dest = 'assets/food.jpg';
+class _HomePageState extends State<MyHomePage> {
+  String _text = "Hello World.", _dest = 'assets/food.jpg';
   int counter = 0, counter2 = 0;
 
   _textChanger() {
@@ -67,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
               Row(children: [
                 RaisedButton(
-                    onPressed: (counter2 == 1) ? null : _textChanger,
+                    onPressed: (counter2 == 0) ? _textChanger : null,
                     child: Text('Next dish')),
                 RaisedButton(
                     color: Colors.deepOrangeAccent,
                     onPressed: () {
                       setState(() {
-                        if (counter2 == 1) counter2 = -1;
+                        if (counter2 == 2) counter2 = -1;
                         counter2++;
                       });
                     },
@@ -82,16 +81,47 @@ class _MyHomePageState extends State<MyHomePage> {
               ]),
               (counter2 == 1)
                   ? Text('Form',
+                      textAlign: TextAlign.right,
                       style: TextStyle(
                           letterSpacing: 5.0,
                           color: Colors.deepOrangeAccent,
                           fontSize: 35))
-                  : Text('Food',
-                      style: TextStyle(
-                          letterSpacing: 5.0,
-                          color: Colors.deepOrangeAccent,
-                          fontSize: 35))
+                  : (counter2 == 2)
+                      ? Text('Save',
+                          style: TextStyle(
+                              letterSpacing: 5.0,
+                              color: Colors.deepOrangeAccent,
+                              fontSize: 35))
+                      : Text('Food',
+                          style: TextStyle(
+                              letterSpacing: 5.0,
+                              color: Colors.deepOrangeAccent,
+                              fontSize: 35))
             ])),
-        body: (counter2 == 1) ? formTester() : textChanger(_dest, _text));
+        body: (counter2 == 1)
+            ? formTester()
+            : (counter2 == 2) ? savePoint() : textChanger(_dest, _text)
+        //     ,
+        // floatingActionButton: (counter2 == 2)
+        //     ? FloatingActionButton(
+        //         onPressed: () {
+        //           return showDialog(
+        //               context: context,
+        //               builder: (context) {
+        //                 return AlertDialog(
+        //                     title: Text('Elements'),
+        //                     content: Row(children: <Widget>[
+        //                       Column(
+        //                           children: _list
+        //                               .map((element) =>
+        //                                   Card(child: Text(element)))
+        //                               .toList())
+        //                     ]));
+        //               });
+        //         },
+        //         tooltip: 'showData',
+        //         child: Icon(Icons.menu))
+        //     : null
+        );
   }
 }

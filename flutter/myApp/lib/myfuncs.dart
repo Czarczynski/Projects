@@ -5,3 +5,4 @@ bool Is_letter(str){
 bool Is_numeric(str){
   return RegExp(r"^[0-9]+$").hasMatch(str) ? true : false;
 }
+

@@ -63,7 +63,7 @@ class formTesterState extends State<formTester> {
               decoration: InputDecoration(hintText: 'Confirm password'),
               validator: (password2) {
                 if (password2 != passwordField.text)
-                  return "Passwords have to be the same";
+                  return "Passwords are different";
               },
             ),
             TextFormField(
