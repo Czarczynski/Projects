@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Transition, animate} from 'react-spring/renderprops'
+import {Transition, animated} from 'react-spring/renderprops'
 import Components1 from './components/Components1'
 import Components2 from './components/Components2'
 import Components3 from './components/Components3'
@@ -21,7 +21,13 @@ export class App extends Component {
           form={{opacity:0}}
           enter={{opacity:1}}
           leave={{opacity:0}}
-        ></Transition>
+        >
+          {show=>show && (props =>
+            <animated.div style={props}>
+              <Components3 />
+            </animated.div>
+            )}
+        </Transition>
       </div>
     )
   }
