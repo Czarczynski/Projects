@@ -1,0 +1,23 @@
+name: github_app
+description: github-app
+
+version: 1.0.0+1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  shared_preferences: ^0.5.2
+  rxdart: ^0.22.0
+  dio: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+
