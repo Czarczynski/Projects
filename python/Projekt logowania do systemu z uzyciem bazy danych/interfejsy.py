@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QLineEdit, QPushButton, QHBoxLayout, QMessageBox, QFileDialog
 from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QFileInfo
 import sys
 import database_conn as db
 import re
+import ftplib
 
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 
@@ -20,17 +21,16 @@ class Register(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.interfejs()
-
     def interfejs(self):
         # CSS
 
         stylesheet = '''
                         QWidget{
-                            background-color: white;
+                            
                         }
                         QPushButton{
-                            background-color:#FFA07A;
-                            border-color: #FFA07A;
+                            background-color:#8ceda6;
+                            border-color: #8ceda6;
                             color: #222;
                             font-weight:bold;
                             font-family:Arial;
@@ -39,7 +39,7 @@ class Register(QWidget):
                             height: 25%;
                         }
                         QPushButton:hover{
-                            background-color:#384d48;
+                            background-color:#8ceda6;
                             color:white;
                         }
 
@@ -50,8 +50,8 @@ class Register(QWidget):
                         QLineEdit{
                             height:25px;
                             font-size:16px;
-                            background-color: #EEE;
-                            border:1px solid #EEE;
+                            
+                            border:1px solid #8ceda6;
                         }
             '''
         # widgety
@@ -143,7 +143,7 @@ class Register(QWidget):
         street = self.street.text().capitalize()
         house = self.house.text()
         email = self.email.text()
-        cur.execute("USE projekt")
+        cur.execute("USE project")
         cur.execute("SELECT `login`, `password` from `users` WHERE `login`='{}'".format(login))
         if not cur.fetchall():
             if len(login) < 3 : QMessageBox.warning(self, "Error", "Incorect value in <b>Login</b>.")
@@ -182,7 +182,7 @@ class Register(QWidget):
                                              QMessageBox.Yes | QMessageBox.No,
                                              QMessageBox.No)
                 if quest == QMessageBox.Yes:
-                    regcur.execute("USE projekt")
+                    regcur.execute("USE project")
                     regcur.execute("INSERT INTO `users` (`login`,`password`,`name`,`surname`,`city`,`pesel`,`post_code`,`street`,`house`, `email`) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(login, password, name, surname, city, pesel, post_code, street, house, email))
                     con.commit()
                     self.back()
@@ -217,11 +217,11 @@ class Edit_data(QWidget):
 
         stylesheet = '''
                         QWidget{
-                            background-color: white;
+                            
                         }
                         QPushButton{
-                            background-color:#FFA07A;
-                            border-color: #FFA07A;
+                            background-color:#8ceda6;
+                            border-color: #8ceda6;
                             color: #222;
                             font-weight:bold;
                             font-family:Arial;
@@ -241,12 +241,12 @@ class Edit_data(QWidget):
                         QLineEdit{
                             height:25px;
                             font-size:16px;
-                            background-color: #EEE;
-                            border:1px solid #EEE;
+                            
+                            border:1px solid #8ceda6;
                         }
             '''
         # widgety
-        mycur.execute("USE projekt")
+        mycur.execute("USE project")
         mycur.execute("SELECT * FROM users WHERE login='{}'".format(user))
         query = mycur.fetchall()
         for rekord in query:
@@ -327,7 +327,7 @@ class Edit_data(QWidget):
                 self.back()
 
     def save(self):
-        cursor.execute("USE projekt")
+        cursor.execute("USE project")
         name = self.name.text().capitalize()
         surname = self.surname.text().capitalize()
         city = self.city.text().capitalize()
@@ -367,11 +367,11 @@ class User_menu(QWidget):
 
         stylesheet = '''
                         QWidget{
-                            background-color: white;
+                            
                         }
                         QPushButton{
-                            background-color:#FFA07A;
-                            border-color: #FFA07A;
+                            background-color:#8ceda6;
+                            border-color: #8ceda6;
                             color: #222;
                             font-weight:bold;
                             font-family:Arial;
@@ -380,7 +380,7 @@ class User_menu(QWidget):
                             height: 25%;
                         }
                         QPushButton:hover{
-                            background-color:#384d48;
+                            background-color:#8ceda6;
                             color:white;
                         }
                         QPushButton#disabled{
@@ -394,7 +394,7 @@ class User_menu(QWidget):
                         }
             '''
         # widgety
-        cur.execute("USE projekt")
+        cur.execute("USE project")
         cur.execute("SELECT image FROM users WHERE login='{}'".format(user))
         query = cur.fetchall()
         for rekord in query:
@@ -467,7 +467,7 @@ class User_menu(QWidget):
              "<th style='width:50px;'>House</th>" \
              "<th style='width:50px;'>E-mail</th>" \
              "</tr>"
-        showcur.execute("USE projekt")
+        showcur.execute("USE project")
         showcur.execute("SELECT * FROM `users`")
         users = showcur.fetchall()
         i=0
@@ -499,7 +499,7 @@ class User_menu(QWidget):
                                  QMessageBox.Yes | QMessageBox.No,
                                  QMessageBox.No)
             if quest == QMessageBox.Yes:
-                delcur.execute("USE projekt")
+                delcur.execute("USE project")
                 delcur.execute("DELETE FROM `users` WHERE `login`='{}'".format(self.user))
                 con.commit()
                 self.child_win = Main_switch()
@@ -524,17 +524,24 @@ class User_menu(QWidget):
 
     def choose_photo(self):
         openDirectoryDialog = QFileDialog()
-        filter = "Images (*.png *.jpg)"
         selected_filter = "Images (*.png *.jpg)"
-        upload = openDirectoryDialog.getOpenFileName(self, "open",'C:',filter, selected_filter)
-        photocur.execute("USE projekt")
+        upload = openDirectoryDialog.getOpenFileName(self, "Select Your profile photo",selected_filter)
+        upl = QFileInfo(upload[0])
+        ftp = ftplib.FTP('localhost')
+        ftp.login("login","password")
+        ftp.cwd()
+        photo = open(upload[0],rb)
+        ftp.storlines("STOR "+photoName, photo)
+        ftp.quit()
+        photoName = upl.fileName()
+        photocur.execute("USE project")
         photocur.execute("UPDATE `users` SET `image` = '{}' WHERE `login`='{}'".format(upload[0],self.user))
         con.commit()
         self.close()
         self.__init__(self.user)
 
     def show_data(self):
-        cur.execute("USE projekt")
+        cur.execute("USE project")
         cur.execute("SELECT * FROM users WHERE login='{}'".format(self.user))
 
         query = cur.fetchall()
@@ -584,11 +591,11 @@ class Log_in(QWidget):
 
         stylesheet = '''
                         QWidget{
-                            background-color: white;
+                            
                         }
                         QPushButton{
-                            background-color:#FFA07A;
-                            border-color: #FFA07A;
+                            background-color:#8ceda6;
+                            border-color: #8ceda6;
                             color: #222;
                             font-weight:bold;
                             font-family:Arial;
@@ -597,7 +604,7 @@ class Log_in(QWidget):
                             height: 25px;
                         }
                         QPushButton:hover{
-                            background-color:#384d48;
+                            background-color:#8ceda6;
                             color:white;
                         }
 
@@ -652,7 +659,7 @@ class Log_in(QWidget):
     def logtry(self):
         login = self.logon.text().capitalize()
         password = self.password.text()
-        cur.execute("USE projekt")
+        cur.execute("USE project")
         cur.execute("SELECT * FROM users WHERE login='{}'".format(login))
         logged=0
         user = cur.fetchall()
@@ -712,11 +719,8 @@ class Main_switch(QWidget):
         endBtn.resize(endBtn.sizeHint())
         # CSS
         stylesheet = '''
-                QWidget{
-                    background-color: #FA8072;
-                }
+                
                 QPushButton{
-                    background-color:#FFA07A;
                     border-color: #FFA07A;
                     color: #222;
                     font-weight:bold;
