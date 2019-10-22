@@ -59,7 +59,7 @@ class Interfejs(QWidget):
         QLineEdit{
             height:25px;
             font-size:16px;
-            background-color: #EEE;
+            background-color: #897;
             border:1px solid #EEE;
         }
         QLabel{
@@ -165,7 +165,7 @@ class Interfejs(QWidget):
             ax.axvline(x=0, color='k')
             ax.grid(True, which='both')
             #plt.grid(b=None, which='major', axis='both', color='b', linestyle='-', linewidth=2)
-            for x in self.drange(-10,10, 0.5):
+            for x in self.drange(-100,100, 0.5):
                 y.append(parA * x**2 + parB * x + parC)
                 xlist.append(x)
                 plt.plot(xlist, y)

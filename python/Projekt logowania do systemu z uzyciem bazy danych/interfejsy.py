@@ -158,7 +158,7 @@ class Register(QWidget):
             elif len(house)==0: QMessageBox.warning(self, "Error", "Incorrect value in <b>House</b>.")
             elif not EMAIL_REGEX.match(email): QMessageBox.warning(self, "Error", "Incorrect value in <b>E-mail</b>.")
             else:
-                quest = QMessageBox.question(self, "Regiser", "<table colapse=colapse stye='border:0px solid #FFA07A; width:100px;'>"
+                quest = QMessageBox.question(self, "Register", "<table colapse=colapse stye='border:0px solid #FFA07A; width:100px;'>"
                                                       "<tr><td>Login:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
                                                       "<tr><td>Password:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
                                                       "<tr><td>Name:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
@@ -246,8 +246,11 @@ class Edit_data(QWidget):
                         }
             '''
         # widgety
-        mycur.execute("USE project")
-        mycur.execute("SELECT * FROM users WHERE login='{}'".format(user))
+        try:
+            mycur.execute("USE project")
+            mycur.execute("SELECT * FROM users WHERE login='{}'".format(user))
+        except:
+             print("No database connection")   
         query = mycur.fetchall()
         for rekord in query:
             pass
