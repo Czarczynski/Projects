@@ -5,6 +5,7 @@ import sys
 import database_conn as db
 import re
 import ftplib
+import os
 
 EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 
@@ -29,8 +30,8 @@ class Register(QWidget):
                             
                         }
                         QPushButton{
-                            background-color:#8ceda6;
-                            border-color: #8ceda6;
+                            
+                            border-color: #FFA07A;
                             color: #222;
                             font-weight:bold;
                             font-family:Arial;
@@ -38,10 +39,14 @@ class Register(QWidget):
                             width:100%;
                             height: 25%;
                         }
+                        QPushBUtton first-child{
+                            background-color:white;
+                        }
                         QPushButton:hover{
-                            background-color:#8ceda6;
+                            background-color:#384d48;
                             color:white;
                         }
+                       
 
                         QLabel{
                             font-size:20px;
@@ -49,8 +54,8 @@ class Register(QWidget):
 
                         QLineEdit{
                             height:25px;
-                            font-size:16px;
-                            
+                            font-size:16px;   
+                            background-color: #444;
                             border:1px solid #8ceda6;
                         }
             '''
@@ -530,10 +535,15 @@ class User_menu(QWidget):
         selected_filter = "Images (*.png *.jpg)"
         upload = openDirectoryDialog.getOpenFileName(self, "Select Your profile photo",selected_filter)
         upl = QFileInfo(upload[0])
-        ftp = ftplib.FTP('localhost', 'root','')
-        photo = open(upl,'rb') # rb do poprawy
-        ftp.storlines("STOR {}".format(upl), photo)
-        ftp.quit()
+        ftp = ftplib.FTP("127.0.0.1")
+        ftp.login("root", "")
+        ext = os.path.splitext(upl)[1]
+        if ext in (".PNG", ".png", ".jpg", ".JPG", ".jpeg", ".JPEG"):
+            ftp.storlines("STOR " + upl, open(upl))
+        else:
+            ftp.storbinary("STOR " + upl, open(upl, "rb"), 1024)
+
+
         photoName = upl.fileName()
         photocur.execute("USE project")
         photocur.execute("UPDATE `users` SET `image` = '{}' WHERE `login`='{}'".format(upload[0],self.user))

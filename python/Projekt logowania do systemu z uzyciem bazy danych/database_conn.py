@@ -1,5 +1,6 @@
 import pymysql as mysql
-
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox
+from PyQt5.QtGui import QIcon
 def conn():
     try:
         con = mysql.Connect(host='localhost',
@@ -11,5 +12,13 @@ def conn():
         # utworzenie obiektu kursora
         return con
     except:
-        print("Not working database")
+        # Error()
+        print("Not working databas")
         exit()
+
+class Error(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.showWarning()
+    def showWarning(self):
+        QMessageBox.warning(self, "Not working database", "Error", QMessageBox.Ok)
