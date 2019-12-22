@@ -28,6 +28,7 @@ class _ProjectsDetailsPageState extends State<ProjectsDetailsPage> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
+        brightness: Brightness.dark,
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 16),
