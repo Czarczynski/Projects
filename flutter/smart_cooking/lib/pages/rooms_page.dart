@@ -13,7 +13,7 @@ class Rooms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<EmployeesBloc>(
-      builder: (context) => EmployeesBloc(context),
+      create: (context) => EmployeesBloc(context),
       child: Scaffold(
           key: _scaffoldKey,
           backgroundColor: Theme.of(context).backgroundColor,

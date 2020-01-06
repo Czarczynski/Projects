@@ -1,14 +1,15 @@
-name: salon
-description: Salon zabiegowy Eweliny - probna aplikacja
+name: flutter_clock_helper
+description: Helper classes for Flutter Clock contest.
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  intl: "^0.16.0"
 
   cupertino_icons: ^0.1.2
 
@@ -18,5 +19,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/

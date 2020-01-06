@@ -26,7 +26,7 @@ class GuideBook2 extends StatelessWidget {
               ]),
         ),
         body: ChangeNotifierProvider<GuidebookBloc>(
-            builder: (context) => GuidebookBloc(), child: _GuideBook2State()));
+            create: (context) => GuidebookBloc(), child: _GuideBook2State()));
   }
 }
 
