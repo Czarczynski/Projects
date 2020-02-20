@@ -1,0 +1,22 @@
+
+
+.Modal{
+     position: relative;
+     left: 50%;
+}
+
+.Card{
+    transform: translate3d(-50%, 0,0);
+}
+
+.Card_content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modale{
+    padding-bottom: 20px;
+}
+
