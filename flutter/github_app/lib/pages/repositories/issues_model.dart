@@ -41,7 +41,7 @@ class BlocIssues extends ChangeNotifier {
       if(lista.isNotEmpty)
         this.items = lista;
       else
-        return CircularProgressIndicator();
+        CircularProgressIndicator();
       notifyListeners();
     });
   }
