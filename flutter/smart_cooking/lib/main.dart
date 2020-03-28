@@ -14,7 +14,7 @@ class WalletApp extends StatelessWidget with CustomThemes {
         AppConfig.ROUTE_TO_LOGIN: (context) => LoginPage(),
         AppConfig.ROUTE_TO_DASHBOARD: (context) => DashboardPage(),
       },
-      theme: walletTheme,
+      theme: ownTheme,
       debugShowCheckedModeBanner: false,
       title: "Smart Cooking",
       home: LoginPage(),

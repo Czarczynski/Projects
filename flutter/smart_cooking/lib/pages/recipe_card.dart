@@ -71,7 +71,7 @@ class _RecipeCardState extends State<RecipeCard> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: Image.network(widget._recipeModel.image,width: 90,),
+                    child: Image.network(widget._recipeModel.image ?? AppConfig.DEFAULT_FOOD_IMAGE,width: 90,),
                   ),
                 ],
               ),

@@ -209,6 +209,7 @@ class RecipesModel {
 }
 
 class ExtendedIngredients {
+  bool haveIt;
   int id;
   String aisle;
   String image;
@@ -224,7 +225,8 @@ class ExtendedIngredients {
   Measures measures;
 
   ExtendedIngredients(
-      {this.id,
+      {this.haveIt,
+        this.id,
       this.aisle,
       this.image,
       this.consitency,
@@ -239,6 +241,7 @@ class ExtendedIngredients {
       this.measures});
 
   ExtendedIngredients.fromJson(Map<String, dynamic> json) {
+    haveIt = false;
     id = json['id'];
     aisle = json['aisle'];
     image = json['image'];

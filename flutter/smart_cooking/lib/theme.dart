@@ -2,7 +2,7 @@ import 'package:smart_cooking/app_config.dart';
 import 'package:flutter/material.dart';
 
 mixin CustomThemes {
-  final walletTheme = ThemeData(
+  final ownTheme = ThemeData(
     backgroundColor: ThemeConfig.WHITE_SMOKE,
     accentColor: ThemeConfig.MINT_GREEN,
     disabledColor: ThemeConfig.BLUE_CYAN,

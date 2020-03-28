@@ -1,5 +1,4 @@
 import 'package:smart_cooking/api/error/errors.dart';
-import 'package:smart_cooking/custom-painters/custom_flushbar.dart';
 import 'package:flutter/material.dart';
 
 class WalletUtils {
@@ -12,6 +11,6 @@ class WalletUtils {
       errorMessage = error.toString();
     }
 
-    showFlushBar(context, '$errorMessage', 'Dismiss', (){});
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text('$errorMessage'),action: SnackBarAction(label: 'dismiss', onPressed: (){})));
   }
 }

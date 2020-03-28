@@ -13,6 +13,7 @@ class AppConfig {
   static const String DEFAULT_USER_ID = '_';
   static const String DEFAULT_IMAGE =
       'https://static2.clutch.co/s3fs-public/logos/letterhead_logo.jpg?NllCKKF7SKZ_1lG9LfKMWQcnh_FtG_Sa';
+  static const String DEFAULT_FOOD_IMAGE = 'https://toppng.com/uploads/preview/clipart-free-seaweed-clipart-draw-food-placeholder-11562968708qhzooxrjly.png';
 }
 
 class ThemeConfig {

@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light, child: _LoginPageState()),
+          value: SystemUiOverlayStyle.dark, child: _LoginPageState()),
     );
   }
 }

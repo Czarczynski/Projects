@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:smart_cooking/api/network_api_client.dart';
-import 'package:smart_cooking/models/availableresources_model.dart';
 import 'package:smart_cooking/models/user_model.dart';
 
 class UserBloc {

@@ -25,11 +25,11 @@ class LoginBloc {
   }
 
   _goToRegisterPage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => GoogleWebPage(),
-      ),
-    );
+//    Navigator.push(
+//      context,
+//      MaterialPageRoute(
+//        builder: (context) => GoogleWebPage(),
+//      ),
+//    );
   }
 }

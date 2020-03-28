@@ -10,7 +10,8 @@ import 'no_results.dart';
 class HistoryList extends StatefulWidget {
   final String items;
   final bool history;
-  HistoryList(this.context,this.items,this.history);
+
+  HistoryList(this.context, this.items, this.history);
 
   final BuildContext context;
 
@@ -36,24 +37,22 @@ class _HistoryListState extends State<HistoryList> {
         ),
         Expanded(
             child: ChangeNotifierProvider<HistoryBloc>(
-                create: (context) => HistoryBloc(widget.items,context),
+                create: (context) => HistoryBloc(widget.items, context),
                 child: Consumer<HistoryBloc>(
                   builder: (context, HistoryBloc _bloc, _) {
-                    if (_bloc.recipeModels.length == 0) {
+                    if (_bloc.isInProgress) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (_bloc.recipeModels.length == 0) {
                       return NoResults();
-                    }
-                    return ListView.builder(
-                      itemCount: _bloc.recipeModels.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (_bloc.recipeModels == null) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-
-                        return RecipeCard(_bloc.recipeModels[index], '');
-                      },
-                    );
+                    } else
+                      return ListView.builder(
+                        itemCount: _bloc.recipeModels.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return RecipeCard(_bloc.recipeModels[index], '');
+                        },
+                      );
                   },
                 )))
       ],

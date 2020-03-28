@@ -6,7 +6,6 @@ import 'package:smart_cooking/blocs/logout_button.dart';
 import 'package:smart_cooking/blocs/recipes_bloc.dart';
 import 'package:smart_cooking/blocs/user_bloc.dart';
 import 'package:smart_cooking/pages/drawer_page.dart';
-import 'package:smart_cooking/pages/history_list.dart';
 import 'package:smart_cooking/pages/history_page.dart';
 import 'package:smart_cooking/pages/no_results.dart';
 import 'package:smart_cooking/pages/recipe_card.dart';
@@ -85,7 +84,7 @@ class DashboardPage extends StatelessWidget {
                                         HistoryPage(UserBloc.internal().profileInfo.lastVisited))),
                             child: _button(
                               context,
-                              EngStrings.STARRED,
+                              EngStrings.HISTORY,
                               null,
                               width: 0.45,
                               marginright: 0,
@@ -99,7 +98,7 @@ class DashboardPage extends StatelessWidget {
                                         StarredPage(UserBloc.internal().profileInfo.starred))),
                             child: _button(
                               context,
-                              EngStrings.HISTORY,
+                              EngStrings.STARRED,
                               LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
@@ -113,7 +112,7 @@ class DashboardPage extends StatelessWidget {
                         ],
                       );
                     } else if (index == 3) {
-                      return _text(context, EngStrings.LAST_VISITED);
+                      return _text(context, EngStrings.STARRED);
                     } else {
                       if (_bloc.recipeModels.length > 0) {
                         return RecipeCard(_bloc.recipeModels[index - 4], '');
@@ -127,10 +126,10 @@ class DashboardPage extends StatelessWidget {
   }
 
   Container _button(_context, String _text, LinearGradient _gradient,
-      {width = 1, double marginleft = 12, double marginright = 12}) {
+      {width = 1, double marginleft = 0.03, double marginright = 0.03}) {
     return Container(
       height: 60,
-      margin: EdgeInsets.fromLTRB(marginleft, 12, marginright, 16),
+      margin: EdgeInsets.fromLTRB(MediaQuery.of(_context).size.width * marginleft, 12, MediaQuery.of(_context).size.width * marginright, 16),
       width: MediaQuery.of(_context).size.width * width,
       decoration: BoxDecoration(
         color: ThemeConfig.VENETIAN_RED,

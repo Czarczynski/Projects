@@ -24,48 +24,26 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        brightness: Brightness.dark,
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: _biggerButton(context, bigger),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: _saveRecipeButton(context, _scaffoldKey),
-          )
-        ],
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back,
-                color: Theme.of(context).iconTheme.color, size: 24)),
-        bottom: PreferredSize(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(40, 0, 40, 12),
-              child: Center(
-                child: Text('${widget._recipeModel.title}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontSize: 24),
-                    maxLines: null),
-              ),
-            ),
-            preferredSize: widget._recipeModel.title.length <= 30
-                ? Size.fromHeight(40.0)
-                : widget._recipeModel.title.length <= 50
-                    ? Size.fromHeight(60.0)
-                    : widget._recipeModel.title.length <= 70
-                        ? Size.fromHeight(80.0)
-                        : Size.fromHeight(100.0)),
+//        title: Text(widget._recipeModel.title,
+//            style: Theme.of(context).textTheme.title.copyWith(fontSize: 24),
+//            maxLines: null),
+      actions: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top:8.0,bottom:8),
+          child: _biggerButton(context, bigger),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _saveRecipeButton(context, _scaffoldKey),
+        )
+      ],
+        brightness: Brightness.light,
       ),
       body: SafeArea(
         child: Stack(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(16, 16, 16, 20),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(4),
@@ -76,63 +54,74 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                           offset: Offset(0, 2))
                     ]),
                 child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                     child: ListView.builder(
                         itemCount: widget._recipeModel.analyzedInstructions[0]
                                 .steps.length +
-                            widget._recipeModel.extendedIngredients.length +
-                            5,
+                            6,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == 0) {
                             return Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 4),
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text(widget._recipeModel.title,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .title
+                                      .copyWith(fontSize: 24),
+                                  textAlign: TextAlign.center,
+                                  maxLines: null),
+                            );
+                          } else if (index == 2) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 4, top: 4),
                               child: Text(
                                   'Cooking time: ${widget._recipeModel.readyInMinutes} min',
                                   style: Theme.of(context).textTheme.display4),
                             );
-                          } else if (index == 1) {
-                            return Row(
-                              children: <Widget>[
-                                Visibility(
-                                  visible: true,
-                                  child: Expanded(
-                                    flex: widget._recipeModel.readyInMinutes,
+                          } else if (index == 3) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Visibility(
+                                    visible: true,
+                                    child: Expanded(
+                                      flex: widget._recipeModel.readyInMinutes,
+                                      child: DecoratedBox(
+                                        child: SizedBox(
+                                          height: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                            gradient: LinearGradient(colors: [
+                                          Color(0xFF84C7FF),
+                                          Color(0xFF3116C2)
+                                        ])),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: (200 -
+                                        widget._recipeModel.readyInMinutes),
                                     child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).disabledColor,
+                                      ),
                                       child: SizedBox(
                                         height: 4,
                                       ),
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                        Color(0xFF84C7FF),
-                                        Color(0xFF3116C2)
-                                      ])),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: (200 -
-                                      widget._recipeModel.readyInMinutes),
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).disabledColor,
-                                    ),
-                                    child: SizedBox(
-                                      height: 4,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             );
-                          } else if (index == 2) {
+                          } else if (index == 1) {
                             return Padding(
                               padding:
                                   const EdgeInsets.only(top: 20, bottom: 10),
-                              child: widget._recipeModel.image != null
-                                  ? Image.network(widget._recipeModel.image)
-                                  : Container(),
+                              child: Image.network(widget._recipeModel.image ??
+                                  AppConfig.DEFAULT_FOOD_IMAGE),
                             );
-                          } else if (index == 3) {
+                          } else if (index == 4) {
                             return Container(
                                 padding: EdgeInsets.only(bottom: 0),
                                 color: Theme.of(context).iconTheme.color,
@@ -144,12 +133,9 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                         .copyWith(
                                             color: ThemeConfig.WHITE_SMOKE,
                                             fontSize: 23)));
-                          } else if (index >= 4 &&
-                              index <
-                                  widget._recipeModel.extendedIngredients
-                                          .length +
-                                      4) {
+                          } else if (index == 5) {
                             return Container(
+                              alignment: Alignment.centerLeft,
                               decoration: BoxDecoration(
                                   border: Border(
                                       left: BorderSide(
@@ -161,32 +147,52 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                               .iconTheme
                                               .color),
                                       bottom: BorderSide(
-                                          color: widget
-                                                          ._recipeModel
-                                                          .extendedIngredients
-                                                          .length +
-                                                      3 ==
-                                                  index
-                                              ? Theme.of(context)
-                                                  .iconTheme
-                                                  .color
-                                              : Colors.black54))),
-                              child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10.0,
-                                      left: 10,
-                                      right: 10,
-                                      bottom: 6),
-                                  child: Text(
-                                    "${widget._recipeModel.extendedIngredients[index - 4].originalString}",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(fontSize: 15),
-                                  )),
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color))),
+                              child: RotatedBox(
+                                quarterTurns: 1,
+                                child: ToggleButtons(
+                                  children: widget
+                                      ._recipeModel.extendedIngredients
+                                      .map((_item) => RotatedBox(
+                                            quarterTurns: 3,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10),
+                                              child: SizedBox(
+                                                width: double.infinity,
+                                                child: Text(
+                                                    "${_item.originalString}",
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(
+                                                        fontSize: 15)),
+                                              ),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  renderBorder: false,
+                                  isSelected: widget
+                                      ._recipeModel.extendedIngredients
+                                      .map((_item) => _item.haveIt)
+                                      .toList(),
+                                  onPressed: (index) {
+                                    setState(() {
+                                      widget
+                                              ._recipeModel
+                                              .extendedIngredients[index]
+                                              .haveIt =
+                                          !widget
+                                              ._recipeModel
+                                              .extendedIngredients[index]
+                                              .haveIt;
+                                    });
+                                  },
+                                  selectedColor: Colors.green,
+                                ),
+                              ),
                             );
-                          } else if (index ==
-                              4 +
-                                  widget._recipeModel.extendedIngredients
-                                      .length) {
+                          } else if (index == 6) {
                             return Padding(
                               padding:
                                   const EdgeInsets.only(bottom: 8.0, top: 8),
@@ -204,25 +210,20 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    "\nStep ${index - 4 - widget._recipeModel.extendedIngredients.length}",
+                                    "\nStep ${index - 6}",
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black54),
                                   ),
                                   Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 10.0),
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 10),
                                       child: Text(
                                           widget
                                               ._recipeModel
                                               .analyzedInstructions[0]
-                                              .steps[index -
-                                                  5 -
-                                                  widget
-                                                      ._recipeModel
-                                                      .extendedIngredients
-                                                      .length]
+                                              .steps[index - 7]
                                               .step,
                                           style: Theme.of(context)
                                               .textTheme
@@ -248,7 +249,10 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
           return null;
         });
       },
-      child: Icon(_bigger ? Icons.zoom_out : Icons.zoom_in),
+      child: Padding(
+        padding: const EdgeInsets.only(left:8.0,right: 8),
+        child: Icon(_bigger ? Icons.zoom_out : Icons.zoom_in),
+      ),
     );
   }
 
@@ -270,19 +274,25 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                 content: Text("Already saved\nDo You want to unsave?"),
                 action: SnackBarAction(
                   label: "Yes",
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
               ))
           : () {
               StarredBloc("${widget._recipeModel.id}");
-              setState((){});
+              setState(() {});
             },
       child: already
-          ? Icon(
-              Icons.star,
-              color: Colors.amber,
-            )
-          : Icon(Icons.star_border),
+          ? Padding(
+            padding: const EdgeInsets.only(left:8.0,right: 8),
+            child: Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+          )
+          : Padding(
+            padding: const EdgeInsets.only(left:8.0,right: 8),
+            child: Icon(Icons.star_border),
+          ),
     );
   }
 }

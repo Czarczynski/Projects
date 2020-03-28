@@ -8,27 +8,27 @@ import 'package:smart_cooking/models/recipe_model.dart';
 
 class RecipesBloc extends ChangeNotifier {
   List<RecipesModel> recipeModels = List<RecipesModel>();
-  bool _isinprogress = true;
+  bool _isInProgress = true;
   final BuildContext context;
 
-  bool get isInProgress =>_isinprogress;
+  bool get isInProgress => _isInProgress;
+
   RecipesBloc(this.context) {
     _getRecipeModels().then((_list) {
       recipeModels = _list.recipes;
-      _isinprogress = false;
+      _isInProgress = false;
       notifyListeners();
     });
   }
 
   Future<RecipeModel> _getRecipeModels() async {
     try {
-      final response = await http.get(
-          '${AppConfig.RAPID_API_URL}/recipes/random?number=9',
-          headers: {
-            "x-rapidapi-host": AppConfig.RAPID_API_HOST,
-            "x-rapidapi-key": AppConfig.RAPID_API_KEY
-          });
-      if(response.statusCode==200)
+      final response = await http
+          .get('${AppConfig.RAPID_API_URL}/recipes/random?number=9', headers: {
+        "x-rapidapi-host": AppConfig.RAPID_API_HOST,
+        "x-rapidapi-key": AppConfig.RAPID_API_KEY
+      });
+      if (response.statusCode == 200)
         return RecipeModel.fromJson(json.decode(response.body));
       else
         throw Exception('Failed while getting recipes');
@@ -69,17 +69,20 @@ class HistoryBloc extends ChangeNotifier {
   List<String> _listOfId;
   List<RecipesModel> recipeModels = [];
   final BuildContext context;
+  bool _isInProgress = true;
 
-  HistoryBloc(this._ids,this.context) {
+  bool get isInProgress => _isInProgress;
+
+  HistoryBloc(this._ids, this.context) {
     _listOfId = _ids.split(',');
 
     _listOfId.reversed.forEach((item) {
       _getRecipeById(item).then((_item) {
         recipeModels.add(_item);
-    notifyListeners();
+        _isInProgress = false;
+        notifyListeners();
       });
     });
-
   }
 
   Future<RecipesModel> _getRecipeById(String id) async {

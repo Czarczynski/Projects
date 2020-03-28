@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class CircularProgressWidget extends StatefulWidget {
   final int _amount, _budget;
-  final bool _paid, _completed;
+  final bool  _completed;
 
-  CircularProgressWidget(this._amount, this._budget, this._paid, this._completed);
+  CircularProgressWidget(this._amount, this._budget, this._completed);
 
   @override
   _CircularProgressWidgetState createState() => _CircularProgressWidgetState();

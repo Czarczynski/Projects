@@ -2,7 +2,7 @@ import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/blocs/recipes_bloc.dart';
 import 'package:smart_cooking/pages/drawer_page.dart';
 import 'package:smart_cooking/pages/recipes_list.dart';
-import 'package:smart_cooking/pages/projects_search.dart';
+import 'package:smart_cooking/pages/recipes_search.dart';
 import 'package:flutter/material.dart';
 
 class RecipesPage extends StatelessWidget {

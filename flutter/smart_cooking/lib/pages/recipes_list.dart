@@ -25,32 +25,37 @@ class _RecipesListState extends State<RecipesList> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Text(
-          EngStrings.TODAY_S_RECIPES,
-          style: Theme.of(context).textTheme.display1.copyWith(
-              fontSize: 20, color: ThemeConfig.ST_TROPAZ, letterSpacing: 1.5),
-        ),
         Expanded(
             child: ChangeNotifierProvider<RecipesBloc>(
                 create: (context) => RecipesBloc(context),
                 child: Consumer<RecipesBloc>(
                   builder: (context, RecipesBloc _bloc, _) {
-                    if (_bloc.recipeModels.length == 0) {
+                    if (_bloc.isInProgress) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (_bloc.recipeModels.length == 0) {
                       return NoResults();
-                    }
-                    return ListView.builder(
-                      itemCount: _bloc.recipeModels.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (_bloc.recipeModels == null) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-
-                        return RecipeCard(
-                            _bloc.recipeModels[index], '');
-                      },
-                    );
+                    } else
+                      return ListView.builder(
+                        itemCount: _bloc.recipeModels.length + 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 0)
+                            return Center(
+                              child: Text(
+                                EngStrings.TODAY_S_RECIPES,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .display1
+                                    .copyWith(
+                                        fontSize: 20,
+                                        color: ThemeConfig.ST_TROPAZ,
+                                        letterSpacing: 1.5),
+                              ),
+                            );
+                          return RecipeCard(_bloc.recipeModels[index-1], '');
+                        },
+                      );
                   },
                 )))
       ],
