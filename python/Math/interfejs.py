@@ -10,7 +10,6 @@ class Interfejs(QWidget):
         super().__init__(parent)
         self.interfejs()
     def interfejs(self):
-
         # widgety
         ukladT = QGridLayout()
 
@@ -37,8 +36,8 @@ class Interfejs(QWidget):
         koniecBtn.resize(koniecBtn.sizeHint())
 
         koniecBtn.setFixedSize(400, 50)
-        rysujBtn.setFixedSize(198, 50)
-        liczBtn.setFixedSize(198, 50)
+        rysujBtn.setFixedSize(150, 40)
+        liczBtn.setFixedSize(150, 40)
         # CSS
         stylesheet='''
         QWidget{
@@ -59,7 +58,6 @@ class Interfejs(QWidget):
         QLineEdit{
             height:25px;
             font-size:16px;
-            background-color: #897;
             border:1px solid #EEE;
         }
         QLabel{
@@ -165,7 +163,7 @@ class Interfejs(QWidget):
             ax.axvline(x=0, color='k')
             ax.grid(True, which='both')
             #plt.grid(b=None, which='major', axis='both', color='b', linestyle='-', linewidth=2)
-            for x in self.drange(-100,100, 0.5):
+            for x in self.drange(-10,10, 0.5):
                 y.append(parA * x**2 + parB * x + parC)
                 xlist.append(x)
                 plt.plot(xlist, y)
@@ -191,3 +189,5 @@ def run():
     app= QApplication(sys.argv)
     okno = Interfejs()
     sys.exit(app.exec_())
+
+    
