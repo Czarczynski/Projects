@@ -17,6 +17,7 @@ dependencies:
   http:
   qr_code_scanner: ^0.0.11
   flushbar:
+  flutter_html: ^0.11.1
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +47,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/images/urzadzenia/
 
 

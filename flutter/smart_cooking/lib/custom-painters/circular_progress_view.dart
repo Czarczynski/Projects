@@ -67,23 +67,17 @@ class _CircularProgressWidgetState extends State<CircularProgressWidget>
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(EngStrings.COLLECTED,
-                      style: Theme.of(context)
-                          .textTheme
-                          .display1
-                          .copyWith(color: ThemeConfig.ST_TROPAZ)),
-                  Text(
-                      "${widget._amount.toInt()}/${widget._budget.toInt()} ${EngStrings.PLN}",
-                      style: Theme.of(context).textTheme.subhead),
-                  widget._paid == true
-                      ? Image.asset(
-                          'assets/images/ic_cegielka_asd.png',
-                          width: 48,
-                          height: 30,
-                        )
-                      : Container()
-                ],
+//                children: <Widget>[
+//                  Text(EngStrings.COLLECTED,
+//                      style: Theme.of(context)
+//                          .textTheme
+//                          .display1
+//                          .copyWith(color: ThemeConfig.ST_TROPAZ)),
+//                  Text(
+//                      "${widget._amount.toInt()}/${widget._budget.toInt()} ${EngStrings.PLN}",
+//                      style: Theme.of(context).textTheme.subhead),
+//
+//                ],
               ),
             ),
           ),

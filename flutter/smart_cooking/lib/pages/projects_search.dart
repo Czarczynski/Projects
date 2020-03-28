@@ -1,15 +1,15 @@
-import 'package:smart_cooking/app_config.dart';
-import 'package:smart_cooking/blocs/projects_bloc.dart';
-import 'package:smart_cooking/blocs/search_bloc.dart';
-import 'package:smart_cooking/models/project_model.dart';
-import 'package:smart_cooking/pages/no_results.dart';
-import 'package:smart_cooking/pages/project_card.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_cooking/app_config.dart';
+import 'package:smart_cooking/blocs/recipes_bloc.dart';
+import 'package:smart_cooking/blocs/search_bloc.dart';
+import 'package:smart_cooking/models/recipe_model.dart';
+import 'package:smart_cooking/pages/no_results.dart';
+import 'package:smart_cooking/pages/recipe_card.dart';
 
-class ProjectsSearch extends SearchDelegate {
-  List<ProjectModel> _projectModels;
+class RecipesSearch extends SearchDelegate {
+  List<RecipesModel> _recipesModels;
 
-  ProjectsSearch(this._projectModels);
+  RecipesSearch(this._recipesModels);
 
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -44,12 +44,12 @@ class ProjectsSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return _SearchProjects(query, _projectModels, context);
+    return _SearchProjects(query, _recipesModels, context);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return _SearchProjects(query, _projectModels, context);
+    return _SearchProjects(query, _recipesModels, context);
 //    if (query.trim() == '') {
 //      return Container(
 //        color: ThemeConfig.WHITE_SMOKE,
@@ -88,14 +88,13 @@ class ProjectsSearch extends SearchDelegate {
 }
 
 class _SearchProjects extends StatelessWidget {
-  final List<ProjectModel> _projectModels;
+  final List<RecipesModel> _projectModels;
   final String query;
   SearchBloc _searchBloc;
 
-  _SearchProjects(this.query, this._projectModels, BuildContext context){
+  _SearchProjects(this.query, this._projectModels, BuildContext context) {
     _searchBloc = SearchBloc(_projectModels, context);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -111,10 +110,10 @@ class _SearchProjects extends StatelessWidget {
         ),
       );
     else {
-      ProjectBloc _bloc = ProjectBloc(context);
+      RecipesBloc _bloc = RecipesBloc(context);
       return StreamBuilder(
         stream: _searchBloc.getSearchResultsStream(query),
-        builder: (context,snapshot) {
+        builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.length == 0) {
               return NoResults();
@@ -123,7 +122,7 @@ class _SearchProjects extends StatelessWidget {
             return ListView.builder(
                 itemCount: projectsList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ProjectCard(_projectModels[index], _bloc, query);
+                  return RecipeCard(_projectModels[index], query);
                 });
           } else if (snapshot.hasError) {
             throw Exception(snapshot.error);
@@ -137,4 +136,5 @@ class _SearchProjects extends StatelessWidget {
         },
       );
     }
-    }}
+  }
+}

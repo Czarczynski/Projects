@@ -4,10 +4,10 @@ import 'package:smart_cooking/pages/drawer_page.dart';
 import 'package:smart_cooking/pages/history_list.dart';
 
 // ignore: must_be_immutable
-class HistoryPage extends StatelessWidget {
-  final String lastVisited;
+class StarredPage extends StatelessWidget {
+  final String starred;
 
-  HistoryPage(this.lastVisited);
+  StarredPage(this.starred);
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class HistoryPage extends StatelessWidget {
         brightness: Brightness.light,
         backgroundColor: Colors.transparent,
         title: Text(
-          EngStrings.HISTORY,
+          EngStrings.STARRED,
           style: Theme.of(context).textTheme.title,
         ),
       ),
-      drawer: DrawerPage(CurrentDrawerPage.HISTORY_PAGE),
-      body: HistoryList(context, lastVisited, true),
+      drawer: DrawerPage(CurrentDrawerPage.SAVED_PAGE),
+      body: HistoryList(context, starred, false),
     );
   }
 }

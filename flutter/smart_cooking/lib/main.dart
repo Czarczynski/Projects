@@ -1,5 +1,5 @@
 import 'package:smart_cooking/app_config.dart';
-import 'package:smart_cooking/pages/LoginPage.dart';
+import 'package:smart_cooking/pages/login_page.dart';
 import 'package:smart_cooking/pages/dashboard_page.dart';
 import 'package:smart_cooking/theme.dart';
 import 'package:flutter/material.dart';

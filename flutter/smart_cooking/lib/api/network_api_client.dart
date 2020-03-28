@@ -3,19 +3,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:smart_cooking/app_config.dart';
-import 'package:smart_cooking/blocs/get_refresh_token.dart';
 import 'package:dio/dio.dart';
 
 import './error/error_handler.dart';
 import '../store/account_manager.dart';
 
-class AppuniteHttpClient {
-  static final AppuniteHttpClient _instance = AppuniteHttpClient._internal();
-
-  factory AppuniteHttpClient() => _instance;
+class SmartCookingHttpClient {
+  static final SmartCookingHttpClient _instance = SmartCookingHttpClient._internal();
+  bool external= false;
+  factory SmartCookingHttpClient() => _instance;
   final Dio _dioClient = Dio();
 
-  AppuniteHttpClient._internal() {
+  SmartCookingHttpClient._internal() {
     _handleDioInterceptors();
     _dioClient.options.baseUrl = AppConfig.HOST_URL;
   }
@@ -27,27 +26,30 @@ class AppuniteHttpClient {
   Future<Response> post(url,
           {Map<String, dynamic> body, Map<String, dynamic> headers}) async =>
       ErrorHandler.makeRequestWithErrorHandler(_dioClient.post(url,
-          data: jsonEncode(body), options: Options(headers: headers)));
+          data: body==null ? null : encodeMap(body), options: Options(headers: headers)));
 
+  String encodeMap(Map data) {
+    return data.keys.map((key) => "${Uri.encodeComponent(key)}=${Uri.encodeComponent(data[key])}").join("&");
+  }
   _handleDioInterceptors() {
     _dioClient.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
       String xAuthToken = await AccountManager().getAccessToken();
 
       if (xAuthToken?.isNotEmpty ?? false) {
-        DateTime expiresAt =
-            DateTime.parse(await AccountManager().getExpiresAt())
-                .add(DateTime.now().timeZoneOffset);
-        DateTime currentTime = DateTime.now();
-        if (currentTime.difference(expiresAt).inMilliseconds > 0) {
-          GetRefreshToken(await AccountManager().getRefreshToken(),
-              await AccountManager().getAccessToken());
-          xAuthToken = await AccountManager().getAccessToken();
-        }
-        options.headers['x-auth-token'] = '$xAuthToken';
+//        DateTime expiresAt =
+//            DateTime.parse(await AccountManager().getExpiresAt())
+//                .add(DateTime.now().timeZoneOffset);
+//        DateTime currentTime = DateTime.now();
+//        if (currentTime.difference(expiresAt).inMilliseconds > 0) {
+//          GetRefreshToken(await AccountManager().getRefreshToken(),
+//              await AccountManager().getAccessToken());
+//          xAuthToken = await AccountManager().getAccessToken();
+//        }
+        options.headers['Authorization'] = 'bearer $xAuthToken';
       }
       options.headers[HttpHeaders.acceptHeader] = "application/json";
-      options.headers[HttpHeaders.contentTypeHeader] = "application/json";
+//      options.headers[HttpHeaders.contentTypeHeader] = "application/x-www-form-urlencoded";
       return options;
     }, onResponse: (Response response) async {
       return response;
