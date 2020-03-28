@@ -56,7 +56,7 @@ class EngStrings {
   static const String FIRSTNAME = "Firstname";
   static const String LASTNAME = "Lastname";
   static const String PHONE_NO = "Phone number";
-  static const String CREATION_DATE = "Created dater";
+  static const String TIME_WITH_US = "You are here since";
   static const String COOKING_TIME = "Cooking time";
   static const String TODAY_S_RECIPES = "Today's recipes";
 

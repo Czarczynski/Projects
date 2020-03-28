@@ -83,7 +83,7 @@ class ProfilePage extends StatelessWidget {
       )),
     );
   }
-
+  DateTime _creationDate = DateTime.parse(UserBloc.internal().profileInfo.creationDate);
   Container _profilePageDetails(BuildContext context,
       {double height = 1, double width = 1}) {
     return Container(
@@ -99,7 +99,8 @@ class ProfilePage extends StatelessWidget {
                   stream: UserBloc.internal().streamControllerProfileInfo,
                   builder: (context, snapshot) {
                     return Text(
-                        '${_profilePageBloc.profileInfo != null ? UserBloc.internal().profileInfo.userName : "Default String"}',
+                        '${_profilePageBloc.profileInfo != null ?
+                        UserBloc.internal().profileInfo.userName : "Default String"}',
                         textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
@@ -124,10 +125,10 @@ class ProfilePage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            '${EngStrings.FIRSTNAME}:   \n\n'
-                            '${EngStrings.LASTNAME}:    \n\n'
+                            '${EngStrings.FIRSTNAME}:\n\n'
+                            '${EngStrings.LASTNAME}:\n\n'
                             '${EngStrings.PHONE_NO}:\n\n'
-                            '${EngStrings.CREATION_DATE}:\n\n',
+                            '${EngStrings.TIME_WITH_US}:\n\n',
                             style: Theme.of(context)
                                 .textTheme
                                 .display1
@@ -145,8 +146,7 @@ class ProfilePage extends StatelessWidget {
                                 '${UserBloc.internal().profileInfo.firstName}\n\n'
                                 '${UserBloc.internal().profileInfo.lastName}\n\n'
                                 '${UserBloc.internal().profileInfo.phoneNumber}\n\n'
-                                '${UserBloc.internal().profileInfo.creationDate}\n\n',
-//                            textAlign: TextAlign.center,
+                                '${_creationDate.year} ${MonthInWord(_creationDate.month)} ${_creationDate.day}\n\n',
                                 style: Theme.of(context)
                                     .textTheme
                                     .display1
@@ -161,5 +161,36 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String MonthInWord(int _switcher){
+    switch(_switcher){
+      case 1:
+        return "January";
+      case 2:
+        return "February";
+      case 3:
+        return "March";
+      case 4:
+        return "April";
+      case 5:
+        return "May";
+      case 6:
+        return "June";
+      case 7:
+        return "July";
+      case 8:
+        return "August";
+      case 9:
+        return "September";
+      case 10:
+        return "October";
+      case 11:
+        return "November";
+      case 12:
+        return "December";
+      default:
+        return "Unknown Month";
+    }
   }
 }

@@ -31,6 +31,7 @@ class DrawerPage extends StatelessWidget {
           DrawerHeader(
               decoration: BoxDecoration(
                   image: DecorationImage(
+                    fit: BoxFit.fitHeight,
                       image:
                           AssetImage('assets/images/drawerbackground.jpeg'))),
               child: Row(
@@ -79,7 +80,10 @@ class DrawerPage extends StatelessWidget {
               stream: profilePageBloc.streamControllerProfileInfo,
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
-                  return Center(child: CircularProgressIndicator());
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 200),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
                 else{
                   return Expanded(
                     child: Container(
