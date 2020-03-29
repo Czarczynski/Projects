@@ -406,7 +406,7 @@ class User_menu(QWidget):
         cur.execute("SELECT image FROM users WHERE login='{}'".format(user))
         query = cur.fetchall()
         for rekord in query:
-            zdj= rekord[0]
+            zdj= "user.png"
 
         if zdj == False:
             zdj = 'user.png'
@@ -558,17 +558,17 @@ class User_menu(QWidget):
         query = cur.fetchall()
 
         for rekord in query:
-            QMessageBox.information(self, "Your Data","<table colapse=colapse stye='border:0px solid #FFA07A; width:100px;'>"
-                                                      "<tr><td>Login:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>Password:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>Name:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>Surname:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>City:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>Pesel:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>Post Code:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>Street:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>House:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
-                                                      "<tr><td>E-mail:</td><td style='background-color:#EEE; font-weight: bold;'>{}</td></tr>"
+            QMessageBox.information(self, "Your Data","<table colapse=colapse style='border:0px solid #FFA07A; width:100px;'>"
+                                                      "<tr><td>Login:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>Password:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>Name:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>Surname:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>City:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>Pesel:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>Post Code:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>Street:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>House:</td><td style='font-weight: bold;'>{}</td></tr>"
+                                                      "<tr><td>E-mail:</td><td style='font-weight: bold;'>{}</td></tr>"
                                                       "</table>".format(str(rekord[1]),
                                                                 str(rekord[2]),
                                                                 str(rekord[3]),
