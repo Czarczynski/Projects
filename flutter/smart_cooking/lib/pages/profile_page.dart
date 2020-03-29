@@ -4,6 +4,7 @@ import 'package:smart_cooking/blocs/user_bloc.dart';
 
 import 'drawer_page.dart';
 
+// ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -146,7 +147,7 @@ class ProfilePage extends StatelessWidget {
                                 '${UserBloc.internal().profileInfo.firstName}\n\n'
                                 '${UserBloc.internal().profileInfo.lastName}\n\n'
                                 '${UserBloc.internal().profileInfo.phoneNumber}\n\n'
-                                '${_creationDate.year} ${MonthInWord(_creationDate.month)} ${_creationDate.day}\n\n',
+                                '${_creationDate.year} ${monthInWord(_creationDate.month)} ${_creationDate.day}\n\n',
                                 style: Theme.of(context)
                                     .textTheme
                                     .display1
@@ -163,7 +164,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  String MonthInWord(int _switcher){
+  String monthInWord(int _switcher){
     switch(_switcher){
       case 1:
         return "January";

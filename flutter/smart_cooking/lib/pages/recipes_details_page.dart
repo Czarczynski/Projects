@@ -24,9 +24,6 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-//        title: Text(widget._recipeModel.title,
-//            style: Theme.of(context).textTheme.title.copyWith(fontSize: 24),
-//            maxLines: null),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top:8.0,bottom:8),
@@ -161,7 +158,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                               padding: const EdgeInsets.only(
                                                   left: 10, right: 10),
                                               child: SizedBox(
-                                                width: double.infinity,
+                                                width: MediaQuery.of(context).size.width,
                                                 child: Text(
                                                     "${_item.originalString}",
                                                     textAlign: TextAlign.left,

@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark, child: _LoginPageState()),
+          value: SystemUiOverlayStyle.light, child: _LoginPageState()),
     );
   }
 }
@@ -43,7 +43,7 @@ class _LoginPageState extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width * 0.8,
                 alignment: Alignment.center,
-                child: Text("Kontynuuj bez logowania",
+                child: Text("Continue without signing",
                     style: TextStyle(
                         decoration: TextDecoration.underline,
                         fontSize: 16,

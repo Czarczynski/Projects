@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_cooking/app_config.dart';
-import 'package:smart_cooking/blocs/recipes_bloc.dart';
 import 'package:smart_cooking/blocs/search_bloc.dart';
 import 'package:smart_cooking/models/recipe_model.dart';
 import 'package:smart_cooking/pages/no_results.dart';
@@ -50,43 +49,10 @@ class RecipesSearch extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     return _SearchRecipes(query, _recipesModels, context);
-//    if (query.trim() == '') {
-//      return Container(
-//        color: ThemeConfig.WHITE_SMOKE,
-//        child: Center(
-//          child: Text(EngStrings.SEARCH,
-//              style: Theme.of(context)
-//                  .textTheme
-//                  .title
-//                  .copyWith(color: ThemeConfig.BLUE_LIGHT_GRAY)),
-//        ),
-//      );
-//    }
-//    searchBloc(query, context);
-//    return StreamBuilder(
-//        stream: searchBloc.getSearchResultsStream(query),
-//        builder: (BuildContext context,
-//            AsyncSnapshot<List<ProjectModel>> _snapshot) {
-//          if (_snapshot.hasData) {
-//            if (_snapshot.data.length == 0) {
-//              return NoResults();
-//            }
-//            _projectModels = _snapshot.data;
-//            return ListView.builder(
-//                itemCount: _projectModels.length,
-//                itemBuilder: (BuildContext context, int index) {
-//                  return ProjectCard(_projectModels[index], _bloc, query);
-//                });
-//          } else if (_snapshot.hasError) {
-//            throw Exception(_snapshot.error);
-//          }
-//          return Center(
-//            child: CircularProgressIndicator(),
-//          );
-//        });
   }
 }
 
+// ignore: must_be_immutable
 class _SearchRecipes extends StatelessWidget {
   final List<RecipesModel> _projectModels;
   final String query;
@@ -110,7 +76,6 @@ class _SearchRecipes extends StatelessWidget {
         ),
       );
     else {
-      RecipesBloc _bloc = RecipesBloc(context);
       return StreamBuilder(
         stream: _searchBloc.getSearchResultsStream(query),
         builder: (context, snapshot) {

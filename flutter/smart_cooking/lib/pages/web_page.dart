@@ -1,14 +1,13 @@
-import 'package:smart_cooking/app_config.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class WebPage extends StatelessWidget {
-  final String _url;
-
-  WebPage(this._url);
+//  final String _url;
+//
+//  WebPage(this._url);
 
   @override
   Widget build(BuildContext context) {
+    return Container();
 //    return WebviewScaffold(
 //      appBar: AppBar(),
 //      userAgent: AppConfig.USER_AGENT,

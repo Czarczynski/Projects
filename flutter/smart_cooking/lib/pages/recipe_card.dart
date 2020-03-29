@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_cooking/app_config.dart';
-import 'package:smart_cooking/blocs/recipes_bloc.dart';
 import 'package:smart_cooking/models/recipe_model.dart';
 import 'package:smart_cooking/pages/recipes_details_page.dart';
 
