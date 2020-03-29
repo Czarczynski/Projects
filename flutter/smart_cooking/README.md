@@ -1,16 +1,27 @@
 # smart_cooking
 
-A new Flutter application.
+Flutter application for searching recipes.
 
-## Getting Started
+# Now
 
-This project is a starting point for a Flutter application.
+App uses 2 API's. 
 
-A few resources to get you started if this is your first Flutter project:
+[First API](https://rapidapi.com/spoonacular/api/recipe-food-nutrition) is used for getting recipes.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+[Second API](https://pleasurecookings.azurewebsites.net/swagger/ui/index#/) was created for the needs of the academic's project by [my colleague](https://github.com/mbazych). This API allows us to add accounts where we are able to keep our favourite recipes and history of recipes.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+# In future
+
+App is using only one account being automatically signing in without typing username or password. It is happenning because it is only test for now. In the near future I'm going to add register and login forms.  
+I'll try add posibility for creating own recipes by users. It's going to be kept in our data base. Then try to shuffle recipes form first and second API's.
+
+# Screenshots of app
+
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/intro.png" height=500 /><img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/dashboard.png" height=500 />
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/drawer.png" height=500 />
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/details_1.png" height=500 />
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/details_2.png" height=500 />
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/recipes.png" height=500 />
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/searching.png" height=500 />
