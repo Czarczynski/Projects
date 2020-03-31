@@ -1,15 +1,15 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/store/account_manager.dart';
-import 'package:flutter/material.dart';
 
 class LogoutButton extends StatelessWidget {
   FlatButton flatButton(BuildContext context, String text, Function onPressed) {
     return FlatButton(
       onPressed: onPressed,
-      highlightColor: Colors.grey,
       child: Text(
         text,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.lightBlue),
       ),
     );
   }
@@ -20,16 +20,15 @@ class LogoutButton extends StatelessWidget {
       onTap: () {
         return showDialog(
           context: context,
-          barrierDismissible: true,
+          barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
-              backgroundColor: Theme.of(context).backgroundColor,
               elevation: 0,
-              contentTextStyle: Theme.of(context).textTheme.display1,
-              content: Text(EngStrings.QUESTION_SURE,
-                  style: Theme.of(context).textTheme.title),
+              backgroundColor: ThemeConfig.WHITE_SMOKE,
+              titleTextStyle: Theme.of(context).textTheme.title,
+              title: Text(EngStrings.QUESTION_SURE),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0)),
+                  borderRadius: BorderRadius.circular(15.0)),
               actions: <Widget>[
                 flatButton(context, EngStrings.YES, () {
                   AccountManager().clearUserAccessToken();

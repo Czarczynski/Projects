@@ -15,8 +15,8 @@ dependencies:
   provider:
   http:
   flutter_html: ^0.11.1
-
-path_provider: 1.6.1
+  path_provider:
+  gallery_saver:
 
 dev_dependencies:
   flutter_test:

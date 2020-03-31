@@ -53,7 +53,7 @@ class _RecipesListState extends State<RecipesList> {
                                         letterSpacing: 1.5),
                               ),
                             );
-                          return RecipeCard(_bloc.recipeModels[index-1], '');
+                          return RecipeCard(_bloc.recipeModels[index - 1], '');
                         },
                       );
                   },
