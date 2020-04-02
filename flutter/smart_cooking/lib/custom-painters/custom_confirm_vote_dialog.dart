@@ -14,12 +14,12 @@ class ConfirmVoteDialog extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       elevation: 0,
       contentTextStyle: Theme.of(context).textTheme.display1,
-      content: Text(EngStrings.QUESTION_SURE,
+      content: Text(EnglishVer.QUESTION_SURE,
           style: Theme.of(context).textTheme.title),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
       actions: <Widget>[
-        _flatButton(context, EngStrings.YES, onYesClick),
-        _flatButton(context, EngStrings.NO, onNoClick),
+        _flatButton(context, EnglishVer.YES, onYesClick),
+        _flatButton(context, EnglishVer.NO, onNoClick),
       ],
     );
   }
@@ -31,7 +31,7 @@ class ConfirmVoteDialog extends StatelessWidget {
       highlightColor: Colors.grey,
       child: Text(
         text,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: DarkThemeConfig.BLACK),
       ),
     );
   }

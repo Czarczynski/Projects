@@ -14,10 +14,10 @@ class StarredPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         backgroundColor: Colors.transparent,
         title: Text(
-          EngStrings.STARRED,
+          EnglishVer.STARRED,
           style: Theme.of(context).textTheme.title,
         ),
       ),

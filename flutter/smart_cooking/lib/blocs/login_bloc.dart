@@ -14,7 +14,7 @@ class LoginBloc {
             if (userToken != null && userToken.isNotEmpty) {
 
               Navigator.of(context).pushNamedAndRemoveUntil(
-                  AppConfig.ROUTE_TO_DASHBOARD,
+                  Config.ROUTE_TO_DASHBOARD,
                       (Route<dynamic> route) => false);
             }
 //            else {

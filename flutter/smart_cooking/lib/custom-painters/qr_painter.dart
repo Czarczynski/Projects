@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../app_config.dart';
+
 class QRPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = Colors.white;
+    paint.color = DarkThemeConfig.WHITE;
     paint.strokeWidth = 10;
     paint.style = PaintingStyle.stroke;
     var path = Path();

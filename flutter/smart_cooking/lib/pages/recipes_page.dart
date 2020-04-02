@@ -13,10 +13,10 @@ class RecipesPage extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
 
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         backgroundColor: Colors.transparent,
         title: Text(
-          EngStrings.RECIPES,
+          EnglishVer.RECIPES,
           style: Theme.of(context).textTheme.title,
         ),
         actions: [

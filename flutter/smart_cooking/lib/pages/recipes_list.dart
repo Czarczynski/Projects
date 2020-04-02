@@ -43,13 +43,13 @@ class _RecipesListState extends State<RecipesList> {
                           if (index == 0)
                             return Center(
                               child: Text(
-                                EngStrings.TODAY_S_RECIPES,
+                                EnglishVer.TODAY_S_RECIPES,
                                 style: Theme.of(context)
                                     .textTheme
                                     .display1
                                     .copyWith(
                                         fontSize: 20,
-                                        color: ThemeConfig.ST_TROPAZ,
+                                        color: DarkThemeConfig.ST_TROPAZ,
                                         letterSpacing: 1.5),
                               ),
                             );

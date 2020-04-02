@@ -13,7 +13,7 @@ class NoResults extends StatelessWidget {
             height: 64,
             width: 64,
           ),
-          Text(EngStrings.EMPTY),
+          Text(EnglishVer.EMPTY),
         ],
       ),
     );

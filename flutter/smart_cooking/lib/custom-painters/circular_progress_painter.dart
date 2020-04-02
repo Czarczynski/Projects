@@ -17,7 +17,7 @@ class CircularProgress extends CustomPainter {
     var gradientComplete = LinearGradient(colors: [Color(0xFF00FF00), Color(0xFF2228B11)]);
     Paint outerCircle = Paint()
       ..strokeWidth = 14
-      ..color = ThemeConfig.WHITE_SMOKE
+      ..color = DarkThemeConfig.WHITE_SMOKE
       ..style = PaintingStyle.stroke;
 
     Paint completeArc = Paint()

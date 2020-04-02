@@ -48,6 +48,7 @@ class _RecipeCardState extends State<RecipeCard> {
                     RecipesDetailsPage(widget._recipeModel)));
       },
       child: Card(
+        color: DarkThemeConfig.WHITE,
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Padding(
@@ -62,7 +63,7 @@ class _RecipeCardState extends State<RecipeCard> {
                   Flexible(
                     child: RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.display1,
+                        style: Theme.of(context).textTheme.display1.copyWith(color: DarkThemeConfig.REAL_BLACK),
                         children:
                             _getSpans(widget._recipeModel.title, widget.query),
                       ),
@@ -70,17 +71,17 @@ class _RecipeCardState extends State<RecipeCard> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: Image.network(widget._recipeModel.image ?? AppConfig.DEFAULT_FOOD_IMAGE,width: 90,),
+                    child: Image.network(widget._recipeModel.image ?? Config.DEFAULT_FOOD_IMAGE,width: 90,),
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 0, bottom: 4),
-                child: Text(EngStrings.COOKING_TIME,
-                    style: Theme.of(context).textTheme.display4),
-              ),
               Row(
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4, bottom: 4, right: 10),
+                    child: Text(EnglishVer.COOKING_TIME,
+                        style: Theme.of(context).textTheme.display4.copyWith(color: DarkThemeConfig.BLUE_GRANADE)),
+                  ),
                   Visibility(
                     visible: true,
                     child: Expanded(
@@ -91,8 +92,10 @@ class _RecipeCardState extends State<RecipeCard> {
                         ),
                         decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [
-                          Color(0xFF84C7FF),
-                          Color(0xFF3116C2)
+//                          Color(0xFF84C7FF),
+//                          Color(0xFF3116C2)
+                          Color(0xFF7b3800),
+                          Color(0xFFcee93d)
                         ])),
                       ),
                     ),

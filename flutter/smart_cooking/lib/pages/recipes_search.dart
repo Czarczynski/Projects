@@ -16,7 +16,7 @@ class RecipesSearch extends SearchDelegate {
       appBarTheme: theme.appBarTheme,
       primaryColor: theme.backgroundColor,
       primaryIconTheme: theme.iconTheme,
-      iconTheme: theme.iconTheme,
+      iconTheme: theme.iconTheme
     );
   }
 
@@ -37,7 +37,7 @@ class RecipesSearch extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back_ios),
     );
   }
 
@@ -66,38 +66,34 @@ class _SearchRecipes extends StatelessWidget {
   Widget build(BuildContext context) {
     if (query.trim() == '')
       return Container(
-        color: ThemeConfig.WHITE_SMOKE,
+        color: DarkThemeConfig.WHITE_SMOKE,
         child: Center(
-          child: Text(EngStrings.SEARCH,
+          child: Text(EnglishVer.SEARCH,
               style: Theme.of(context)
                   .textTheme
                   .title
-                  .copyWith(color: ThemeConfig.BLUE_LIGHT_GRAY)),
+                  .copyWith(color: DarkThemeConfig.GRAY_DARK)),
         ),
       );
     else {
       return StreamBuilder(
         stream: _searchBloc.getSearchResultsStream(query),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data.length == 0) {
-              return NoResults();
-            }
-            final projectsList = snapshot.data;
-            return ListView.builder(
-                itemCount: projectsList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return RecipeCard(_projectModels[index], query);
-                });
-          } else if (snapshot.hasError) {
-            throw Exception(snapshot.error);
-          }
           return Container(
-            color: ThemeConfig.WHITE_SMOKE,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+              color: DarkThemeConfig.WHITE_SMOKE,
+              child: snapshot.hasData
+                  ? snapshot.data.length == 0
+                      ? NoResults()
+                      : ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return RecipeCard(_projectModels[index], query);
+                          })
+                  : snapshot.hasError
+                      ? throw Exception(snapshot.error)
+                      : Center(
+                          child: CircularProgressIndicator(),
+                        ));
         },
       );
     }

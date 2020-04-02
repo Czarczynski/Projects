@@ -11,10 +11,10 @@ class SmartCooking extends StatelessWidget with CustomThemes {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
-        AppConfig.ROUTE_TO_LOGIN: (context) => LoginPage(),
-        AppConfig.ROUTE_TO_DASHBOARD: (context) => DashboardPage(),
+        Config.ROUTE_TO_LOGIN: (context) => LoginPage(),
+        Config.ROUTE_TO_DASHBOARD: (context) => DashboardPage(),
       },
-      theme: ownTheme,
+      theme: myTheme,
       debugShowCheckedModeBanner: false,
       title: "Smart Cooking",
       home: LoginPage(),

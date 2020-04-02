@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppConfig {
+class Config {
   static const String HOST_URL = "https://pleasurecookings.azurewebsites.net";
   static const String RAPID_API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
   static const String RAPID_API_HOST = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
@@ -16,7 +16,7 @@ class AppConfig {
   static const String DEFAULT_FOOD_IMAGE = 'https://toppng.com/uploads/preview/clipart-free-seaweed-clipart-draw-food-placeholder-11562968708qhzooxrjly.png';
 }
 
-class ThemeConfig {
+class LightThemeConfig {
   static const Color BLUE_GRANADE = Color.fromRGBO(42, 41, 78, 1);
   static const Color GRAY_DARK = Color.fromRGBO(42, 42, 42, 1);
   static const Color PURPLE_ = Color.fromRGBO(94, 53, 177, 1);
@@ -30,9 +30,37 @@ class ThemeConfig {
   static const Color SOLITUDE = Color.fromRGBO(225, 238, 255, 1);
   static const Color SNOW = Color.fromRGBO(250, 250, 250, 1);
   static const Color VENETIAN_RED = Color.fromRGBO(176, 0, 17, 1);
+  static const Color WHITE = Color(0xffffffff);
+  static const Color BLACK = Color(0xff000000);
+  static const Color VIOLENT_START = Color(0xFF7472af);
+  static const Color VIOLENT_END = Color(0xFF403e77);
+  static const Color WHITE_70 = Colors.white70;
+  static const Color BLACK_54 = Colors.black54;
+}
+class DarkThemeConfig {
+  static const Color BLUE_GRANADE = Color(0xffd5d6b1);
+  static const Color GRAY_DARK = Color(0xFFb2b1d6);
+  static const Color PURPLE_ = Color(0xFF8b8d50);
+  static const Color BLUE_GRAY = Color(0xffdbd4cb);
+  static const Color MINT_GREEN = Color(0xffe22049);
+  static const Color ST_TROPAZ = Color(0xff887052);
+  static const Color BLUE_LIGHT_GRAY = Color(0xff8a8073);
+  static const Color BLUE_CYAN = Color(0xff241c12);
+  static const Color WHITE_SMOKE = Color(0xff212121);
+  static const Color RED_NEAR_VENETIAN = Color(0xff3ff3ec);
+  static const Color SOLITUDE = Color(0xff1e1100);
+  static const Color SNOW = Color(0xff050505);
+  static const Color VENETIAN_RED = Color(0xffe6ac75);
+  static const Color WHITE = Color(0xff141414);
+  static const Color REAL_BLACK = Color(0xffffffff);
+  static const Color BLACK = Color(0xffcfcfcf);
+  static const Color VIOLENT_START = Color(0xFF8b8d50);
+  static const Color VIOLENT_END = Color(0xFFbfc188);
+  static const Color BLACK_54 = Colors.white70;
+  static const Color WHITE_70 = Colors.black54;
 }
 
-class EngStrings {
+class EnglishVer {
   static const String EMPTY = 'Nothing to show';
   static const String LAST_VISITED = 'Last Visited';
   static const String ACTIONS = "Actions";

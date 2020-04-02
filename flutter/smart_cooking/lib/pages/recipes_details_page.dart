@@ -23,11 +23,12 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
     UserBloc.internal().fetchData();
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              brightness: Brightness.light,
+              brightness: Brightness.dark,
               backgroundColor: Theme.of(context).backgroundColor,
               expandedHeight: 200,
               floating: false,
@@ -46,14 +47,14 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                 onLongPress: () {
                   saveImage(
                     context,
-                    widget._recipeModel.image ?? AppConfig.DEFAULT_FOOD_IMAGE,
+                    widget._recipeModel.image ?? Config.DEFAULT_FOOD_IMAGE,
                   );
                 },
                 child: FlexibleSpaceBar(
                     centerTitle: true,
                     collapseMode: CollapseMode.none,
                     background: Image.network(
-                      widget._recipeModel.image ?? AppConfig.DEFAULT_FOOD_IMAGE,
+                      widget._recipeModel.image ?? Config.DEFAULT_FOOD_IMAGE,
                       fit: BoxFit.fill,
                     )),
               ),
@@ -61,10 +62,10 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
           ];
         },
         body: Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 50),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(4),
+                color: DarkThemeConfig.WHITE,
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
                 boxShadow: [
                   BoxShadow(
                       color: Color.fromRGBO(0, 0, 0, 0.04),
@@ -72,7 +73,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                       offset: Offset(0, 2))
                 ]),
             child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 5),
                 child: ListView.builder(
                     itemCount: widget
                             ._recipeModel.analyzedInstructions[0].steps.length +
@@ -96,7 +97,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                             children: <Widget>[
                               Text(
                                   'Cooking time: ${widget._recipeModel.readyInMinutes} min',
-                                  style: Theme.of(context).textTheme.display4),
+                                  style: Theme.of(context).textTheme.display4.copyWith(fontSize:20)),
                               Row(
                                 children: <Widget>[
                                   Text("${widget._recipeModel.aggregateLikes} ",
@@ -105,59 +106,25 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                           .display4
                                           .copyWith(fontSize: 20)),
                                   Icon(Icons.thumb_up,
-                                      color: ThemeConfig.PURPLE_)
+                                      color: DarkThemeConfig.PURPLE_)
                                 ],
                               )
                             ],
                           ),
                         );
                       } else if (index == 2) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Row(
-                            children: <Widget>[
-                              Visibility(
-                                visible: true,
-                                child: Expanded(
-                                  flex: widget._recipeModel.readyInMinutes,
-                                  child: DecoratedBox(
-                                    child: SizedBox(
-                                      height: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                        gradient: LinearGradient(colors: [
-                                      Color(0xFF84C7FF),
-                                      Color(0xFF3116C2)
-                                    ])),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex:
-                                    (200 - widget._recipeModel.readyInMinutes),
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).disabledColor,
-                                  ),
-                                  child: SizedBox(
-                                    height: 4,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                        return Container();
                       } else if (index == 3) {
                         return Container(
                             padding: EdgeInsets.only(bottom: 0),
                             color: Theme.of(context).iconTheme.color,
-                            child: Text(EngStrings.INGREDIENTS,
+                            child: Text(EnglishVer.INGREDIENTS,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
                                     .display1
                                     .copyWith(
-                                        color: ThemeConfig.WHITE_SMOKE,
+                                        color: DarkThemeConfig.WHITE_SMOKE,
                                         fontSize: 23)));
                       } else if (index == 4) {
                         return Container(
@@ -174,6 +141,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                           child: RotatedBox(
                             quarterTurns: 1,
                             child: ToggleButtons(
+                              fillColor: Colors.white12,
                               children: widget._recipeModel.extendedIngredients
                                   .map((_item) => RotatedBox(
                                         quarterTurns: 3,
@@ -187,7 +155,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                             child: Text(
                                                 "${_item.originalString}",
                                                 textAlign: TextAlign.left,
-                                                style: TextStyle(fontSize: 15)),
+                                                style: TextStyle(fontSize: 15, color: DarkThemeConfig.BLUE_GRAY)),
                                           ),
                                         ),
                                       ))
@@ -205,20 +173,19 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                           .extendedIngredients[index].haveIt;
                                 });
                               },
-                              selectedColor: Colors.green,
                             ),
                           ),
                         );
                       } else if (index == 5) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 8.0, top: 8),
-                          child: Text(EngStrings.DESCRIPTION,
+                          child: Text(EnglishVer.DESCRIPTION,
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
                                   .textTheme
                                   .display1
                                   .copyWith(
-                                      color: ThemeConfig.BLUE_GRANADE,
+                                      color: DarkThemeConfig.BLUE_GRANADE,
                                       fontSize: 30)),
                         );
                       } else {
@@ -230,8 +197,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                              ),
+                                )                              ),
                               Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10.0, bottom: 10),
@@ -245,7 +211,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                           .textTheme
                                           .display1
                                           .copyWith(
-                                              color: ThemeConfig.BLUE_GRANADE,
+                                              color: DarkThemeConfig.BLACK,
                                               fontSize: bigger ? 22 : 16)))
                             ]);
                       }
@@ -265,7 +231,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100), color: Colors.white38),
+            borderRadius: BorderRadius.circular(100)),
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: Icon(
@@ -297,8 +263,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                 )),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.white38),
+                  borderRadius: BorderRadius.circular(100)),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Icon(
@@ -316,8 +281,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
             },
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.white38),
+                  borderRadius: BorderRadius.circular(100),),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Icon(Icons.star_border),

@@ -25,7 +25,7 @@ class SearchBloc {
 
   Stream<List<RecipesModel>> getSearchResultsStream(String query) {
     return Future.value(searchModels(query)).catchError((_) {
-      WalletUtils.showErrorSnackbar(context, EngStrings.NO_INTERNET);
+      WalletUtils.showErrorSnackbar(context, EnglishVer.NO_INTERNET);
     }).asStream();
   }
 }

@@ -22,13 +22,14 @@ class DashboardPage extends StatelessWidget {
     profilePageBloc.fetchData();
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: DarkThemeConfig.WHITE_SMOKE,
+//        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          brightness: Brightness.light,
+          brightness: Brightness.dark,
           title: Container(
               height: 26,
               width: 204,
-              child: Text(EngStrings.DASHBOARD,
+              child: Text(EnglishVer.DASHBOARD,
                   style: Theme.of(context).textTheme.title)),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -40,7 +41,7 @@ class DashboardPage extends StatelessWidget {
           ],
           leading: IconButton(
               icon: Icon(Icons.toc),
-              color: ThemeConfig.PURPLE_,
+              color: DarkThemeConfig.PURPLE_,
               onPressed: () => _scaffoldKey.currentState.openDrawer()),
         ),
         drawer: DrawerPage(CurrentDrawerPage.DASHBOARD_PAGE),
@@ -62,16 +63,16 @@ class DashboardPage extends StatelessWidget {
                                   builder: (context) => RecipesPage())),
                           child: _button(
                             context,
-                            EngStrings.RANDOM_RECIPES,
+                            EnglishVer.RANDOM_RECIPES,
                             LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                colors: [Color(0xFF7472af), Color(0xFF403e77)]),
+                                colors: [DarkThemeConfig.VIOLENT_START,DarkThemeConfig.VIOLENT_END]),
                           ),
                         ),
                       );
                     } else if (index == 1) {
-                      return _text(context, EngStrings.ACTIONS);
+                      return _text(context, EnglishVer.ACTIONS);
                     } else if (index == 2) {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +85,7 @@ class DashboardPage extends StatelessWidget {
                                         HistoryPage(UserBloc.internal().profileInfo.lastVisited))),
                             child: _button(
                               context,
-                              EngStrings.HISTORY,
+                              EnglishVer.HISTORY,
                               null,
                               width: 0.45,
                               marginright: 0,
@@ -98,13 +99,12 @@ class DashboardPage extends StatelessWidget {
                                         StarredPage(UserBloc.internal().profileInfo.starred))),
                             child: _button(
                               context,
-                              EngStrings.STARRED,
+                              EnglishVer.STARRED,
                               LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    Color(0xFF7472af),
-                                    Color(0xFF403e77)
+                                    DarkThemeConfig.VIOLENT_START,DarkThemeConfig.VIOLENT_END
                                   ]),
                               width: 0.45,
                             ),
@@ -112,7 +112,7 @@ class DashboardPage extends StatelessWidget {
                         ],
                       );
                     } else if (index == 3) {
-                      return _text(context, EngStrings.STARRED);
+                      return _text(context, EnglishVer.STARRED);
                     } else {
                       if (_bloc.recipeModels.length > 0) {
                         return RecipeCard(_bloc.recipeModels[index - 4], '');
@@ -132,7 +132,7 @@ class DashboardPage extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(MediaQuery.of(_context).size.width * marginleft, 12, MediaQuery.of(_context).size.width * marginright, 16),
       width: MediaQuery.of(_context).size.width * width,
       decoration: BoxDecoration(
-        color: ThemeConfig.VENETIAN_RED,
+        color: DarkThemeConfig.VENETIAN_RED,
         gradient: _gradient,
         borderRadius: BorderRadius.circular(4.0),
       ),
@@ -142,7 +142,7 @@ class DashboardPage extends StatelessWidget {
           style: Theme.of(_context)
               .textTheme
               .display2
-              .copyWith(color: Colors.white, fontWeight: FontWeight.w500),
+              .copyWith(color: DarkThemeConfig.WHITE, fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
       ),
@@ -157,7 +157,7 @@ class DashboardPage extends StatelessWidget {
         style: Theme.of(_context)
             .textTheme
             .display3
-            .copyWith(color: Colors.black54, fontSize: 16),
+            .copyWith(color: DarkThemeConfig.BLACK, fontSize: 16),
         maxLines: 1,
       ),
     );

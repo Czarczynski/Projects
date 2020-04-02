@@ -24,19 +24,19 @@ class LogoutButton extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               elevation: 0,
-              backgroundColor: ThemeConfig.WHITE_SMOKE,
+              backgroundColor: DarkThemeConfig.WHITE_SMOKE,
               titleTextStyle: Theme.of(context).textTheme.title,
-              title: Text(EngStrings.QUESTION_SURE),
+              title: Text(EnglishVer.QUESTION_SURE),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0)),
               actions: <Widget>[
-                flatButton(context, EngStrings.YES, () {
+                flatButton(context, EnglishVer.YES, () {
                   AccountManager().clearUserAccessToken();
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                      AppConfig.ROUTE_TO_LOGIN,
+                      Config.ROUTE_TO_LOGIN,
                       (Route<dynamic> route) => false);
                 }),
-                flatButton(context, EngStrings.NO, () {
+                flatButton(context, EnglishVer.NO, () {
                   Navigator.of(context).pop();
                 }),
               ],
@@ -44,7 +44,7 @@ class LogoutButton extends StatelessWidget {
           },
         );
       },
-      child: Icon(Icons.exit_to_app, color: ThemeConfig.PURPLE_),
+      child: Icon(Icons.exit_to_app, color: DarkThemeConfig.PURPLE_),
     );
   }
 }

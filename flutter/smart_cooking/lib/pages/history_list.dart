@@ -31,9 +31,9 @@ class _HistoryListState extends State<HistoryList> {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Text(
-          widget.history ? EngStrings.DESC_HISTORY : EngStrings.DESC_STARRED,
+          widget.history ? EnglishVer.DESC_HISTORY : EnglishVer.DESC_STARRED,
           style: Theme.of(context).textTheme.display1.copyWith(
-              fontSize: 20, color: ThemeConfig.ST_TROPAZ, letterSpacing: 1.5),
+              fontSize: 20, color: DarkThemeConfig.ST_TROPAZ, letterSpacing: 1.5),
         ),
         Expanded(
             child: ChangeNotifierProvider<HistoryBloc>(

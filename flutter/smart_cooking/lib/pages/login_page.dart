@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_cooking/app_config.dart';
-import 'package:flutter/material.dart';
 import 'package:smart_cooking/blocs/login_bloc.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,6 +34,31 @@ class _LoginPageState extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Please, continue without logging"),
+                  action: SnackBarAction(
+                    onPressed: () {},
+                    label: "Ok",
+                  ),
+                ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40),
+                  color: DarkThemeConfig.WHITE,
+                ),
+                height: MediaQuery.of(context).size.width * 0.1,
+                width: MediaQuery.of(context).size.width * 0.8,
+                alignment: Alignment.center,
+                child: Text("Login",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: DarkThemeConfig.BLACK)),
+              ),
+            ),
+            InkWell(
+              onTap: () {
                 LoginBloc(context);
 //                Navigator.of(context).pushNamedAndRemoveUntil(
 //                    AppConfig.ROUTE_TO_DASHBOARD,
@@ -60,7 +85,7 @@ class _LoginPageState extends StatelessWidget {
 InkWell button(String image, context) => InkWell(
       onTap: () {
         Navigator.of(context).pushNamedAndRemoveUntil(
-            AppConfig.ROUTE_TO_DASHBOARD, (Route<dynamic> route) => false);
+            Config.ROUTE_TO_DASHBOARD, (Route<dynamic> route) => false);
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.09,

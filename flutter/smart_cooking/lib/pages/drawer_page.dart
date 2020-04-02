@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/blocs/user_bloc.dart';
-import 'package:smart_cooking/pages/profile_page.dart';
 import 'package:smart_cooking/pages/dashboard_page.dart';
 import 'package:smart_cooking/pages/history_page.dart';
+import 'package:smart_cooking/pages/profile_page.dart';
 import 'package:smart_cooking/pages/recipes_page.dart';
 import 'package:smart_cooking/pages/starred_page.dart';
 
@@ -30,10 +30,10 @@ class DrawerPage extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
               decoration: BoxDecoration(
+                  color: DarkThemeConfig.WHITE,
                   image: DecorationImage(
-                    fit: BoxFit.fitWidth,
-                      image:
-                          AssetImage('assets/images/drawerbackground.jpeg'))),
+                      fit: BoxFit.fitWidth,
+                      image: AssetImage('assets/images/drawerbackground.jpeg'))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -52,7 +52,10 @@ class DrawerPage extends StatelessWidget {
                               else
                                 return Text(
                                     '${UserBloc.internal().profileInfo != null ? snapshot.data.firstName : "Antoni Kowalski"}',
-                                    style: Theme.of(context).textTheme.display2,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .display2
+                                        .copyWith(color: Colors.white),
                                     textAlign: TextAlign.center);
                             }),
                       ),
@@ -69,8 +72,8 @@ class DrawerPage extends StatelessWidget {
                                   builder: (context) =>
                                       ProfilePage(UserBloc.internal())));
                         },
-                        child: Icon(Icons.settings,
-                            size: 30, color: ThemeConfig.WHITE_SMOKE),
+                        child:
+                            Icon(Icons.settings, size: 30, color: Colors.white),
                       ),
                     ],
                   ),
@@ -79,40 +82,42 @@ class DrawerPage extends StatelessWidget {
           StreamBuilder(
               stream: profilePageBloc.streamControllerProfileInfo,
               builder: (context, snapshot) {
-                if (!snapshot.hasData){
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 100),
-                    child: Center(child: CircularProgressIndicator()),
-                  );}
-                else{
-                  return Expanded(
+                return Expanded(
                     child: Container(
-                      color: ThemeConfig.SNOW,
-                      child: ListView(
-                        padding: EdgeInsets.only(top: 0),
-                        children: <Widget>[
-                          _singleListTile(context, 0,
-                              icon: Icons.airplay,
-                              text: EngStrings.DASHBOARD,
-                              route: DashboardPage()),
-                          _singleListTile(context, 1,
-                              icon: Icons.restaurant,
-                              text: EngStrings.RECIPES,
-                              route: RecipesPage()),
-                          _singleListTile(context, 3,
-                              icon: Icons.history,
-                              text: EngStrings.HISTORY,
-                              route: HistoryPage(
-                                  profilePageBloc.profileInfo.lastVisited)),
-                          _singleListTile(context, 2,
-                              icon: Icons.star,
-                              text: EngStrings.STARRED,
-                              route: StarredPage(
-                                  profilePageBloc.profileInfo.starred))
-                        ],
-                      ),
-                    ),
-                  );}
+                        color: DarkThemeConfig.WHITE_SMOKE,
+                        child: !snapshot.hasData
+                            ? Center(
+                                child: CircularProgressIndicator(
+                              backgroundColor: DarkThemeConfig.WHITE,
+                            ))
+                            : ListView(
+                                padding: EdgeInsets.only(top: 0),
+                                children: <Widget>[
+                                  _singleListTile(context, 0,
+                                      icon: Icons.airplay,
+                                      text: EnglishVer.DASHBOARD,
+                                      route: DashboardPage()),
+                                  _singleListTile(context, 1,
+                                      icon: Icons.restaurant,
+                                      text: EnglishVer.RECIPES,
+                                      route: RecipesPage()),
+                                  _singleListTile(context, 3,
+                                      icon: Icons.history,
+                                      text: EnglishVer.HISTORY,
+                                      route: HistoryPage(profilePageBloc
+                                          .profileInfo.lastVisited)),
+                                  _singleListTile(context, 2,
+                                      icon: Icons.star,
+                                      text: EnglishVer.STARRED,
+                                      route: StarredPage(
+                                          profilePageBloc.profileInfo.starred))
+                                ],
+                              )));
+//                if (!snapshot.hasData){
+//                  return ;}
+//                else{
+//                  return
+//    ;}
               })
         ],
       ),
@@ -129,38 +134,38 @@ class DrawerPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
           color: _currentDrawerPage == CurrentDrawerPage.DASHBOARD_PAGE &&
                   index == 0
-              ? ThemeConfig.WHITE_SMOKE
+              ? DarkThemeConfig.WHITE
               : _currentDrawerPage == CurrentDrawerPage.RECIPES_PAGE &&
                       index == 1
-                  ? ThemeConfig.WHITE_SMOKE
+                  ? DarkThemeConfig.WHITE
                   : _currentDrawerPage == CurrentDrawerPage.HISTORY_PAGE &&
                           index == 3
-                      ? ThemeConfig.WHITE_SMOKE
+                      ? DarkThemeConfig.WHITE
                       : _currentDrawerPage == CurrentDrawerPage.SAVED_PAGE &&
                               index == 2
-                          ? ThemeConfig.WHITE_SMOKE
-                          : ThemeConfig.SNOW),
+                          ? DarkThemeConfig.WHITE
+                          : DarkThemeConfig.WHITE_SMOKE),
       child: ListTile(
         leading: Icon(icon,
             color: _currentDrawerPage == CurrentDrawerPage.DASHBOARD_PAGE &&
                     index == 0
-                ? Color.fromRGBO(65, 81, 253, 1)
+                ? DarkThemeConfig.PURPLE_
                 : _currentDrawerPage == CurrentDrawerPage.RECIPES_PAGE &&
                         index == 1
-                    ? Color.fromRGBO(65, 81, 253, 1)
+                    ? DarkThemeConfig.PURPLE_
                     : _currentDrawerPage == CurrentDrawerPage.HISTORY_PAGE &&
                             index == 3
-                        ? Color.fromRGBO(65, 81, 253, 1)
+                        ? DarkThemeConfig.PURPLE_
                         : _currentDrawerPage == CurrentDrawerPage.SAVED_PAGE &&
                                 index == 2
-                            ? Color.fromRGBO(65, 81, 253, 1)
-                            : ThemeConfig.BLUE_GRAY),
+                            ? DarkThemeConfig.PURPLE_
+                            : DarkThemeConfig.BLUE_GRAY),
         title: Text('$text',
             textAlign: TextAlign.left,
             style: Theme.of(context)
                 .textTheme
                 .display1
-                .copyWith(color: ThemeConfig.BLUE_GRANADE, fontSize: 14)),
+                .copyWith(color: DarkThemeConfig.BLUE_GRANADE, fontSize: 14)),
         onTap: () {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => route));

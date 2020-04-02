@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
+import '../app_config.dart';
+
 void saveImage(BuildContext _context, String _path) async {
   return showDialog(
       context: _context,
@@ -14,12 +16,12 @@ void saveImage(BuildContext _context, String _path) async {
           margin: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width / 2 - 100,
               vertical: MediaQuery.of(context).size.height / 2 - 100),
-          color: Colors.black54,
+          color: DarkThemeConfig.BLACK_54,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text("Save Photo?",
-                  style: TextStyle(color: Colors.white70, fontSize: 20)),
+                  style: TextStyle(color: DarkThemeConfig.WHITE_70, fontSize: 20)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[

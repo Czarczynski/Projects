@@ -53,9 +53,9 @@ class _CircularProgressWidgetState extends State<CircularProgressWidget>
           foregroundPainter: CircularProgress(_animation.value, widget._completed),
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: DarkThemeConfig.WHITE,
                 shape: BoxShape.circle,
-                border: Border.all(color: ThemeConfig.SOLITUDE, width: 30),
+                border: Border.all(color: DarkThemeConfig.SOLITUDE, width: 30),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                       color: Color.fromRGBO(0, 137, 255, 0.15),

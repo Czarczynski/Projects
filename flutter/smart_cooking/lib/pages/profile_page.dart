@@ -18,18 +18,18 @@ class ProfilePage extends StatelessWidget {
       key: _scaffoldKey,
       drawer: DrawerPage(CurrentDrawerPage.PROFILE_PAGE),
       appBar: AppBar(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         title: Padding(
           padding: const EdgeInsets.only(left: 30),
           child: Container(
               height: 26,
               width: 204,
-              child: Text(EngStrings.PROFILE,
+              child: Text(EnglishVer.PROFILE,
                   style: Theme.of(context).textTheme.title)),
         ),
         leading: IconButton(
             icon: Icon(Icons.toc),
-            color: ThemeConfig.PURPLE_,
+            color: DarkThemeConfig.PURPLE_,
             onPressed: () => _scaffoldKey.currentState.openDrawer()),
       ),
       body: OrientationBuilder(
@@ -63,7 +63,7 @@ class ProfilePage extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * height,
       width: MediaQuery.of(context).size.width * width,
-      decoration: BoxDecoration(color: ThemeConfig.WHITE_SMOKE),
+      decoration: BoxDecoration(color: DarkThemeConfig.WHITE_SMOKE),
       child: Center(
           child: Container(
         width: MediaQuery.of(context).size.height * photoheight,
@@ -72,8 +72,8 @@ class ProfilePage extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-                color: Color.fromRGBO(2, 0, 255, 0.15),
-                blurRadius: 50,
+                color: DarkThemeConfig.WHITE,
+                blurRadius: 1000,
                 offset: Offset(0, 2))
           ],
           image: DecorationImage(
@@ -90,7 +90,7 @@ class ProfilePage extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * height,
       width: MediaQuery.of(context).size.width * width,
-      decoration: BoxDecoration(color: ThemeConfig.WHITE_SMOKE),
+      decoration: BoxDecoration(color: DarkThemeConfig.WHITE_SMOKE),
       child: Column(
         children: <Widget>[
           Container(
@@ -106,19 +106,19 @@ class ProfilePage extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .display2
-                            .copyWith(color: ThemeConfig.BLUE_GRAY));
+                            .copyWith(color: DarkThemeConfig.BLUE_GRAY));
                   })),
           Expanded(
 //            margin: EdgeInsets.fromLTRB(8, 0, 8, 32),
 //            height: 58,
             child: ListView(
               children: <Widget>[
-                Text('${EngStrings.PROFILE}\n\n',
+                Text('${EnglishVer.PROFILE}\n\n',
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
                         .display1
-                        .copyWith(color: ThemeConfig.BLUE_LIGHT_GRAY)),
+                        .copyWith(color: DarkThemeConfig.BLUE_LIGHT_GRAY)),
                 Row(
                   children: <Widget>[
                     Padding(
@@ -126,14 +126,14 @@ class ProfilePage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            '${EngStrings.FIRSTNAME}:\n\n'
-                            '${EngStrings.LASTNAME}:\n\n'
-                            '${EngStrings.PHONE_NO}:\n\n'
-                            '${EngStrings.TIME_WITH_US}:\n\n',
+                            '${EnglishVer.FIRSTNAME}:\n\n'
+                            '${EnglishVer.LASTNAME}:\n\n'
+                            '${EnglishVer.PHONE_NO}:\n\n'
+                            '${EnglishVer.TIME_WITH_US}:\n\n',
                             style: Theme.of(context)
                                 .textTheme
                                 .display1
-                                .copyWith(color: ThemeConfig.PURPLE_),
+                                .copyWith(color: DarkThemeConfig.PURPLE_),
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -151,7 +151,7 @@ class ProfilePage extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .display1
-                                    .copyWith(color: ThemeConfig.BLUE_GRAY))),
+                                    .copyWith(color: DarkThemeConfig.BLUE_GRAY))),
                       ],
                     ),
                   ],

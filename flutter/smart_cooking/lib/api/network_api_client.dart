@@ -15,7 +15,7 @@ class SmartCookingHttpClient {
 
   SmartCookingHttpClient._internal() {
     _handleDioInterceptors();
-    _dioClient.options.baseUrl = AppConfig.HOST_URL;
+    _dioClient.options.baseUrl = Config.HOST_URL;
   }
 
   Future<Response> get(url, {Map<String, dynamic> headers}) async =>
