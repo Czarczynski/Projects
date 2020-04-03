@@ -6,16 +6,16 @@ import 'package:http/http.dart' as http;
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/models/recipe_model.dart';
 
-class RecipesBloc extends ChangeNotifier {
+class RecipesResultBloc extends ChangeNotifier {
   List<RecipesModel> recipeModels = List<RecipesModel>();
-  bool _isInProgress = true;
   final BuildContext context;
-
+  bool _isInProgress = true;
+  final String cuisine, diet;
   bool get isInProgress => _isInProgress;
 
-  RecipesBloc(this.context) {
-    _getRecipeModels().then((_list) {
-      recipeModels = _list.recipes;
+  RecipesResultBloc(this.context, this.cuisine, this.diet) {
+    _getRecipeModels().then((RecipeModel _list) {
+      recipeModels = _list.results;
       _isInProgress = false;
       notifyListeners();
     });
@@ -24,7 +24,7 @@ class RecipesBloc extends ChangeNotifier {
   Future<RecipeModel> _getRecipeModels() async {
     try {
       final response = await http
-          .get('${Config.RAPID_API_URL}/recipes/random?number=9', headers: {
+          .get('${Config.RAPID_API_URL}/recipes/search?query=all&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}', headers: {
         "x-rapidapi-host": Config.RAPID_API_HOST,
         "x-rapidapi-key": Config.RAPID_API_KEY
       });
@@ -41,11 +41,14 @@ class RecipesBloc extends ChangeNotifier {
 class RecipeByIdBloc extends ChangeNotifier {
   RecipesModel recipe;
   final String id;
-  final BuildContext context;
+  bool _isInProgress = true;
 
-  RecipeByIdBloc(this.id, this.context) {
+  bool get isInProgress => _isInProgress;
+
+  RecipeByIdBloc(this.id) {
     _getRecipeById().then((_item) {
       recipe = _item;
+      _isInProgress = false;
       notifyListeners();
     });
   }

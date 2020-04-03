@@ -6,7 +6,9 @@ import 'package:smart_cooking/pages/no_results.dart';
 import 'package:smart_cooking/pages/recipe_card.dart';
 
 class RecipesList extends StatefulWidget {
-  RecipesList(this.context);
+  final String cuisine,diet;
+
+  RecipesList(this.context, this.cuisine, this.diet);
 
   final BuildContext context;
 
@@ -26,10 +28,10 @@ class _RecipesListState extends State<RecipesList> {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Expanded(
-            child: ChangeNotifierProvider<RecipesBloc>(
-                create: (context) => RecipesBloc(context),
-                child: Consumer<RecipesBloc>(
-                  builder: (context, RecipesBloc _bloc, _) {
+            child: ChangeNotifierProvider<RecipesResultBloc>(
+                create: (context) => RecipesResultBloc(context,widget.cuisine, widget.diet),
+                child: Consumer<RecipesResultBloc>(
+                  builder: (context, RecipesResultBloc _bloc, _) {
                     if (_bloc.isInProgress) {
                       return Center(
                         child: CircularProgressIndicator(),

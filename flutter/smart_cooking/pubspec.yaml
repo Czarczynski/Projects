@@ -17,6 +17,8 @@ dependencies:
   flutter_html: ^0.11.1
   path_provider:
   gallery_saver:
+  flutter_picker:
+    git: git://github.com/yangyxd/flutter_picker.git
 
 dev_dependencies:
   flutter_test:

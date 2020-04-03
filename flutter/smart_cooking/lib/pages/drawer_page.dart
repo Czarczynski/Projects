@@ -25,101 +25,102 @@ class DrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     profilePageBloc.fetchData();
-    return Drawer(
-      child: Column(
-        children: <Widget>[
-          DrawerHeader(
-              decoration: BoxDecoration(
-                  color: DarkThemeConfig.WHITE,
-                  image: DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      image: AssetImage('assets/images/drawerbackground.jpeg'))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(Icons.person_pin_circle,
-                          size: 70, color: Colors.white),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: StreamBuilder(
-                            stream: profilePageBloc.streamControllerProfileInfo,
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData)
-                                return Center();
-                              else
-                                return Text(
-                                    '${UserBloc.internal().profileInfo != null ? snapshot.data.firstName : "Antoni Kowalski"}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .display2
-                                        .copyWith(color: Colors.white),
-                                    textAlign: TextAlign.center);
-                            }),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ProfilePage(UserBloc.internal())));
-                        },
-                        child:
-                            Icon(Icons.settings, size: 30, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
-          StreamBuilder(
-              stream: profilePageBloc.streamControllerProfileInfo,
-              builder: (context, snapshot) {
-                return Expanded(
-                    child: Container(
-                        color: DarkThemeConfig.WHITE_SMOKE,
-                        child: !snapshot.hasData
-                            ? Center(
-                                child: CircularProgressIndicator(
-                              backgroundColor: DarkThemeConfig.WHITE,
-                            ))
-                            : ListView(
-                                padding: EdgeInsets.only(top: 0),
-                                children: <Widget>[
-                                  _singleListTile(context, 0,
-                                      icon: Icons.airplay,
-                                      text: EnglishVer.DASHBOARD,
-                                      route: DashboardPage()),
-                                  _singleListTile(context, 1,
-                                      icon: Icons.restaurant,
-                                      text: EnglishVer.RECIPES,
-                                      route: RecipesPage()),
-                                  _singleListTile(context, 3,
-                                      icon: Icons.history,
-                                      text: EnglishVer.HISTORY,
-                                      route: HistoryPage(profilePageBloc
-                                          .profileInfo.lastVisited)),
-                                  _singleListTile(context, 2,
-                                      icon: Icons.star,
-                                      text: EnglishVer.STARRED,
-                                      route: StarredPage(
-                                          profilePageBloc.profileInfo.starred))
-                                ],
-                              )));
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.75,
+      child: Drawer(
+        child: Column(
+          children: <Widget>[
+            DrawerHeader(
+                decoration: BoxDecoration(
+                    color: DarkThemeConfig.WHITE,
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/drawerbackground.jpeg'))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(Icons.person_pin_circle,
+                            size: 70, color: Colors.white),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: StreamBuilder(
+                              stream: profilePageBloc.streamControllerProfileInfo,
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return Center();
+                                else
+                                  return Text(
+                                      '${UserBloc.internal().profileInfo != null ? snapshot.data.firstName : "Antoni Kowalski"}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .display2
+                                          .copyWith(color: Colors.white),
+                                      textAlign: TextAlign.center);
+                              }),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProfilePage(UserBloc.internal())));
+                          },
+                          child:
+                              Icon(Icons.settings, size: 30, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
+            StreamBuilder(
+                stream: profilePageBloc.streamControllerProfileInfo,
+                builder: (context, snapshot) {
+                  return Expanded(
+                      child: Container(
+                          color: DarkThemeConfig.WHITE_SMOKE,
+                          child: !snapshot.hasData
+                              ? Center(
+                                  child: CircularProgressIndicator())
+                              : ListView(
+                                  padding: EdgeInsets.only(top: 0),
+                                  children: <Widget>[
+                                    _singleListTile(context, 0,
+                                        icon: Icons.airplay,
+                                        text: EnglishVer.DASHBOARD,
+                                        route: DashboardPage()),
+                                    _singleListTile(context, 1,
+                                        icon: Icons.restaurant,
+                                        text: EnglishVer.RECIPES,
+                                        route: RecipesPage(cuisine: Lists.cuisines[0], diet: Lists.diets[0])),
+                                    _singleListTile(context, 3,
+                                        icon: Icons.history,
+                                        text: EnglishVer.HISTORY,
+                                        route: HistoryPage(profilePageBloc
+                                            .profileInfo.lastVisited)),
+                                    _singleListTile(context, 2,
+                                        icon: Icons.star,
+                                        text: EnglishVer.STARRED,
+                                        route: StarredPage(
+                                            profilePageBloc.profileInfo.starred))
+                                  ],
+                                )));
 //                if (!snapshot.hasData){
 //                  return ;}
 //                else{
 //                  return
 //    ;}
-              })
-        ],
+                })
+          ],
+        ),
       ),
     );
   }

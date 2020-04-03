@@ -6,9 +6,12 @@ import 'package:smart_cooking/pages/recipes_search.dart';
 import 'package:flutter/material.dart';
 
 class RecipesPage extends StatelessWidget {
+  String cuisine, diet;
+
+  RecipesPage({this.cuisine,this.diet});
   @override
   Widget build(BuildContext context) {
-    var _bloc = RecipesBloc(context);
+    var _bloc = RecipesResultBloc(context, cuisine, diet);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
@@ -35,7 +38,7 @@ class RecipesPage extends StatelessWidget {
         ],
       ),
       drawer: DrawerPage(CurrentDrawerPage.RECIPES_PAGE),
-      body: RecipesList(context),
+      body: RecipesList(context,this.cuisine, this.diet),
     );
   }
 }

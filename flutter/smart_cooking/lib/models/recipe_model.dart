@@ -12,7 +12,7 @@ class RecipeModel {
     }
     if (json['results'] != null) {
       results = new List<RecipesModel>();
-      json['recipes'].forEach((v) {
+      json['results'].forEach((v) {
         results.add(new RecipesModel.fromJson(v));
       });
     }

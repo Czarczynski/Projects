@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/Picker.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/blocs/logout_button.dart';
@@ -12,18 +13,34 @@ import 'package:smart_cooking/pages/recipe_card.dart';
 import 'package:smart_cooking/pages/recipes_page.dart';
 import 'package:smart_cooking/pages/starred_page.dart';
 
-// ignore: must_be_immutable
 class DashboardPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _DashboardPage();
+  }
+}
+
+// ignore: must_be_immutable
+class _DashboardPage extends StatefulWidget {
+  @override
+  _DashboardPageState createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<_DashboardPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   UserBloc get profilePageBloc => UserBloc.internal();
+
+  bool showFilter = false;
+  String chosenCuisine = 'all';
+  String chosenDiet = 'all';
 
   @override
   Widget build(BuildContext context) {
     profilePageBloc.fetchData();
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: DarkThemeConfig.WHITE_SMOKE,
-//        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           brightness: Brightness.dark,
           title: Container(
@@ -45,10 +62,10 @@ class DashboardPage extends StatelessWidget {
               onPressed: () => _scaffoldKey.currentState.openDrawer()),
         ),
         drawer: DrawerPage(CurrentDrawerPage.DASHBOARD_PAGE),
-        body: ChangeNotifierProvider<RecipesBloc>(
-            create: (context) => RecipesBloc(_scaffoldKey.currentContext),
-            child:
-                Consumer<RecipesBloc>(builder: (context, RecipesBloc _bloc, _) {
+        body: ChangeNotifierProvider<RecipesResultBloc>(
+            create: (context) => RecipesResultBloc(_scaffoldKey.currentContext,chosenCuisine, chosenDiet),
+            child: Consumer<RecipesResultBloc>(
+                builder: (context, RecipesResultBloc _bloc, _) {
               if (_bloc.isInProgress)
                 return Center(child: CircularProgressIndicator());
               return ListView.builder(
@@ -60,19 +77,174 @@ class DashboardPage extends StatelessWidget {
                           onTap: () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RecipesPage())),
+                                  builder: (context) => RecipesPage(cuisine: chosenCuisine, diet: chosenDiet,))),
                           child: _button(
                             context,
                             EnglishVer.RANDOM_RECIPES,
                             LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                colors: [DarkThemeConfig.VIOLENT_START,DarkThemeConfig.VIOLENT_END]),
+                                colors: [
+                                  DarkThemeConfig.VIOLENT_START,
+                                  DarkThemeConfig.VIOLENT_END
+                                ]),
                           ),
                         ),
                       );
                     } else if (index == 1) {
-                      return _text(context, EnglishVer.ACTIONS);
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Center(
+                            child: RaisedButton(
+                                color: DarkThemeConfig.WHITE_SMOKE,
+                                onPressed: () {
+                                  showFilter = !showFilter;
+                                  setState(() {});
+                                },
+                                elevation: 0,
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.filter_list,
+                                        color: DarkThemeConfig.BLUE_GRAY,
+                                      ),
+                                      Text(
+                                        "Filter",
+                                        style: TextStyle(
+                                            color: DarkThemeConfig.BLUE_GRAY),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.03),
+                            child: AnimatedContainer(
+                              height: showFilter ? 100 : 0,
+                              curve: Curves.ease,
+                              duration: Duration(milliseconds: 500),
+                              child: ListView(
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text("Cuisine",
+                                              style: TextStyle(
+                                                  color: DarkThemeConfig
+                                                      .BLUE_GRAY)),
+                                          RaisedButton(
+                                            elevation: 0,
+                                            color: DarkThemeConfig.WHITE_SMOKE,
+                                            onPressed: () => Picker(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.3,
+                                                itemExtent: 40,
+                                                textStyle: TextStyle(
+                                                    color: DarkThemeConfig
+                                                        .BLUE_GRAY,
+                                                    fontSize: 30),
+                                                selectedTextStyle:
+                                                    TextStyle(fontSize: 33),
+                                                confirmTextStyle: TextStyle(
+                                                    color: DarkThemeConfig
+                                                        .BLUE_GRAY),
+                                                containerColor:
+                                                    DarkThemeConfig.WHITE_SMOKE,
+                                                backgroundColor:
+                                                    DarkThemeConfig.WHITE_SMOKE,
+                                                headercolor:
+                                                    DarkThemeConfig.WHITE_SMOKE,
+                                                adapter:
+                                                    PickerDataAdapter<String>(
+                                                        pickerdata:
+                                                            Lists.cuisines),
+                                                changeToFirst: false,
+                                                textAlign: TextAlign.center,
+                                                columnPadding:
+                                                    const EdgeInsets.all(8.0),
+                                                onConfirm: (Picker picker,
+                                                    List value) {
+                                                  chosenCuisine = picker
+                                                      .getSelectedValues()
+                                                      .first;
+                                                  setState(() {});
+                                                }).show(_scaffoldKey.currentState),
+                                            child: _myRow(context, chosenCuisine)
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text("Diet",
+                                              style: TextStyle(
+                                                  color: DarkThemeConfig
+                                                      .BLUE_GRAY)),
+                                          RaisedButton(
+                                            elevation: 0,
+                                            color: DarkThemeConfig.WHITE_SMOKE,
+                                            onPressed: () => Picker(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.3,
+                                                itemExtent: 40,
+                                                textStyle: TextStyle(
+                                                    color: DarkThemeConfig
+                                                        .BLUE_GRAY,
+                                                    fontSize: 30),
+                                                selectedTextStyle:
+                                                    TextStyle(fontSize: 33),
+                                                confirmTextStyle: TextStyle(
+                                                    color: DarkThemeConfig
+                                                        .BLUE_GRAY),
+                                                containerColor:
+                                                    DarkThemeConfig.WHITE_SMOKE,
+                                                backgroundColor:
+                                                    DarkThemeConfig.WHITE_SMOKE,
+                                                headercolor:
+                                                    DarkThemeConfig.WHITE_SMOKE,
+                                                adapter:
+                                                    PickerDataAdapter<String>(
+                                                        pickerdata:
+                                                            Lists.diets),
+                                                changeToFirst: true,
+                                                textAlign: TextAlign.center,
+                                                columnPadding:
+                                                    const EdgeInsets.all(8.0),
+                                                onConfirm: (Picker picker,
+                                                    List value) {
+                                                  chosenDiet = picker
+                                                      .getSelectedValues()
+                                                      .first;
+                                                  setState(() {});
+                                                }).show(_scaffoldKey.currentState),
+                                            child: _myRow(context, chosenDiet)
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          _text(context, EnglishVer.ACTIONS)
+                        ],
+                      );
                     } else if (index == 2) {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,8 +253,10 @@ class DashboardPage extends StatelessWidget {
                             onTap: () => Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        HistoryPage(UserBloc.internal().profileInfo.lastVisited))),
+                                    builder: (context) => HistoryPage(
+                                        UserBloc.internal()
+                                            .profileInfo
+                                            .lastVisited))),
                             child: _button(
                               context,
                               EnglishVer.HISTORY,
@@ -95,8 +269,10 @@ class DashboardPage extends StatelessWidget {
                             onTap: () => Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        StarredPage(UserBloc.internal().profileInfo.starred))),
+                                    builder: (context) => StarredPage(
+                                        UserBloc.internal()
+                                            .profileInfo
+                                            .starred))),
                             child: _button(
                               context,
                               EnglishVer.STARRED,
@@ -104,7 +280,8 @@ class DashboardPage extends StatelessWidget {
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                   colors: [
-                                    DarkThemeConfig.VIOLENT_START,DarkThemeConfig.VIOLENT_END
+                                    DarkThemeConfig.VIOLENT_START,
+                                    DarkThemeConfig.VIOLENT_END
                                   ]),
                               width: 0.45,
                             ),
@@ -116,7 +293,6 @@ class DashboardPage extends StatelessWidget {
                     } else {
                       if (_bloc.recipeModels.length > 0) {
                         return RecipeCard(_bloc.recipeModels[index - 4], '');
-
                       } else {
                         return NoResults();
                       }
@@ -129,7 +305,11 @@ class DashboardPage extends StatelessWidget {
       {width = 1, double marginleft = 0.03, double marginright = 0.03}) {
     return Container(
       height: 60,
-      margin: EdgeInsets.fromLTRB(MediaQuery.of(_context).size.width * marginleft, 12, MediaQuery.of(_context).size.width * marginright, 16),
+      margin: EdgeInsets.fromLTRB(
+          MediaQuery.of(_context).size.width * marginleft,
+          12,
+          MediaQuery.of(_context).size.width * marginright,
+          16),
       width: MediaQuery.of(_context).size.width * width,
       decoration: BoxDecoration(
         color: DarkThemeConfig.VENETIAN_RED,
@@ -139,10 +319,8 @@ class DashboardPage extends StatelessWidget {
       child: Center(
         child: Text(
           _text,
-          style: Theme.of(_context)
-              .textTheme
-              .display2
-              .copyWith(color: DarkThemeConfig.WHITE, fontWeight: FontWeight.w500),
+          style: Theme.of(_context).textTheme.display2.copyWith(
+              color: DarkThemeConfig.WHITE, fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
       ),
@@ -162,4 +340,76 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
+}
+
+
+Row _myRow(BuildContext _context, String _chosen){
+  return Row(
+    children: <Widget>[
+      Container(
+        width: MediaQuery.of(_context)
+            .size
+            .width *
+            0.3,
+        padding:
+        const EdgeInsets.only(
+            top: 5,
+            bottom: 5,
+            left: 5),
+        decoration: BoxDecoration(
+            border: Border(
+              left: BorderSide(
+                  width: 1,
+                  color: DarkThemeConfig
+                      .BLACK),
+              top: BorderSide(
+                  width: 1,
+                  color: DarkThemeConfig
+                      .BLACK),
+              bottom: BorderSide(
+                  width: 1,
+                  color: DarkThemeConfig
+                      .BLACK),
+            )),
+        child: SingleChildScrollView(
+          scrollDirection:
+          Axis.horizontal,
+          child: Text(_chosen,
+              style: TextStyle(
+                  color:
+                  DarkThemeConfig
+                      .BLUE_GRAY)),
+        ),
+      ),
+      Container(
+        padding:
+        const EdgeInsets.only(
+            top: 6,
+            bottom: 6,
+            right: 5),
+        decoration: BoxDecoration(
+            border: Border(
+                top: BorderSide(
+                    width: 1,
+                    color:
+                    DarkThemeConfig
+                        .BLACK),
+                bottom: BorderSide(
+                    width: 1,
+                    color:
+                    DarkThemeConfig
+                        .BLACK),
+                right: BorderSide(
+                    width: 1,
+                    color:
+                    DarkThemeConfig
+                        .BLACK))),
+        child: Icon(
+            Icons
+                .arrow_drop_down_circle,
+            color: DarkThemeConfig
+                .BLUE_GRAY),
+      )
+    ],
+  );
 }

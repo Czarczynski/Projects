@@ -5,6 +5,7 @@ import 'package:smart_cooking/pages/recipes_details_page.dart';
 
 class RecipeCard extends StatefulWidget {
   final RecipesModel _recipeModel;
+
   final String query;
 
   RecipeCard(this._recipeModel, this.query);
@@ -45,7 +46,7 @@ class _RecipeCardState extends State<RecipeCard> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    RecipesDetailsPage(widget._recipeModel)));
+                    RecipesDetailsPage(widget._recipeModel.id)));
       },
       child: Card(
         color: DarkThemeConfig.WHITE,
@@ -63,7 +64,10 @@ class _RecipeCardState extends State<RecipeCard> {
                   Flexible(
                     child: RichText(
                       text: TextSpan(
-                        style: Theme.of(context).textTheme.display1.copyWith(color: DarkThemeConfig.REAL_BLACK),
+                        style: Theme.of(context)
+                            .textTheme
+                            .display1
+                            .copyWith(color: DarkThemeConfig.REAL_BLACK),
                         children:
                             _getSpans(widget._recipeModel.title, widget.query),
                       ),
@@ -71,46 +75,26 @@ class _RecipeCardState extends State<RecipeCard> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: Image.network(widget._recipeModel.image ?? Config.DEFAULT_FOOD_IMAGE,width: 90,),
+                    child: Image.network(
+                        widget._recipeModel.image == null
+                            ? Config.DEFAULT_FOOD_IMAGE
+                            : "https://spoonacular.com/recipeImages/${widget._recipeModel.image}",
+                        height: 50,
+                        width: 70,
+                    ),
                   ),
                 ],
               ),
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top: 4, bottom: 4, right: 10),
-                    child: Text(EnglishVer.COOKING_TIME,
-                        style: Theme.of(context).textTheme.display4.copyWith(color: DarkThemeConfig.BLUE_GRANADE)),
-                  ),
-                  Visibility(
-                    visible: true,
-                    child: Expanded(
-                      flex: widget._recipeModel.readyInMinutes,
-                      child: DecoratedBox(
-                        child: SizedBox(
-                          height: 4,
-                        ),
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-//                          Color(0xFF84C7FF),
-//                          Color(0xFF3116C2)
-                          Color(0xFF7b3800),
-                          Color(0xFFcee93d)
-                        ])),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: (200 -
-                        widget._recipeModel.readyInMinutes),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).disabledColor,
-                      ),
-                      child: SizedBox(
-                        height: 4,
-                      ),
-                    ),
+                    padding:
+                        const EdgeInsets.only(top: 4, bottom: 4, right: 10),
+                    child: Text(EnglishVer.COOKING_TIME + ": ${widget._recipeModel.readyInMinutes}min",
+                        style: Theme.of(context)
+                            .textTheme
+                            .display4
+                            .copyWith(color: DarkThemeConfig.BLUE_GRANADE)),
                   ),
                 ],
               ),

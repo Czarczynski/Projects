@@ -12,8 +12,7 @@ class SearchBloc {
   List<RecipesModel> searchModels(String query) {
     try {
       return _recipesModel.where((_item) {
-        if (_item.title.toLowerCase().contains(query.toLowerCase()) ||
-            _item.instructions.toLowerCase().contains(query.toLowerCase()))
+        if (_item.title.toLowerCase().contains(query.toLowerCase()))
           return true;
         else
           return false;

@@ -78,7 +78,7 @@ class EnglishVer {
   static const String OK = 'OK';
   static const String YES = 'Yes';
   static const String NO = 'No';
-  static const String RANDOM_RECIPES = 'Show random recipes';
+  static const String RANDOM_RECIPES = 'Show recipes';
   static const String DASHBOARD = 'Dashboard';
   static const String SEARCH = 'Search';
 
@@ -91,5 +91,10 @@ class EnglishVer {
 
   static const String INGREDIENTS = "Ingredients";
 
+}
+
+class Lists{
+  static const List<String> cuisines = ["all", "african", "chinese", "japanese", "korean", "vietnamese", "thai", "indian", "british", "irish", "french", "italian", "mexican", "spanish", "middle eastern", "jewish", "american", "cajun", "southern", "greek", "german", "nordic", "eastern european", "caribbean", "latin american"];
+  static const List<String> diets = ["all", "pescetarian", "lacto", "vegetarian", "ovo vegetarian", "vegan", "vegetarian" ];
 
 }
