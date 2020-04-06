@@ -13,6 +13,7 @@ class RecipesSearch extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
+      backgroundColor: theme.backgroundColor,
         appBarTheme: theme.appBarTheme,
         primaryColor: theme.backgroundColor,
         primaryIconTheme: theme.iconTheme,
@@ -64,34 +65,29 @@ class _SearchRecipes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (query.trim() == '')
-      return Container(
-        color: Theme.of(context).backgroundColor,
-        child: Center(
-          child: Text(EnglishVer.SEARCH,
-              style: Theme.of(context)
-                  .textTheme
-                  .title),
-        ),
+      return Center(
+        child: Text(EnglishVer.SEARCH,
+            style: Theme.of(context)
+                .textTheme
+                .title),
       );
     else {
       return StreamBuilder(
         stream: _searchBloc.getSearchResultsStream(query),
         builder: (context, snapshot) {
-          return Container(
-              color: Theme.of(context).backgroundColor,
-              child: snapshot.hasData
-                  ? snapshot.data.length == 0
-                      ? NoResults()
-                      : ListView.builder(
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return RecipeCard(_projectModels[index], query);
-                          })
-                  : snapshot.hasError
-                      ? throw Exception(snapshot.error)
-                      : Center(
-                          child: CircularProgressIndicator(),
-                        ));
+          return snapshot.hasData
+              ? snapshot.data.length == 0
+                  ? NoResults()
+                  : ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return RecipeCard(_projectModels[index], query);
+                      })
+              : snapshot.hasError
+                  ? throw Exception(snapshot.error)
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    );
         },
       );
     }
