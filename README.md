@@ -15,7 +15,7 @@ Repository of few smaller and bigger projects. They are mainly written in two la
 # Flutter
 &nbsp;&nbsp;&nbsp;&nbsp;1 [Cooking App](https://github.com/Czarczynski/Projects/tree/master/flutter/smart_cooking) - App for searching recipes.
 
-<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/dashboard.png" height=300 />
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/smart_cooking/Gitscreens/dashboard_white.png" height=300 />
 
 &nbsp;&nbsp;&nbsp;&nbsp;2 [Github App](https://github.com/Czarczynski/Projects/tree/master/flutter/github_app) - Application for managing github accounts.
 
