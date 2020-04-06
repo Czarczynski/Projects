@@ -14,7 +14,6 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        brightness: Brightness.dark,
         backgroundColor: Colors.transparent,
         title: Text(
           EnglishVer.HISTORY,

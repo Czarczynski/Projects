@@ -1,16 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/blocs/user_bloc.dart';
-
 import 'drawer_page.dart';
 
 // ignore: must_be_immutable
-class ProfilePage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class ProfilePage extends StatefulWidget {
 
   ProfilePage(this._profilePageBloc);
 
   final UserBloc _profilePageBloc;
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +24,26 @@ class ProfilePage extends StatelessWidget {
       key: _scaffoldKey,
       drawer: DrawerPage(CurrentDrawerPage.PROFILE_PAGE),
       appBar: AppBar(
-        brightness: Brightness.dark,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 30),
-          child: Container(
-              height: 26,
-              width: 204,
-              child: Text(EnglishVer.PROFILE,
-                  style: Theme.of(context).textTheme.title)),
-        ),
-        leading: IconButton(
-            icon: Icon(Icons.toc),
-            color: DarkThemeConfig.PURPLE_,
-            onPressed: () => _scaffoldKey.currentState.openDrawer()),
-      ),
+          title: Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: Container(
+                height: 26,
+                width: 204,
+                child: Text(EnglishVer.PROFILE,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .title)),
+          ),
+          leading: IconButton(
+              icon: Icon(Icons.toc),
+              color: Theme
+                  .of(context)
+                  .appBarTheme
+                  .iconTheme
+                  .color,
+              onPressed: () => _scaffoldKey.currentState.openDrawer()),
+          ),
       body: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
@@ -57,56 +69,98 @@ class ProfilePage extends StatelessWidget {
 
   Container _profilePagePhoto(BuildContext context,
       {double height = 0.52,
-      double width = 1,
-      double photoheight = 0.324,
-      double photowidth = 0.324}) {
+        double width = 1,
+        double photoheight = 0.324,
+        double photowidth = 0.324}) {
     return Container(
-      height: MediaQuery.of(context).size.height * height,
-      width: MediaQuery.of(context).size.width * width,
-      decoration: BoxDecoration(color: DarkThemeConfig.WHITE_SMOKE),
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * height,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * width,
+      decoration: BoxDecoration(color: Theme
+          .of(context)
+          .backgroundColor),
       child: Center(
           child: Container(
-        width: MediaQuery.of(context).size.height * photoheight,
-        height: MediaQuery.of(context).size.height * photowidth,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-                color: DarkThemeConfig.WHITE,
-                blurRadius: 1000,
-                offset: Offset(0, 2))
-          ],
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage("assets/images/face.png"),
-          ),
-        ),
-      )),
+            width: MediaQuery
+                .of(context)
+                .size
+                .height * photoheight,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * photowidth,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                    color: Theme
+                        .of(context)
+                        .textTheme
+                        .display2
+                        .color,
+                    blurRadius: 1000,
+                    offset: Offset(0, 2))
+              ],
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/face.png"),
+              ),
+            ),
+          )),
     );
   }
-  DateTime _creationDate = DateTime.parse(UserBloc.internal().profileInfo.creationDate);
+
+  DateTime _creationDate =
+  DateTime.parse(UserBloc
+      .internal()
+      .profileInfo
+      .creationDate);
+
   Container _profilePageDetails(BuildContext context,
       {double height = 1, double width = 1}) {
     return Container(
-      height: MediaQuery.of(context).size.height * height,
-      width: MediaQuery.of(context).size.width * width,
-      decoration: BoxDecoration(color: DarkThemeConfig.WHITE_SMOKE),
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * height,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * width,
+      decoration: BoxDecoration(color: Theme
+          .of(context)
+          .backgroundColor),
       child: Column(
         children: <Widget>[
           Container(
               margin: EdgeInsets.fromLTRB(16, 0, 16, 12),
               height: 32,
               child: StreamBuilder(
-                  stream: UserBloc.internal().streamControllerProfileInfo,
+                  stream: UserBloc
+                      .internal()
+                      .streamControllerProfileInfo,
                   builder: (context, snapshot) {
                     return Text(
-                        '${_profilePageBloc.profileInfo != null ?
-                        UserBloc.internal().profileInfo.userName : "Default String"}',
+                        '${widget._profilePageBloc.profileInfo != null ? UserBloc
+                            .internal()
+                            .profileInfo
+                            .userName : "Default String"}',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
+                        style: Theme
+                            .of(context)
                             .textTheme
                             .display2
-                            .copyWith(color: DarkThemeConfig.BLUE_GRAY));
+                            .copyWith(
+                            color: Theme
+                                .of(context)
+                                .textTheme
+                                .title
+                                .color));
                   })),
           Expanded(
 //            margin: EdgeInsets.fromLTRB(8, 0, 8, 32),
@@ -115,10 +169,13 @@ class ProfilePage extends StatelessWidget {
               children: <Widget>[
                 Text('${EnglishVer.PROFILE}\n\n',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
+                    style: Theme
+                        .of(context)
                         .textTheme
                         .display1
-                        .copyWith(color: DarkThemeConfig.BLUE_LIGHT_GRAY)),
+                        .copyWith(color: Theme
+                        .of(context)
+                        .buttonColor)),
                 Row(
                   children: <Widget>[
                     Padding(
@@ -127,13 +184,19 @@ class ProfilePage extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             '${EnglishVer.FIRSTNAME}:\n\n'
-                            '${EnglishVer.LASTNAME}:\n\n'
-                            '${EnglishVer.PHONE_NO}:\n\n'
-                            '${EnglishVer.TIME_WITH_US}:\n\n',
-                            style: Theme.of(context)
+                                '${EnglishVer.LASTNAME}:\n\n'
+                                '${EnglishVer.PHONE_NO}:\n\n'
+                                '${EnglishVer.TIME_WITH_US}:\n\n',
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .display1
-                                .copyWith(color: DarkThemeConfig.PURPLE_),
+                                .copyWith(
+                                color: Theme
+                                    .of(context)
+                                    .appBarTheme
+                                    .iconTheme
+                                    .color),
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -144,14 +207,31 @@ class ProfilePage extends StatelessWidget {
                         Padding(
                             padding: const EdgeInsets.only(top: 1.0, left: 20),
                             child: Text(
-                                '${UserBloc.internal().profileInfo.firstName}\n\n'
-                                '${UserBloc.internal().profileInfo.lastName}\n\n'
-                                '${UserBloc.internal().profileInfo.phoneNumber}\n\n'
-                                '${_creationDate.year} ${monthInWord(_creationDate.month)} ${_creationDate.day}\n\n',
-                                style: Theme.of(context)
+                                '${UserBloc
+                                    .internal()
+                                    .profileInfo
+                                    .firstName}\n\n'
+                                    '${UserBloc
+                                    .internal()
+                                    .profileInfo
+                                    .lastName}\n\n'
+                                    '${UserBloc
+                                    .internal()
+                                    .profileInfo
+                                    .phoneNumber}\n\n'
+                                    '${_creationDate.year} ${monthInWord(
+                                    _creationDate.month)} ${_creationDate
+                                    .day}\n\n',
+                                style: Theme
+                                    .of(context)
                                     .textTheme
                                     .display1
-                                    .copyWith(color: DarkThemeConfig.BLUE_GRAY))),
+                                    .copyWith(
+                                    color: Theme
+                                        .of(context)
+                                        .textTheme
+                                        .title
+                                        .color))),
                       ],
                     ),
                   ],
@@ -164,8 +244,8 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  String monthInWord(int _switcher){
-    switch(_switcher){
+  String monthInWord(int _switcher) {
+    switch (_switcher) {
       case 1:
         return "January";
       case 2:

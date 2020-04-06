@@ -10,10 +10,10 @@ class RecipesResultBloc extends ChangeNotifier {
   List<RecipesModel> recipeModels = List<RecipesModel>();
   final BuildContext context;
   bool _isInProgress = true;
-  final String cuisine, diet;
+  final String cuisine, diet, type;
   bool get isInProgress => _isInProgress;
 
-  RecipesResultBloc(this.context, this.cuisine, this.diet) {
+  RecipesResultBloc(this.context, this.cuisine, this.diet, this.type) {
     _getRecipeModels().then((RecipeModel _list) {
       recipeModels = _list.results;
       _isInProgress = false;
@@ -24,7 +24,7 @@ class RecipesResultBloc extends ChangeNotifier {
   Future<RecipeModel> _getRecipeModels() async {
     try {
       final response = await http
-          .get('${Config.RAPID_API_URL}/recipes/search?query=all&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}', headers: {
+          .get('${Config.RAPID_API_URL}/recipes/search?query=all&instructionsRequired=true&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}${type=='all' ? "" : "&type="+type}', headers: {
         "x-rapidapi-host": Config.RAPID_API_HOST,
         "x-rapidapi-key": Config.RAPID_API_KEY
       });

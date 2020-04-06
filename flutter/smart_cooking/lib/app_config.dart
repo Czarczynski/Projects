@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cooking/theme.dart';
+
 
 class Config {
   static const String HOST_URL = "https://pleasurecookings.azurewebsites.net";
@@ -31,11 +33,12 @@ class LightThemeConfig {
   static const Color SNOW = Color.fromRGBO(250, 250, 250, 1);
   static const Color VENETIAN_RED = Color.fromRGBO(176, 0, 17, 1);
   static const Color WHITE = Color(0xffffffff);
-  static const Color BLACK = Color(0xff000000);
+  static const Color BLACK = Color(0xff141414);
   static const Color VIOLENT_START = Color(0xFF7472af);
   static const Color VIOLENT_END = Color(0xFF403e77);
   static const Color WHITE_70 = Colors.white70;
   static const Color BLACK_54 = Colors.black54;
+  static const Color REAL_BLACK= Color(0xff000000);
 }
 class DarkThemeConfig {
   static const Color BLUE_GRANADE = Color(0xffd5d6b1);
@@ -63,7 +66,7 @@ class DarkThemeConfig {
 class EnglishVer {
   static const String EMPTY = 'Nothing to show';
   static const String LAST_VISITED = 'Last Visited';
-  static const String ACTIONS = "Actions";
+  static const String YOUR_LISTS = "Your lists";
   static const String RECIPES = 'Recipes';
   static const String STARRED = 'Saved';
   static const String HISTORY = 'History';
@@ -78,7 +81,7 @@ class EnglishVer {
   static const String OK = 'OK';
   static const String YES = 'Yes';
   static const String NO = 'No';
-  static const String RANDOM_RECIPES = 'Show recipes';
+  static const String SHOW_RECIPES = 'Show recipes';
   static const String DASHBOARD = 'Dashboard';
   static const String SEARCH = 'Search';
 
@@ -96,5 +99,5 @@ class EnglishVer {
 class Lists{
   static const List<String> cuisines = ["all", "african", "chinese", "japanese", "korean", "vietnamese", "thai", "indian", "british", "irish", "french", "italian", "mexican", "spanish", "middle eastern", "jewish", "american", "cajun", "southern", "greek", "german", "nordic", "eastern european", "caribbean", "latin american"];
   static const List<String> diets = ["all", "pescetarian", "lacto", "vegetarian", "ovo vegetarian", "vegan", "vegetarian" ];
-
+  static const List<String> types = ["all", "main course", "side dish", "dessert", "appetizer", "salad", "bread", "breakfast", "soup", "beverage", "sauce", "drink"];
 }

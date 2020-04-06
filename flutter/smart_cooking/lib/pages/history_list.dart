@@ -33,7 +33,9 @@ class _HistoryListState extends State<HistoryList> {
         Text(
           widget.history ? EnglishVer.DESC_HISTORY : EnglishVer.DESC_STARRED,
           style: Theme.of(context).textTheme.display1.copyWith(
-              fontSize: 20, color: DarkThemeConfig.ST_TROPAZ, letterSpacing: 1.5),
+              fontSize: 20,
+              color: Theme.of(context).canvasColor,
+              letterSpacing: 1.5),
         ),
         Expanded(
             child: ChangeNotifierProvider<HistoryBloc>(
@@ -50,7 +52,11 @@ class _HistoryListState extends State<HistoryList> {
                       return ListView.builder(
                         itemCount: _bloc.recipeModels.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return RecipeCard(_bloc.recipeModels[index], '');
+                          return RecipeCard(
+                            _bloc.recipeModels[index],
+                            '',
+                            fullRecipe: true,
+                          );
                         },
                       );
                   },

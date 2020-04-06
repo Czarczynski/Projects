@@ -1,5 +1,5 @@
-import 'package:smart_cooking/app_config.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_cooking/app_config.dart';
 
 class NoResults extends StatelessWidget {
   @override

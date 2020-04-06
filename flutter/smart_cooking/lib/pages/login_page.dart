@@ -45,7 +45,7 @@ class _LoginPageState extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: DarkThemeConfig.WHITE,
+                  color: Theme.of(context).textTheme.display2.color,
                 ),
                 height: MediaQuery.of(context).size.width * 0.1,
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -54,7 +54,7 @@ class _LoginPageState extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: DarkThemeConfig.BLACK)),
+                        color: Theme.of(context).textTheme.subhead.color)),
               ),
             ),
             InkWell(

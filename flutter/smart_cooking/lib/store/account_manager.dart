@@ -1,14 +1,20 @@
 import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_cooking/common/theme_changer.dart';
 import 'package:smart_cooking/models/token_model.dart';
+import 'package:smart_cooking/theme.dart';
 
 class AccountManager {
   static const String ARG_ACCESS_TOKEN = "arg_access_token";
+
 //  static const String ARG_USER_ID = "arg_user_id";
   static const String ARG_TOKEN_TYPE = "arg_token_type";
+
 //  static const String ARG_REFRESH_TOKEN = "arg_refresh_token";
   static const String ARG_EXPIRES_AT = "arg_expires_at";
+
+  static const String ARG_PREF_MODE = "arg_pref_mode";
 
   static final AccountManager _instance = AccountManager._internal();
 
@@ -30,18 +36,19 @@ class AccountManager {
 //    return userId != null ? userId : "";
 //  }
 
-  Future<String> getTokenType() {
-    final userTokenType = _getStringValue(ARG_TOKEN_TYPE);
-    return userTokenType != null ? userTokenType : "";
-  }
-
-
   Future<String> getExpiresAt() {
     final tokenExpiresAt = _getStringValue(ARG_EXPIRES_AT);
     return tokenExpiresAt != null ? tokenExpiresAt : "";
   }
 
+  Future<ThemeKey> getPrefMode() async {
+    final mode = await _getStringValue(ARG_PREF_MODE);
+    return enumFromString(mode, ThemeKey.values);
+  }
+
   clearUserAccessToken() => _setStringValue(ARG_ACCESS_TOKEN, null);
+
+  setPrefMode(ThemeKey _key) => _setStringValue(ARG_PREF_MODE, enumToString(_key));
 
   setUserAccessToken(TokenModel token) {
 //    _setStringValue(ARG_USER_ID, token.user_id);

@@ -13,11 +13,10 @@ class RecipesSearch extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return theme.copyWith(
-      appBarTheme: theme.appBarTheme,
-      primaryColor: theme.backgroundColor,
-      primaryIconTheme: theme.iconTheme,
-      iconTheme: theme.iconTheme
-    );
+        appBarTheme: theme.appBarTheme,
+        primaryColor: theme.backgroundColor,
+        primaryIconTheme: theme.iconTheme,
+        iconTheme: theme.iconTheme);
   }
 
   @override
@@ -66,13 +65,12 @@ class _SearchRecipes extends StatelessWidget {
   Widget build(BuildContext context) {
     if (query.trim() == '')
       return Container(
-        color: DarkThemeConfig.WHITE_SMOKE,
+        color: Theme.of(context).backgroundColor,
         child: Center(
           child: Text(EnglishVer.SEARCH,
               style: Theme.of(context)
                   .textTheme
-                  .title
-                  .copyWith(color: DarkThemeConfig.GRAY_DARK)),
+                  .title),
         ),
       );
     else {
@@ -80,7 +78,7 @@ class _SearchRecipes extends StatelessWidget {
         stream: _searchBloc.getSearchResultsStream(query),
         builder: (context, snapshot) {
           return Container(
-              color: DarkThemeConfig.WHITE_SMOKE,
+              color: Theme.of(context).backgroundColor,
               child: snapshot.hasData
                   ? snapshot.data.length == 0
                       ? NoResults()

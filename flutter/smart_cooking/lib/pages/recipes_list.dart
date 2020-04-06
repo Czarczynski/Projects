@@ -6,9 +6,9 @@ import 'package:smart_cooking/pages/no_results.dart';
 import 'package:smart_cooking/pages/recipe_card.dart';
 
 class RecipesList extends StatefulWidget {
-  final String cuisine,diet;
+  final String cuisine, diet, type;
 
-  RecipesList(this.context, this.cuisine, this.diet);
+  RecipesList(this.context, this.cuisine, this.diet, this.type);
 
   final BuildContext context;
 
@@ -29,7 +29,8 @@ class _RecipesListState extends State<RecipesList> {
       children: <Widget>[
         Expanded(
             child: ChangeNotifierProvider<RecipesResultBloc>(
-                create: (context) => RecipesResultBloc(context,widget.cuisine, widget.diet),
+                create: (context) =>
+                    RecipesResultBloc(context, widget.cuisine, widget.diet, widget.type),
                 child: Consumer<RecipesResultBloc>(
                   builder: (context, RecipesResultBloc _bloc, _) {
                     if (_bloc.isInProgress) {
@@ -51,7 +52,7 @@ class _RecipesListState extends State<RecipesList> {
                                     .display1
                                     .copyWith(
                                         fontSize: 20,
-                                        color: DarkThemeConfig.ST_TROPAZ,
+                                        color: Theme.of(context).canvasColor,
                                         letterSpacing: 1.5),
                               ),
                             );

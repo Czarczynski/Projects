@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/blocs/recipes_bloc.dart';
+import 'package:smart_cooking/blocs/starred_bloc.dart';
 import 'package:smart_cooking/blocs/user_bloc.dart';
 import 'package:smart_cooking/store/photo_saver.dart';
 
@@ -33,7 +34,6 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                   (BuildContext context, bool innerBoxIsScrolled) {
                 return <Widget>[
                   SliverAppBar(
-                    brightness: Brightness.dark,
                     backgroundColor: Theme.of(context).backgroundColor,
                     expandedHeight: 200,
                     floating: false,
@@ -80,7 +80,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                     : Container(
                         margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         decoration: BoxDecoration(
-                            color: DarkThemeConfig.WHITE,
+                            color: Theme.of(context).textTheme.display2.color,
                             borderRadius: BorderRadius.vertical(
                                 bottom: Radius.circular(20)),
                             boxShadow: [
@@ -92,10 +92,12 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                         child: Padding(
                             padding: const EdgeInsets.fromLTRB(16, 0, 16, 5),
                             child: ListView.builder(
-                                itemCount: _bloc.recipe.instructions != null
-                                    ? _bloc.recipe.analyzedInstructions[0].steps
-                                        .length
-                                    : 0 + 5,
+                                itemCount: 5 +
+                                    (_bloc.recipe.analyzedInstructions[0] !=
+                                            null
+                                        ? _bloc.recipe.analyzedInstructions[0]
+                                            .steps.length
+                                        : 0),
                                 itemBuilder: (BuildContext context, int index) {
                                   if (index == 0) {
                                     return Padding(
@@ -131,8 +133,10 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                                       .display4
                                                       .copyWith(fontSize: 20)),
                                               Icon(Icons.thumb_up,
-                                                  color:
-                                                      DarkThemeConfig.PURPLE_)
+                                                  color: Theme.of(context)
+                                                      .appBarTheme
+                                                      .iconTheme
+                                                      .color)
                                             ],
                                           )
                                         ],
@@ -151,8 +155,8 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                                 .textTheme
                                                 .display1
                                                 .copyWith(
-                                                    color: DarkThemeConfig
-                                                        .WHITE_SMOKE,
+                                                    color: Theme.of(context)
+                                                        .backgroundColor,
                                                     fontSize: 23)));
                                   } else if (index == 4) {
                                     return Container(
@@ -174,7 +178,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                       child: RotatedBox(
                                         quarterTurns: 1,
                                         child: ToggleButtons(
-                                          fillColor: Colors.white12,
+                                          fillColor: Theme.of(context).selectedRowColor,
                                           children: _bloc
                                               .recipe.extendedIngredients
                                               .map((_item) => RotatedBox(
@@ -195,8 +199,12 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                                                 TextAlign.left,
                                                             style: TextStyle(
                                                                 fontSize: 15,
-                                                                color: DarkThemeConfig
-                                                                    .BLUE_GRAY)),
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .appBarTheme
+                                                                    .textTheme
+                                                                    .title
+                                                                    .color)),
                                                       ),
                                                     ),
                                                   ))
@@ -232,8 +240,10 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                               .textTheme
                                               .display1
                                               .copyWith(
-                                                  color: DarkThemeConfig
-                                                      .BLUE_GRANADE,
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .body1
+                                                      .color,
                                                   fontSize: 30)),
                                     );
                                   } else {
@@ -259,8 +269,11 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                                                       .textTheme
                                                       .display1
                                                       .copyWith(
-                                                          color: DarkThemeConfig
-                                                              .BLACK,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .subhead
+                                                                  .color,
                                                           fontSize: bigger
                                                               ? 22
                                                               : 16)))
@@ -329,6 +342,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
             onTap: () {
               already = true;
               setState(() => null);
+              postStarred("${widget._recipeId}");
             },
             child: Container(
               decoration: BoxDecoration(
