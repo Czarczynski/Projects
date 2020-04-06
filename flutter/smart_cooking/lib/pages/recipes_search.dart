@@ -24,10 +24,10 @@ class RecipesSearch extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-          onPressed: () {
+          onPressed: query != '' ?() {
             query = '';
-          },
-          icon: Icon(Icons.clear))
+          } : null,
+          icon: Icon(Icons.backspace))
     ];
   }
 
