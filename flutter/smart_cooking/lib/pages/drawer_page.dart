@@ -46,8 +46,7 @@ class DrawerPage extends StatelessWidget {
                     color: Theme.of(context).textTheme.display2.color,
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image:
-                            AssetImage('assets/images/drawerbackground.jpeg'))),
+                        image: AssetImage('assets/images/drawerbackground.jpeg'))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -55,7 +54,8 @@ class DrawerPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(Icons.person_pin_circle,
-                            size: 70, color: Colors.white),
+                            size: 70,
+                            color: Colors.white),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: StreamBuilder(
@@ -70,7 +70,8 @@ class DrawerPage extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .display2
-                                          .copyWith(color: Colors.white),
+                                          .copyWith(
+                                              color: Colors.white),
                                       textAlign: TextAlign.center);
                               }),
                         ),
@@ -88,7 +89,8 @@ class DrawerPage extends StatelessWidget {
                                         ProfilePage(UserBloc.internal())));
                           },
                           child: Icon(Icons.settings,
-                              size: 30, color: Colors.white),
+                              size: 30,
+                              color: Colors.white),
                         ),
                       ],
                     ),
@@ -107,12 +109,12 @@ class DrawerPage extends StatelessWidget {
                               child: !snapshot.hasData
                                   ? Center(child: CircularProgressIndicator())
                                   : Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Column(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Column(
                                         children: <Widget>[
                                           _singleListTile(context, 0,
                                               icon: Icons.airplay,
-                                              text: EnglishVer.DASHBOARD,
+                                              text: EnglishVer.HOME,
                                               route: DashboardPage()),
                                           _singleListTile(context, 1,
                                               icon: Icons.restaurant,
@@ -134,7 +136,7 @@ class DrawerPage extends StatelessWidget {
                                                   .profileInfo.starred))
                                         ],
                                       ),
-                                  )),
+                                    )),
                           Expanded(
                             flex: 2,
                             child: Padding(
@@ -144,16 +146,17 @@ class DrawerPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Container(
-                                    child:Row(
+                                    child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text("Dark Mode",
                                             style: TextStyle(fontSize: 14)),
                                         Switch(
-                                          value: ThemeChanger.instanceOf(context)
-                                              .theme ==
-                                              CustomThemes.darkTheme,
+                                          value:
+                                              ThemeChanger.instanceOf(context)
+                                                      .theme ==
+                                                  CustomThemes.darkTheme,
                                           onChanged: (value) {
                                             _changeTheme(context);
                                           },
@@ -162,7 +165,7 @@ class DrawerPage extends StatelessWidget {
                                               .body1
                                               .color,
                                           activeColor:
-                                          Theme.of(context).iconTheme.color,
+                                              Theme.of(context).iconTheme.color,
                                         ),
                                       ],
                                     ),
@@ -174,9 +177,8 @@ class DrawerPage extends StatelessWidget {
                                           color: Theme.of(context).buttonColor),
                                     )),
                                   ),
-
                                   Padding(
-                                    padding: const EdgeInsets.only(top:8.0),
+                                    padding: const EdgeInsets.only(top: 8.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -184,7 +186,8 @@ class DrawerPage extends StatelessWidget {
                                         Text("Log out",
                                             style: TextStyle(fontSize: 14)),
                                         Padding(
-                                          padding: const EdgeInsets.only(right: 16),
+                                          padding:
+                                              const EdgeInsets.only(right: 16),
                                           child: LogoutButton(),
                                         )
                                       ],

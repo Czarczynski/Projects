@@ -19,6 +19,7 @@ dependencies:
   gallery_saver:
   flutter_picker:
     git: git://github.com/yangyxd/flutter_picker.git
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:

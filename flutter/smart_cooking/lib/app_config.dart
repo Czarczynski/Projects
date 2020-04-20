@@ -41,6 +41,7 @@ class LightThemeConfig {
   static const Color REAL_BLACK= Color(0xff000000);
 }
 class DarkThemeConfig {
+  static const Color OLA_COLOR = Color(0xffbfd9cc);
   static const Color BLUE_GRANADE = Color(0xffd5d6b1);
   static const Color GRAY_DARK = Color(0xFFb2b1d6);
   static const Color PURPLE_ = Color(0xFF8b8d50);
@@ -54,7 +55,7 @@ class DarkThemeConfig {
   static const Color SOLITUDE = Color(0xff1e1100);
   static const Color SNOW = Color(0xff050505);
   static const Color VENETIAN_RED = Color(0xffe6ac75);
-  static const Color WHITE = Color(0xff141414);
+  static const Color WHITE = Color(0xff444444);
   static const Color REAL_BLACK = Color(0xffffffff);
   static const Color BLACK = Color(0xffcfcfcf);
   static const Color VIOLENT_START = Color(0xFF8b8d50);
@@ -82,7 +83,7 @@ class EnglishVer {
   static const String YES = 'Yes';
   static const String NO = 'No';
   static const String SHOW_RECIPES = 'Show recipes';
-  static const String DASHBOARD = 'Dashboard';
+  static const String HOME = 'Home';
   static const String SEARCH = 'Search';
 
   static const String FIRSTNAME = "Firstname";

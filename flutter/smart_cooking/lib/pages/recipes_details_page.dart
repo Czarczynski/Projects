@@ -63,7 +63,7 @@ class _RecipesDetailsPageState extends State<RecipesDetailsPage> {
                               : Image.network(
                                   _bloc.recipe.image ??
                                       Config.DEFAULT_FOOD_IMAGE,
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 )),
                     ),
                   ),

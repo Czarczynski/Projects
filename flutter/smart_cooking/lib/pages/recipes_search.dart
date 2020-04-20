@@ -54,12 +54,12 @@ class RecipesSearch extends SearchDelegate {
 
 // ignore: must_be_immutable
 class _SearchRecipes extends StatelessWidget {
-  final List<RecipesModel> _projectModels;
-  final String query;
+  List<RecipesModel> _projectModels= List<RecipesModel>();
+  String query='';
   SearchBloc _searchBloc;
 
   _SearchRecipes(this.query, this._projectModels, BuildContext context) {
-    _searchBloc = SearchBloc(_projectModels, context);
+    this._searchBloc = SearchBloc(this._projectModels, context);
   }
 
   @override
@@ -73,7 +73,7 @@ class _SearchRecipes extends StatelessWidget {
       );
     else {
       return StreamBuilder(
-        stream: _searchBloc.getSearchResultsStream(query),
+        stream: this._searchBloc.getSearchResultsStream(query),
         builder: (context, snapshot) {
           return snapshot.hasData
               ? snapshot.data.length == 0
@@ -81,7 +81,7 @@ class _SearchRecipes extends StatelessWidget {
                   : ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return RecipeCard(_projectModels[index], query);
+                        return RecipeCard(snapshot.data[index], query);
                       })
               : snapshot.hasError
                   ? throw Exception(snapshot.error)

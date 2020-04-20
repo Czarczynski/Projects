@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/blocs/recipes_bloc.dart';
 import 'package:smart_cooking/pages/no_results.dart';
 import 'package:smart_cooking/pages/recipe_card.dart';
 
 class RecipesList extends StatefulWidget {
   final String cuisine, diet, type;
-
-  RecipesList(this.context, this.cuisine, this.diet, this.type);
+  final RecipesResultBloc _bloc;
+  RecipesList(this.context, this.cuisine, this.diet, this.type, this._bloc);
 
   final BuildContext context;
 
@@ -28,40 +27,108 @@ class _RecipesListState extends State<RecipesList> {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Expanded(
-            child: ChangeNotifierProvider<RecipesResultBloc>(
-                create: (context) =>
-                    RecipesResultBloc(context, widget.cuisine, widget.diet, widget.type),
-                child: Consumer<RecipesResultBloc>(
-                  builder: (context, RecipesResultBloc _bloc, _) {
-                    if (_bloc.isInProgress) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (_bloc.recipeModels.length == 0) {
-                      return NoResults();
-                    } else
-                      return ListView.builder(
-                        itemCount: _bloc.recipeModels.length + 1,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == 0)
-                            return Center(
-                              child: Text(
-                                EnglishVer.TODAY_S_RECIPES,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .display1
-                                    .copyWith(
-                                        fontSize: 20,
-                                        color: Theme.of(context).canvasColor,
-                                        letterSpacing: 1.5),
-                              ),
-                            );
-                          return RecipeCard(_bloc.recipeModels[index - 1], '');
-                        },
-                      );
-                  },
-                )))
+            child: widget._bloc.recipeModels.length == 0 ?
+                  NoResults()
+                : Column(
+                    children: <Widget>[
+                      Container(
+                          child: (widget.type != 'all' ||
+                                  widget.cuisine != 'all' ||
+                                  widget.diet != 'all')
+                              ? Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16, bottom: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.filter_list,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .display4
+                                                .color,
+                                            size: 20,
+                                          ),
+                                          Text(
+                                            "Filters",
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .textTheme
+                                                    .display4
+                                                    .color,
+                                                fontSize: 15,
+                                                fontWeight:
+                                                    FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          widget.type != 'all'
+                                              ? _filters(
+                                                  context,
+                                                  widget.type,
+                                                  Colors.lightGreen)
+                                              : Container(),
+                                          widget.cuisine != 'all'
+                                              ? _filters(
+                                                  context,
+                                                  widget.cuisine,
+                                                  Colors.green)
+                                              : Container(),
+                                          widget.diet != 'all'
+                                              ? _filters(
+                                                  context,
+                                                  widget.diet,
+                                                  Colors.greenAccent)
+                                              : Container(),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Container()),
+                      Expanded(
+                        child: ListView(children: <Widget>[
+                          Wrap(
+                            alignment: WrapAlignment.end,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            children: widget._bloc.recipeModels
+                                .map((item) => RecipeCard(item, ''))
+                                .toList(),
+                          ),
+                        ]),
+                      )
+                    ],
+                  )
+        )
+
+
       ],
     );
   }
 }
+
+Container _filters(BuildContext _context, String _filter, Color _color) =>
+    Container(
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        decoration: BoxDecoration(
+          color: _color,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+        child: Text(_filter,
+            style: Theme.of(_context)
+                .textTheme
+                .title
+                .copyWith(color: Colors.white)));

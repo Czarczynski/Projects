@@ -21,7 +21,7 @@ class SmartCooking extends StatelessWidget {
     ]);
     return MaterialApp(
       routes: <String, WidgetBuilder>{
-        Config.ROUTE_TO_LOGIN: (context) => LoginPage(),
+        Config.ROUTE_TO_LOGIN: (context) => LoginPage(oldWidget: true),
         Config.ROUTE_TO_DASHBOARD: (context) => DashboardPage(),
       },
       theme: ThemeChanger.of(context),

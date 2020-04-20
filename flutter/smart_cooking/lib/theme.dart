@@ -7,7 +7,7 @@ class CustomThemes {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     backgroundColor: LightThemeConfig.WHITE_SMOKE,
-    accentColor: LightThemeConfig.MINT_GREEN,
+    accentColor: Colors.grey.withOpacity(0.5),
     disabledColor: LightThemeConfig.BLUE_CYAN,
     canvasColor: LightThemeConfig.ST_TROPAZ,
     buttonColor: LightThemeConfig.BLUE_LIGHT_GRAY,
@@ -98,7 +98,7 @@ class CustomThemes {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
     backgroundColor: DarkThemeConfig.WHITE_SMOKE,
-    accentColor: DarkThemeConfig.MINT_GREEN,
+    accentColor: Colors.grey.withOpacity(0.5),
     disabledColor: DarkThemeConfig.BLUE_CYAN,
     canvasColor: DarkThemeConfig.ST_TROPAZ,
     buttonColor: DarkThemeConfig.BLUE_LIGHT_GRAY,
@@ -193,7 +193,7 @@ class CustomThemes {
       case ThemeKey.DARK:
         return darkTheme;
       default:
-        return darkTheme;
+        return lightTheme;
     }
   }
 }
