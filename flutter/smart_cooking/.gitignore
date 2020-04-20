@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-lib/app_config.dart
+lib/sensitive.dart
 # IntelliJ related
 *.iml
 *.ipr

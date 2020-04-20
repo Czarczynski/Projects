@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_cooking/theme.dart';
-
+import 'package:smart_cooking/sensitive.dart';
 
 class Config {
   static const String HOST_URL = "https://pleasurecookings.azurewebsites.net";
   static const String API_URL = "https://api.spoonacular.com";
-  static const String API_KEY = "b327d59e6a4343c68658d1e096beb84d";
+  static const String API_KEY = Sensitive.API_KEY;
   static const String ROUTE_TO_LOGIN = '/login';
   static const String ROUTE_TO_DASHBOARD = '/projectspage';
   static const String USER_AGENT =
