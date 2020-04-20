@@ -4,9 +4,8 @@ import 'package:smart_cooking/theme.dart';
 
 class Config {
   static const String HOST_URL = "https://pleasurecookings.azurewebsites.net";
-  static const String RAPID_API_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
-  static const String RAPID_API_HOST = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
-  static const String RAPID_API_KEY = "1af46a673amshf2aeeb64cb62279p106805jsna385a77ad8c1";
+  static const String API_URL = "https://api.spoonacular.com";
+  static const String API_KEY = "b327d59e6a4343c68658d1e096beb84d";
   static const String ROUTE_TO_LOGIN = '/login';
   static const String ROUTE_TO_DASHBOARD = '/projectspage';
   static const String USER_AGENT =

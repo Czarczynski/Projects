@@ -24,9 +24,8 @@ class RecipesResultBloc extends ChangeNotifier {
   Future<RecipeModel> _getRecipeModels() async {
     try {
       final response = await http
-          .get('${Config.RAPID_API_URL}/recipes/search?query=all&instructionsRequired=true&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}${type=='all' ? "" : "&type="+type}', headers: {
-        "x-rapidapi-host": Config.RAPID_API_HOST,
-        "x-rapidapi-key": Config.RAPID_API_KEY
+          .get('${Config.API_URL}/recipes/search?query=all&instructionsRequired=true&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}${type=='all' ? "" : "&type="+type}', headers: {
+        "apiKey": Config.API_KEY
       });
       if (response.statusCode == 200)
         return RecipeModel.fromJson(json.decode(response.body));
@@ -56,9 +55,8 @@ class RecipeByIdBloc extends ChangeNotifier {
   Future<RecipesModel> _getRecipeById() async {
     try {
       final response = await http
-          .get('${Config.RAPID_API_URL}/recipes/$id/information', headers: {
-        "x-rapidapi-host": Config.RAPID_API_HOST,
-        "x-rapidapi-key": Config.RAPID_API_KEY
+          .get('${Config.API_URL}/recipes/$id/information', headers: {
+        "apiKey": Config.API_KEY
       });
       return RecipesModel.fromJson(json.decode(response.body));
     } catch (error) {
@@ -91,9 +89,8 @@ class HistoryBloc extends ChangeNotifier {
   Future<RecipesModel> _getRecipeById(String id) async {
     try {
       final response = await http
-          .get('${Config.RAPID_API_URL}/recipes/$id/information', headers: {
-        "x-rapidapi-host": Config.RAPID_API_HOST,
-        "x-rapidapi-key": Config.RAPID_API_KEY
+          .get('${Config.API_URL}/recipes/$id/information', headers: {
+        "apiKey": Config.API_KEY
       });
       return RecipesModel.fromJson(json.decode(response.body));
     } catch (error) {
