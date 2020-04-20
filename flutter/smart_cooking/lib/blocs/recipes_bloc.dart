@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_cooking/app_config.dart';
 import 'package:smart_cooking/models/recipe_model.dart';
+import 'package:smart_cooking/sensitive.dart';
 
 class RecipesResultBloc extends ChangeNotifier {
   List<RecipesModel> recipeModels = List<RecipesModel>();
@@ -24,13 +25,11 @@ class RecipesResultBloc extends ChangeNotifier {
   Future<RecipeModel> _getRecipeModels() async {
     try {
       final response = await http
-          .get('${Config.API_URL}/recipes/search?query=all&instructionsRequired=true&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}${type=='all' ? "" : "&type="+type}', headers: {
-        "apiKey": Config.API_KEY
-      });
+          .get('${Config.API_URL}/recipes/search?apiKey=${Sensitive.API_KEY}&query=all&instructionsRequired=true&number=100${cuisine=='all' ? "" : "&cuisine="+cuisine}${diet=='all' ? "" : "&diet="+diet}${type=='all' ? "" : "&type="+type}');
       if (response.statusCode == 200)
         return RecipeModel.fromJson(json.decode(response.body));
       else
-        throw Exception('Failed while getting recipes');
+        throw Exception(response.body);
     } catch (error) {
       throw error;
     }
@@ -55,9 +54,7 @@ class RecipeByIdBloc extends ChangeNotifier {
   Future<RecipesModel> _getRecipeById() async {
     try {
       final response = await http
-          .get('${Config.API_URL}/recipes/$id/information', headers: {
-        "apiKey": Config.API_KEY
-      });
+          .get('${Config.API_URL}/recipes/$id/information?apiKey=${Sensitive.API_KEY}');
       return RecipesModel.fromJson(json.decode(response.body));
     } catch (error) {
       throw error;
@@ -89,9 +86,7 @@ class HistoryBloc extends ChangeNotifier {
   Future<RecipesModel> _getRecipeById(String id) async {
     try {
       final response = await http
-          .get('${Config.API_URL}/recipes/$id/information', headers: {
-        "apiKey": Config.API_KEY
-      });
+          .get('${Config.API_URL}/recipes/$id/information?apiKey=${Sensitive.API_KEY}');
       return RecipesModel.fromJson(json.decode(response.body));
     } catch (error) {
       throw error;
