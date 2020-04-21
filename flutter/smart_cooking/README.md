@@ -6,7 +6,7 @@ Flutter application for searching recipes.
 
 App uses 2 API's. 
 
-[First API](https://rapidapi.com/spoonacular/api/recipe-food-nutrition) is used for getting recipes.
+[First API](https://spoonacular.com/food-api) is used for getting recipes.
 
 [Second API](https://pleasurecookings.azurewebsites.net/swagger/ui/index#/) was created for the needs of the academic's project by [my colleague](https://github.com/mbazych). This API allows us to add accounts where we are able to keep our favourite recipes and history of recipes.
 
