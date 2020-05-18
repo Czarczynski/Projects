@@ -49,8 +49,6 @@ class DarkThemeConfig {
   static const Color BLUE_LIGHT_GRAY = Color(0xff8a8073);
   static const Color BLUE_CYAN = Color(0xff241c12);
   static const Color WHITE_SMOKE = Color(0xff212121);
-  static const Color RED_NEAR_VENETIAN = Color(0xff3ff3ec);
-  static const Color SOLITUDE = Color(0xff1e1100);
   static const Color SNOW = Color(0xff050505);
   static const Color VENETIAN_RED = Color(0xffe6ac75);
   static const Color WHITE = Color(0xff444444);
