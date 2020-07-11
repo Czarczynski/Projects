@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{02600F1B-B867-497B-ACF3-300EA23BFF4F}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/MathController.cs">
+    <Files>
+      <File FileName="Startup.cs" Line="1" Column="1" />
+      <File FileName="Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="wwwroot/index.html" Line="1" Column="1" />
+      <File FileName="Models/CalcResult.cs" Line="1" Column="1" />
+      <File FileName="Controllers/MathController.cs" Line="16" Column="24" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WebApiAjax" expanded="True">
+            <Node name="WebApiAjax" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="MathController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="wwwroot" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.WebApiAjax PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
