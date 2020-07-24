@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage>
                       end: Alignment.bottomCenter,
                       colors: [Color(0xFF2c3541), Color(0xFF475970)])),
               child: Image.asset(
-                "assets/images/logo.png",
+                "assets/images/logo3.png",
                 frameBuilder: (BuildContext context, Widget child, int frame,
                     bool wasSynchronouslyLoaded) {
                   if (wasSynchronouslyLoaded) {
