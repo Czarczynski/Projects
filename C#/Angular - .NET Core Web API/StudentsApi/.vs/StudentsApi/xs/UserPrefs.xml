@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{FA66B6E2-7E5D-4C7B-8B7B-25D110F55F00}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/StudentsController.cs">
+    <Files>
+      <File FileName="appsettings.json" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="1" Column="1" />
+      <File FileName="Properties/launchSettings.json" Line="23" Column="33" />
+      <File FileName="Controllers/StudentsController.cs" Line="32" Column="69" />
+      <File FileName="Models/StudentContext.cs" Line="1" Column="1" />
+      <File FileName="Models/Student.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="StudentsApi" expanded="True">
+            <Node name="StudentsApi" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="StudentsController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.StudentsApi PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
