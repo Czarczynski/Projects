@@ -13,7 +13,7 @@ and type:
 
 ```
 pipenv shell
-cd ./lead
+cd ./leadmanager
 pipenv sync
 python manage.py runserver
 ```
