@@ -1,10 +1,6 @@
-.DS_Store
-.vscode
+*.DS_Store
+*.vscode
 C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/obj
 C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/.vs
-C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/.vscode
 C#/.DS_Store
-.DS_Store
-*.cache
-C#/Angular - .NET Core Web API/StudentsApi/obj/Debug/netcoreapp3.1/StudentsApi.csprojAssemblyReference.cache
 *.cache
