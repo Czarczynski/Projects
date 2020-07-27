@@ -21,8 +21,7 @@ namespace Commander.Models
         [Required]
         public string Platform { get; set; }
 
-        [Required]
         [JsonIgnore]
-        public List<CommandsCategories> CommandsCategories { get; set; }
+        public virtual ICollection<CommandsCategories> CommandsCategories { get; set; }
     }
 }

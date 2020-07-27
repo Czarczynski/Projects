@@ -11,28 +11,37 @@ namespace Commander.Data
 
         }
 
-        public DbSet<Command> Commands{ get; set; }
-        public DbSet<Category> Categories{ get; set; }
+        public DbSet<Command> Commands { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CommandsCategories> CommandsCategories { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Command>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<Category>()
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<CommandsCategories>()
-                .HasKey(x => new { x.CommandId, x.CategoryId });
-            modelBuilder.Entity<CommandsCategories>()
-                .HasOne(x => x.Command)
-                .WithMany(m => m.CommandsCategories)
-                .HasForeignKey(x => x.CommandId);
-            modelBuilder.Entity<CommandsCategories>()
-                .HasOne(x => x.Category)
-                .WithMany(e => e.CommandsCategories)
-                .HasForeignKey(x => x.CategoryId);
+            modelBuilder
+                .Entity<CommandsCategories>()
+                .HasKey(e => new { e.CommandId, e.CategoryId });
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Command>()
+        //        .HasKey(x => x.Id);
+
+        //    modelBuilder.Entity<Category>()
+        //        .HasKey(x => x.Id);
+
+        //    modelBuilder.Entity<CommandsCategories>()
+        //        .HasKey(x => new { x.CommandId, x.CategoryId });
+        //    modelBuilder.Entity<CommandsCategories>()
+        //        .HasOne(x => x.Command)
+        //        .WithMany(m => m.CommandsCategories)
+        //        .HasForeignKey(x => x.CommandId);
+        //    modelBuilder.Entity<CommandsCategories>()
+        //        .HasOne(x => x.Category)
+        //        .WithMany(e => e.CommandsCategories)
+        //        .HasForeignKey(x => x.CategoryId);
+        //}
 
     }
 }

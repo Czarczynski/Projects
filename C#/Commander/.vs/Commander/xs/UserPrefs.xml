@@ -1,16 +1,18 @@
 ﻿<Properties StartupConfiguration="{54D0F300-373F-425B-8E21-2FBA1399426A}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Data/CommandRepo.cs">
+    <Files>
+      <File FileName="Data/CommandRepo.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Commander" expanded="True">
             <Node name="Commander" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="CommandController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True">
+                <Node name="CommandRepo.cs" selected="True" />
               </Node>
-              <Node name="Data" expanded="True" />
               <Node name="DTOs" expanded="True" />
-              <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Profiles" expanded="True" />
             </Node>

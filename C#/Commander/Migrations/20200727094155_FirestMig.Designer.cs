@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Commander.Migrations
 {
     [DbContext(typeof(CommanderContext))]
-    [Migration("20200724092443_FirestMig")]
+    [Migration("20200727094155_FirestMig")]
     partial class FirestMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

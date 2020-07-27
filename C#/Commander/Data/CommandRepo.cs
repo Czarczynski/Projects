@@ -25,7 +25,7 @@ namespace Commander.Data
 
         public IEnumerable<Command> GetAllCommands()
         {
-            return _context.Commands.ToList();
+            return _context.Commands.Include( i => i.CommandsCategories).ToList();
         }
 
         public Command GetCommandById(int id)
