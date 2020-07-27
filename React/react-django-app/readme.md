@@ -1,4 +1,4 @@
-# Lead Manager using Django, REact and Redux
+# Lead Manager ( Django, React and Redux )
 
 Install required dependencies with command:
 
