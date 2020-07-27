@@ -28,9 +28,11 @@ namespace CompanyApi.Models
         [ForeignKey(nameof(DepartmentId))]
         [InverseProperty("Employee")]
         public virtual Department Department { get; set; }
+
         [ForeignKey(nameof(ManagerId))]
         [InverseProperty(nameof(Employee.Subordinate))]
         public virtual Employee Manager { get; set; }
+
         [InverseProperty(nameof(Employee.Manager))]
         public virtual ICollection<Employee> Subordinate { get; set; }
     }

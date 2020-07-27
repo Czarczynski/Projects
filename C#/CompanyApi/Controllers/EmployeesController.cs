@@ -29,6 +29,7 @@ namespace CompanyApi.Controllers
             Salary = employee.Salary,
             Bonus = employee.Bonus,
             DepartmentId = employee.DepartmentId
+            
         };
 
         private static Employee DTOToEmployee(EmployeeDTO employeeDTO) => new Employee

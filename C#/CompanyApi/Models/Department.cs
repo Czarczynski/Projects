@@ -18,6 +18,6 @@ namespace CompanyApi.Models
         public string Name { get; set; }
 
         [InverseProperty("Department")]
-        public virtual ICollection<Employee> Employee { get; set; }
+        public virtual ICollection<Employee> Employee{ get; set; }
     }
 }

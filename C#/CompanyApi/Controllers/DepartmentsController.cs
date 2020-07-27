@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CompanyApi.Models;
+using System.Reflection;
 
 namespace CompanyApi.Controllers
 {
@@ -15,13 +16,12 @@ namespace CompanyApi.Controllers
     {
 
         public static Department DTOToDept(DepartmentDTO departmentDTO) => new Department {
-            DepartmentId = departmentDTO.DepartmentId,
             Name = departmentDTO.Name
         };
 
         public static DepartmentDTO DeptToDTO(Department department) => new DepartmentDTO {
-            DepartmentId = department.DepartmentId,
-            Name = department.Name
+            Name = department.Name,
+            Employee = department.Employee
         };
 
 
@@ -37,6 +37,7 @@ namespace CompanyApi.Controllers
         public async Task<ActionResult<IEnumerable<DepartmentDTO>>> GetDepartment()
         {
             return await _context.Department
+                .Include(d => d.Employee.Select(s => s.EmployeeId).ToList())
                 .Select(d => DeptToDTO(d))
                 .ToListAsync();
         }
@@ -60,14 +61,14 @@ namespace CompanyApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDepartment(int id, DepartmentDTO departmentDTO)
+        public async Task<IActionResult> PutDepartment(int id, Department department)
         {
-            if (id != departmentDTO.DepartmentId)
+            if (id != department.DepartmentId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(DTOToDept(departmentDTO)).State = EntityState.Modified;
+            _context.Entry(department).State = EntityState.Modified;
 
             try
             {
@@ -92,12 +93,12 @@ namespace CompanyApi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Department>> PostDepartment(DepartmentDTO departmentDTO)
+        public async Task<ActionResult<Department>> PostDepartment(Department department)
         {
-            _context.Department.Add(DTOToDept(departmentDTO));
+            _context.Department.Add(department);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDepartment", new { id = departmentDTO.DepartmentId }, departmentDTO);
+            return CreatedAtAction("GetDepartment", new { id = department.DepartmentId }, department);
         }
 
         // DELETE: api/Departments/5
