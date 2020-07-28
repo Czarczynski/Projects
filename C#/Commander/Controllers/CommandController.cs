@@ -32,6 +32,7 @@ namespace Commander.Controllers
         {
             var commandItems = _repository.Command.GetAllCommands();
 
+            commandItems.Select(i => _mapper.Map<CategoriesDTO>(i.Categories));
             if (commandItems != null)
                 return Ok(_mapper.Map<IEnumerable<CommandReadDTO>>(commandItems));
 
@@ -57,7 +58,7 @@ namespace Commander.Controllers
             var command = _mapper.Map<Command>(commandDTO);
             _repository.Command.PostCommand(command);
             if (_repository.SaveChanges())
-                return CreatedAtRoute(nameof(GetCommandById), new { command.Id }, _mapper.Map<CommandReadDTO>(command));
+                return CreatedAtRoute(nameof(GetCommandById), new { command.ComId }, _mapper.Map<CommandReadDTO>(command));
             return NotFound();
         }
 

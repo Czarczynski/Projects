@@ -2,7 +2,7 @@
 
 namespace Commander.Migrations
 {
-    public partial class FirestMig : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,20 +10,20 @@ namespace Commander.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    CatId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.CatId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Commands",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    ComId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     HowTo = table.Column<string>(maxLength: 250, nullable: false),
                     Line = table.Column<string>(nullable: false),
@@ -31,7 +31,7 @@ namespace Commander.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Commands", x => x.Id);
+                    table.PrimaryKey("PK_Commands", x => x.ComId);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,13 +48,13 @@ namespace Commander.Migrations
                         name: "FK_CommandsCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
+                        principalColumn: "CatId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommandsCategories_Commands_CommandId",
                         column: x => x.CommandId,
                         principalTable: "Commands",
-                        principalColumn: "Id",
+                        principalColumn: "ComId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

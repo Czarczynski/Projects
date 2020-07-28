@@ -21,26 +21,26 @@ namespace Commander.Data
             modelBuilder
                 .Entity<CommandsCategories>()
                 .HasKey(e => new { e.CommandId, e.CategoryId });
+
+
+            //protected override void OnModelCreating(ModelBuilder modelBuilder)
+            //{
+            //modelBuilder.Entity<Command>()
+            //    .HasKey(x => x.ComId);
+
+            //modelBuilder.Entity<Category>()
+            //    .HasKey(x => x.CatId);
+            //modelBuilder.Entity<CommandsCategories>()
+            //    .HasKey(x => new { x.CommandId, x.CategoryId });
+            //modelBuilder.Entity<CommandsCategories>()
+            //    .HasOne(x => x.Command)
+            //    .WithMany(m => m.Categories)
+            //    .HasForeignKey(x => x.CommandId);
+            //modelBuilder.Entity<CommandsCategories>()
+            //    .HasOne(x => x.Category)
+            //    .WithMany(e => e.Commands)
+            //    .HasForeignKey(x => x.CategoryId);
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Command>()
-        //        .HasKey(x => x.Id);
-
-        //    modelBuilder.Entity<Category>()
-        //        .HasKey(x => x.Id);
-
-        //    modelBuilder.Entity<CommandsCategories>()
-        //        .HasKey(x => new { x.CommandId, x.CategoryId });
-        //    modelBuilder.Entity<CommandsCategories>()
-        //        .HasOne(x => x.Command)
-        //        .WithMany(m => m.CommandsCategories)
-        //        .HasForeignKey(x => x.CommandId);
-        //    modelBuilder.Entity<CommandsCategories>()
-        //        .HasOne(x => x.Category)
-        //        .WithMany(e => e.CommandsCategories)
-        //        .HasForeignKey(x => x.CategoryId);
         //}
 
     }

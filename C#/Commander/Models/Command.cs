@@ -9,7 +9,8 @@ namespace Commander.Models
     {
 
         [Key]
-        public int Id { get; set; }
+        [JsonIgnore]
+        public int ComId { get; set; }
 
         [Required]
         [MaxLength(250)]
@@ -19,9 +20,12 @@ namespace Commander.Models
         public string Line { get; set; }
 
         [Required]
+        [JsonIgnore]
         public string Platform { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<CommandsCategories> CommandsCategories { get; set; }
+        public virtual ICollection<CommandsCategories> Categories { get; set; }
+
+
     }
 }

@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Commander.Migrations
 {
     [DbContext(typeof(CommanderContext))]
-    [Migration("20200727094155_FirestMig")]
-    partial class FirestMig
+    [Migration("20200727144603_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Commander.Migrations
 
             modelBuilder.Entity("Commander.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CatId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -27,14 +27,14 @@ namespace Commander.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("CatId");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Commander.Models.Command", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ComId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -51,7 +51,7 @@ namespace Commander.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ComId");
 
                     b.ToTable("Commands");
                 });

@@ -1,6 +1,10 @@
 *.DS_Store
-*.vscode
-C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/obj
-C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/.vs
+*.vscode/
+*.vs/
+C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/obj/
+C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/.vs/
 C#/.DS_Store
-*.cache
+*.cache/
+C#/Commander/bin/
+C#/Commander/obj/
+C#/CompanyApi/obj/

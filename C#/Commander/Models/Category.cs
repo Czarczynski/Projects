@@ -8,16 +8,17 @@ namespace Commander.Models
     public class Category
     {
 
-        [Required]
-        public int Id { get; set; }
+        [Key]
+        [JsonIgnore]
+        public int CatId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
         [Required]
         [JsonIgnore]
-        public virtual ICollection<CommandsCategories> CommandsCategories { get; set; }
+        public virtual ICollection<CommandsCategories> Commands { get; set; }
 
-
+        
     }
 }

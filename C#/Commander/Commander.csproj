@@ -26,5 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="**/*" />
+    <None Include="**/*" />
   </ItemGroup>
 </Project>

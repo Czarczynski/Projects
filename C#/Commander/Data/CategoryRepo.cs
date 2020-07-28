@@ -17,12 +17,12 @@ namespace Commander.Data
 
         public IEnumerable<Category> GetAllCategories()
         {
-            return _context.Categories.Include(e=>e.CommandsCategories).ToList();
+            return _context.Categories.Include(e => e.Commands).ThenInclude(e => e.Command).ToList();
         }
 
         public Category GetCategoryById(int id)
         {
-            return _context.Categories.FirstOrDefault(i => i.Id == id);
+            return _context.Categories.FirstOrDefault(i => i.CatId == id);
         }
     }
 }

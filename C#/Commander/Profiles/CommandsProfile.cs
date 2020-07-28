@@ -13,6 +13,9 @@ namespace Commanasdfsdfder.Profiles
             CreateMap<CommandWriteDTO, Command>();
             CreateMap<Command, CommandWriteDTO>();
             CreateMap<Category, CategoryReadDTO>();
+            CreateMap<CommandsCategories, CategoriesDTO>();
+            CreateMap<CommandsCategories, CommandsDTO>();
+
         }
 
     }

@@ -16,4 +16,4 @@ INSERT INTO CommandsCategories VALUES(4,3);
 INSERT INTO sqlite_sequence VALUES('Commands',6);
 INSERT INTO sqlite_sequence VALUES('Categories',3);
 
---sqlite3 -separator $'\t\t\t\t\t' -header CommanderDB "SELECT co.line, ca.name from Commands co join CommandsCategories cc on (co.id = cc.commandid) join Categories ca on (ca.id = cc.categoryid)"
+--sqlite3 -separator $'\t' -header CommanderDB "SELECT co.line, ca.name from Commands co join CommandsCategories cc on (co.id = cc.commandid) join Categories ca on (ca.id = cc.categoryid)"

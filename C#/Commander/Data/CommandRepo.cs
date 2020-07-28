@@ -17,7 +17,8 @@ namespace Commander.Data
 
         public void DeleteCommand(Command command)
         {
-            if (command == null) {
+            if (command == null)
+            {
                 throw new ArgumentNullException();
             }
             _context.Commands.Remove(command);
@@ -25,18 +26,19 @@ namespace Commander.Data
 
         public IEnumerable<Command> GetAllCommands()
         {
-            return _context.Commands.Include( i => i.CommandsCategories).ToList();
+
+            return _context.Commands.Include(i => i.Categories).ThenInclude(i => i.Category).ToList();
         }
 
         public Command GetCommandById(int id)
         {
             return _context.Commands
-                .FirstOrDefault(p => p.Id == id);
+                .FirstOrDefault(p => p.ComId == id);
         }
 
         public void PostCommand(Command command)
         {
-            if(command == null)
+            if (command == null)
             {
                 throw new ArgumentNullException(nameof(command));
             }

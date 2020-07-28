@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Commander.Data;
 using Commander.DTOs;
@@ -24,9 +25,14 @@ namespace Commander.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CategoryReadDTO>> getAllCategories()
         {
-            var categories = _repository.Category.GetAllCategories();
-            if (categories != null)
-                return Ok(_mapper.Map<IEnumerable<CategoryReadDTO>>(categories));
+            var categoryItems = _repository.Category.GetAllCategories();
+
+            categoryItems.Select(i => _mapper.Map<CommandsDTO>(i.Commands));
+
+
+
+            if (categoryItems != null)
+                return Ok(_mapper.Map<IEnumerable<CategoryReadDTO>>(categoryItems));
             return NotFound();
         }
 
