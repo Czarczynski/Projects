@@ -2,6 +2,7 @@
 *.vscode/
 *.vs/
 C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/obj/
+C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/bin/
 C\#/Angular\ -\ .NET\ Core\ Web\ API/StudentsApi/.vs/
 C#/.DS_Store
 *.cache/
