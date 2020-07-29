@@ -1,15 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Dt5y/r7eF63ihO4zJSZ0GaSwIJO6j5L9lVbFsh/tKn2PZopMGC9C7+S7uaZZJTAfB43fiq5cFVK/TCfb83vsVg==",
+  "dgSpecHash": "ts/lZU7d8PIsSkTXG5UTW2psn+ZuB5LR+tFpJMdARS/PsSeRsKtAjUA7Mqs2TVYCX1eFl99xJlpysynnlkAdKA==",
   "success": true,
   "projectFilePath": "/Users/mateuszczarczynski/Documents/GitHub/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
   "expectedPackageFiles": [
     "/Users/mateuszczarczynski/.nuget/packages/automapper/10.0.0/automapper.10.0.0.nupkg.sha512",
     "/Users/mateuszczarczynski/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.0.1/automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
-    "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnet.cors/5.2.7/microsoft.aspnet.cors.5.2.7.nupkg.sha512",
-    "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnet.webapi.client/5.2.7/microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
-    "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnet.webapi.core/5.2.7/microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
-    "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnet.webapi.cors/5.2.7/microsoft.aspnet.webapi.cors.5.2.7.nupkg.sha512",
     "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnetcore.html.abstractions/2.2.0/microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnetcore.jsonpatch/3.1.6/microsoft.aspnetcore.jsonpatch.3.1.6.nupkg.sha512",
     "/Users/mateuszczarczynski/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/3.1.6/microsoft.aspnetcore.mvc.newtonsoftjson.3.1.6.nupkg.sha512",
@@ -177,36 +173,5 @@
     "/Users/mateuszczarczynski/.nuget/packages/system.xml.xmldocument/4.3.0/system.xml.xmldocument.4.3.0.nupkg.sha512",
     "/Users/mateuszczarczynski/.nuget/packages/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Cors 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.Cors",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Core",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Cors 5.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Cors",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }
