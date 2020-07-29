@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsAPI", "EventsAPI\EventsAPI.csproj", "{9725396D-1247-4572-9A79-CF3A080DBEBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9725396D-1247-4572-9A79-CF3A080DBEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9725396D-1247-4572-9A79-CF3A080DBEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9725396D-1247-4572-9A79-CF3A080DBEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9725396D-1247-4572-9A79-CF3A080DBEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
