@@ -24,3 +24,8 @@ Repository of few smaller and bigger projects. They are mainly written in two la
 &nbsp;&nbsp;&nbsp;&nbsp;3 [Flutter clock](https://github.com/Czarczynski/Projects/tree/master/flutter/flutter_clock/analog_clock) - I took part in Google Flutter clock challenge. This is my idea.
 
 <img src="https://github.com/Czarczynski/Projects/blob/master/flutter/flutter_clock/analog_clock/Gitscreeens/1.png" height=300 />
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;3 [Pokemon App](https://github.com/Czarczynski/Projects/tree/master/flutter/pokemon_app) - Simple app with listed pokemons.
+
+<img src="https://github.com/Czarczynski/Projects/blob/master/flutter/pokemon_app/Gitscreens/list_view.png" height=300 />
