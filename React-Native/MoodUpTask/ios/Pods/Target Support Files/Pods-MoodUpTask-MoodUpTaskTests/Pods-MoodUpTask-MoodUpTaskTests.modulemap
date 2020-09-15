@@ -1,0 +1,6 @@
+module Pods_MoodUpTask_MoodUpTaskTests {
+  umbrella header "Pods-MoodUpTask-MoodUpTaskTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
