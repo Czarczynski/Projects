@@ -2,36 +2,39 @@ import {
   GET_RESERVATIONS,
   DELETE_RESERVATIONS,
   ADD_RESERVATIONS,
-  ADD_RENTAL
-} from "../actions/types.js";
+  ADD_RENTAL,
+} from '../actions/types.js';
 
 const initialState = {
-  reservations: []
+  reservations: [],
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_RESERVATIONS:
       return {
         ...state,
-        reservations: action.payload
+        reservations: action.payload,
       };
     case DELETE_RESERVATIONS:
       return {
         ...state,
         reservations: state.reservations.filter(
-          reservation => reservation.id !== action.payload
-        )
+          (reservation) => reservation.id !== action.payload.id,
+        ),
       };
     case ADD_RESERVATIONS:
       return {
         ...state,
-        reservations: [...state.reservations, action.payload]
+        reservations: [...state.reservations, action.payload],
       };
     case ADD_RENTAL:
       return {
         ...state,
-        reservations: [...state.reservations, action.payload]
+        reservations: [
+          ...state.reservations.filter((item) => item.id !== action.payload.id),
+          action.payload,
+        ],
       };
     default:
       return state;

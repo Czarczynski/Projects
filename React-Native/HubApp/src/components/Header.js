@@ -1,13 +1,25 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, Button, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  Button,
+  View,
+  Alert,
+} from 'react-native';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faArrowLeft, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import {logout} from '../actions/auth';
-import {MAIN_COLOR, SMOKE_WHITE} from '../common/config';
+import {BG_COLOR, TEXT_COLOR, SMOKE_WHITE} from '../common/config';
 
 function Header({title, navigation, logout}) {
+  const logoutSubmit = () =>
+    Alert.alert('Do you want to exit?', '', [
+      {text: 'No', style: 'cancel'},
+      {text: 'Yes', style: 'primary', onPress: () => logout()},
+    ]);
   return (
     <SafeAreaView style={styles.appBar}>
       {navigation ? (
@@ -27,7 +39,7 @@ function Header({title, navigation, logout}) {
         style={styles.arrow}
         icon={faSignOutAlt}
         size={25}
-        onPress={() => logout()}
+        onPress={() => logoutSubmit()}
       />
     </SafeAreaView>
   );
@@ -37,17 +49,17 @@ const styles = StyleSheet.create({
   appBar: {
     height: 110,
     flexDirection: 'row',
-    backgroundColor: MAIN_COLOR,
+    backgroundColor: BG_COLOR,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   title: {
-    color: SMOKE_WHITE,
+    color: TEXT_COLOR,
     fontWeight: '500',
     fontSize: 30,
   },
   arrow: {
-    color: SMOKE_WHITE,
+    color: TEXT_COLOR,
     marginHorizontal: 20,
     paddingHorizontal: 20,
   },
