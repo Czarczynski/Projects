@@ -13,8 +13,11 @@ import {faArrowLeft, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import {logout} from '../actions/auth';
 import {BG_COLOR, TEXT_COLOR, SMOKE_WHITE} from '../common/config';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useTheme} from '@react-navigation/native';
 
-function Header({title, navigation, logout}) {
+function Header({title, navigation, logout, exit}) {
+  const {colors} = useTheme();
   const logoutSubmit = () =>
     Alert.alert('Do you want to exit?', '', [
       {text: 'No', style: 'cancel'},
@@ -22,25 +25,23 @@ function Header({title, navigation, logout}) {
     ]);
   return (
     <SafeAreaView style={styles.appBar}>
-      {navigation ? (
-        <FontAwesomeIcon
-          style={styles.arrow}
-          icon={faArrowLeft}
-          size={25}
-          onPress={() => navigation.goBack()}
-        />
+      {navigation && !exit ? (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <FontAwesomeIcon style={styles.arrow} icon={faArrowLeft} size={25} />
+        </TouchableOpacity>
       ) : (
         <View style={styles.placeholder}></View>
       )}
       <View>
         <Text style={styles.title}>{title}</Text>
       </View>
-      <FontAwesomeIcon
-        style={styles.arrow}
-        icon={faSignOutAlt}
-        size={25}
-        onPress={() => logoutSubmit()}
-      />
+      {exit ? (
+        <TouchableOpacity onPress={() => logoutSubmit()}>
+          <FontAwesomeIcon style={styles.arrow} icon={faSignOutAlt} size={25} />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.placeholder}></View>
+      )}
     </SafeAreaView>
   );
 }

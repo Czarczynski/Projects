@@ -9,12 +9,13 @@ import {
   Dimensions,
   ScrollView,
   TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {BG_COLOR, MAIN_COLOR, ERROR_RED, SMOKE_WHITE} from '../common/config';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faEnvelope, faLock, faUser} from '@fortawesome/free-solid-svg-icons';
-import {faMailchimp} from '@fortawesome/free-brands-svg-icons';
+import styles from '../assets/styles/formStyles';
 
 class LoginPage extends Component {
   state = {
@@ -50,8 +51,10 @@ class LoginPage extends Component {
   };
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView>
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+        <SafeAreaView style={styles.container}>
           <View style={styles.title}>
             <Text style={styles.titleText}>Register</Text>
             <Text style={styles.error}>{this.state.error}</Text>
@@ -62,6 +65,7 @@ class LoginPage extends Component {
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <FontAwesomeIcon icon={faEnvelope} color={MAIN_COLOR} />
                 <TextInput
+                  keybordType="email-address"
                   autoCapitalize="none"
                   onChangeText={(text) => {
                     this.setState({...this.state, email: text});
@@ -91,6 +95,7 @@ class LoginPage extends Component {
                 <FontAwesomeIcon icon={faLock} color={MAIN_COLOR} />
                 <TextInput
                   autoCapitalize="none"
+                  secureTextEntry
                   onChangeText={(text) => {
                     this.setState({...this.state, password: text});
                   }}
@@ -105,6 +110,7 @@ class LoginPage extends Component {
                 <FontAwesomeIcon icon={faLock} color={MAIN_COLOR} />
                 <TextInput
                   autoCapitalize="none"
+                  secureTextEntry
                   onChangeText={(text) => {
                     this.setState({...this.state, password2: text});
                   }}
@@ -123,86 +129,17 @@ class LoginPage extends Component {
             <View style={styles.button2}>
               <Button
                 color={MAIN_COLOR}
-                title="Already have an account?"
+                title="Sign In"
                 onPress={() => {
                   this.props.navigation.replace('Login');
                 }}
               />
             </View>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'flex-end',
-    flex: 1,
-    backgroundColor: BG_COLOR,
-    padding: 30,
-  },
-  logo: {alignItems: 'center'},
-  image: {
-    height: Dimensions.get('window').width - 250,
-    width: Dimensions.get('window').width - 60,
-    tintColor: MAIN_COLOR,
-  },
-  title: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 40,
-  },
-  titleText: {
-    fontSize: 40,
-    letterSpacing: 10,
-    color: MAIN_COLOR,
-  },
-  form: {padding: 30},
-  field: {
-    fontSize: 17,
-    paddingVertical: 8,
-    color: MAIN_COLOR,
-    fontWeight: '500',
-  },
-  item: {
-    marginVertical: 15,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 30,
-    backgroundColor: SMOKE_WHITE,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 10.65,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    paddingLeft: 10,
-    borderRadius: 30,
-    borderColor: MAIN_COLOR,
-    // borderWidth: 2,
-    fontSize: 18,
-  },
-  button: {
-    // marginHorizontal: 50,
-    marginVertical: 15,
-    paddingVertical: 8,
-    backgroundColor: MAIN_COLOR,
-    borderRadius: 30,
-  },
-  button2: {
-    marginHorizontal: 50,
-    paddingVertical: 0,
-    borderRadius: 30,
-  },
-  error: {
-    color: ERROR_RED,
-  },
-});
 const mapStateToProps = (state) => ({});
 export default connect(mapStateToProps, {register})(LoginPage);

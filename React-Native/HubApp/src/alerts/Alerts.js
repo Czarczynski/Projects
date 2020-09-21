@@ -45,8 +45,9 @@ export class Alerts extends Component {
           text: 'Wrong username or password was given',
           textColor: ERROR_RED,
         });
-      if (error.msg.username)
-        Snackbar.show({text: error.msg.name.join(), textColor: ERROR_RED});
+      if (error.msg.username) {
+        Snackbar.show({text: error.msg.username.join(), textColor: ERROR_RED});
+      }
     }
 
     if (message !== prevProps.message) {

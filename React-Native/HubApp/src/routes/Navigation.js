@@ -1,28 +1,78 @@
 import React from 'react';
 
-import Dashboard from '../views/Dashboard';
-import Example from '../views/Example';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {AppearanceProvider} from 'react-native-appearance';
+import {connect} from 'react-redux';
+import FormModal from '../views/FormModal';
 import Header from '../components/Header';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import LoginPage from '../views/LoginPage';
+import Dashboard from '../views/Dashboard';
+import RegisterPage from '../views/RegisterPage';
 
-const views = {
-  Dashboard: {
-    screen: Dashboard,
-    navigationOptions: {
-      header: () => <Header title="Dashboard" />,
-    },
-  },
-  Example: {
-    screen: Example,
-    navigationOptions: ({navigation}) => {
-      return {
-        header: () => <Header title="Example" navigation={navigation} />,
-      };
-    },
-  },
+const {Navigator, Screen} = createStackNavigator();
+
+const HomeNavigator = () => (
+  <Navigator initialRouteName="Dashboard">
+    <Screen
+      name="Dashboard"
+      component={Dashboard}
+      options={({navigation}) => {
+        return {
+          header: () => (
+            <Header title="Dashboard" navigation={navigation} exit />
+          ),
+        };
+      }}
+    />
+  </Navigator>
+);
+
+const navigation = ({auth}) => {
+  return (
+    <AppearanceProvider>
+      <NavigationContainer>
+        <Navigator
+          headerMode="none"
+          screenOptions={{
+            gestureEnabled: true,
+            ...TransitionPresets.ModalPresentationIOS,
+          }}
+          initialRouteName={auth.isAuthenticated ? 'Dashboard' : 'Login'}>
+          <Screen
+            name="Login"
+            component={LoginPage}
+            options={{
+              ...TransitionPresets.FadeFromBottomAndroid,
+              header: () => null,
+            }}
+          />
+          <Screen
+            name="Register"
+            component={RegisterPage}
+            options={{
+              ...TransitionPresets.FadeFromBottomAndroid,
+              header: () => null,
+            }}
+          />
+          <Screen
+            name="FormModal"
+            component={FormModal}
+            options={{
+              ...TransitionPresets.ModalPresentationIOS,
+              stackPresentation: 'modal',
+            }}
+          />
+          <Screen
+            name="Dashboard"
+            component={HomeNavigator}
+            options={{...TransitionPresets.FadeFromBottomAndroid}}
+          />
+        </Navigator>
+      </NavigationContainer>
+    </AppearanceProvider>
+  );
 };
 
-const Navigation = createStackNavigator(views);
-
-export default createAppContainer(Navigation);
+const mapStateToProps = (state) => ({auth: state.auth});
+export default connect(mapStateToProps)(navigation);
