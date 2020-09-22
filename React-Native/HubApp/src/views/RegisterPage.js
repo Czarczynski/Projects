@@ -57,6 +57,8 @@ class LoginPage extends Component {
         <SafeAreaView style={styles.container}>
           <View style={styles.title}>
             <Text style={styles.titleText}>Register</Text>
+          </View>
+          <View style={styles.logo}>
             <Text style={styles.error}>{this.state.error}</Text>
           </View>
           <View style={styles.form}>

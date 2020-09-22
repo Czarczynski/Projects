@@ -5,7 +5,7 @@ import Snackbar from 'react-native-snackbar';
 import {View} from 'react-native';
 import {ERROR_RED} from '../common/config';
 
-export class Alerts extends Component {
+class Alerts extends Component {
   static propTypes = {
     error: PropTypes.object.isRequired,
     message: PropTypes.object.isRequired,

@@ -11,11 +11,16 @@ import {
   Text,
   View,
 } from 'react-native';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
+import {
+  faPen,
+  faPenFancy,
+  faTextHeight,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import {TextInput} from 'react-native-gesture-handler';
 import {Picker} from '@react-native-community/picker';
 import CalendarPicker from 'react-native-calendar-picker';
-import {MAIN_COLOR, SMOKE_WHITE, CAR_CHOICES} from '../common/config';
+import {MAIN_COLOR, SMOKE_WHITE, CAR_CHOICES, BG_COLOR} from '../common/config';
 import {connect} from 'react-redux';
 import {addReservations} from '../actions/reservations';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -23,15 +28,14 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 class FormModal extends Component {
   state = {
     car: 'Skoda Superb',
-    start_date: new Date().toISOString().substring(0, 16),
-    end_date: new Date().toISOString().substring(0, 16),
+    start_date: null,
+    end_date: null,
     purpose: '',
     owner: 1,
     formValid: false,
     endDateValid: false,
     startDateValid: false,
   };
-
   static propTypes = {
     auth: PropTypes.object.isRequired,
   };
@@ -81,7 +85,7 @@ class FormModal extends Component {
   }
 
   // onSubmit function that is run when form is submitted
-  onSubmit = (e) => {
+  onSubmit = () => {
     const {id} = this.props.auth.user;
 
     this.setState({owner: id});
@@ -94,7 +98,7 @@ class FormModal extends Component {
       this.props.addReservations(reservation);
       this.setState({
         car: 'Skoda Superb',
-        start_date: '',
+        start_date: new Date().toISOString().substring(0, 16),
         // start_date: new Date(),
         end_date: new Date().toISOString().substring(0, 16),
         purpose: '',
@@ -106,28 +110,42 @@ class FormModal extends Component {
       });
     }
   };
-  onDateChange = (date, type) => {
+  onDateChange(date, type) {
     if (type === 'END_DATE') {
-      this.setState({
-        ...this.state,
-        end_date: date,
-      });
+      this.setState(
+        {
+          end_date: date ? date.toISOString().substring(0, 16) : null,
+        },
+        () => this.validateField('end_date', this.state.end_date),
+      );
+    } else {
+      this.setState(
+        {
+          end_date: null,
+          start_date: date ? date.toISOString().substring(0, 16) : null,
+        },
+        () => this.validateField('start_date', this.state.start_date),
+      );
     }
-    if (type === 'START_DATE')
-      this.setState({
-        ...this.state,
-        start_date: date,
-      });
+    console.log({STAN: {...this.state}});
+    console.log({DANE_DATY: {date, type}});
+  }
 
-    console.log({...this.state});
-  };
   render() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
     return (
-      <View style={styles.modal}>
+      <SafeAreaView style={styles.modal}>
         <View style={styles.appBar}>
           <Text style={styles.title}>New reservation</Text>
+
+          <Button
+            title="Leave"
+            color={SMOKE_WHITE}
+            onPress={() => this.props.navigation.goBack()}
+          />
         </View>
-        <ScrollView>
+        <ScrollView style={styles.content}>
           <View style={OutterStyles.item}>
             <Text style={OutterStyles.field}>Car</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -148,50 +166,30 @@ class FormModal extends Component {
               </Picker>
             </View>
           </View>
-
-          <View></View>
           <View style={OutterStyles.item}>
-            <Text style={OutterStyles.field}>Start date</Text>
+            <Text style={OutterStyles.field}>
+              Select reservation date range
+            </Text>
             <View style={{flexDirection: 'column', alignItems: 'center'}}>
               <CalendarPicker
-                allowRangeSelection
-                onDateChange={this.onDateChange}
-                width={Dimensions.get('window').width - 120}
-                height={350}
-              />
-              <TextInput
-                autoCapitalize="none"
-                onChangeText={(text) => {
-                  this.setState({...this.state, start_date: text}, () =>
-                    this.validateField('start_date', text),
-                  );
+                selectedDayTextColor={BG_COLOR}
+                selectedRangeStyle={{
+                  backgroundColor: MAIN_COLOR,
                 }}
-                value={this.state.start_date}
-                style={OutterStyles.input}
-              />
-            </View>
-          </View>
-          <View style={OutterStyles.item}>
-            <Text style={OutterStyles.field}>End date</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <FontAwesomeIcon icon={faUser} color={MAIN_COLOR} />
-              <TextInput
-                autoCapitalize="none"
-                onChangeText={(text) =>
-                  this.setState({...this.state, end_date: text}, () =>
-                    this.validateField('end_date', text),
-                  )
-                }
-                value={this.state.end_date.toString() ?? null}
-                style={OutterStyles.input}
+                minDate={tomorrow}
+                allowRangeSelection
+                onDateChange={(date, type) => this.onDateChange(date, type)}
+                width={Dimensions.get('window').width - 120}
+                height={Dimensions.get('window').width - 120}
               />
             </View>
           </View>
           <View style={OutterStyles.item}>
             <Text style={OutterStyles.field}>Purpose</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <FontAwesomeIcon icon={faUser} color={MAIN_COLOR} />
+              <FontAwesomeIcon icon={faPenFancy} color={MAIN_COLOR} />
               <TextInput
+                multiline={true}
                 autoCapitalize="none"
                 onChangeText={(text) => {
                   this.setState({...this.state, purpose: text});
@@ -202,12 +200,10 @@ class FormModal extends Component {
             </View>
           </View>
         </ScrollView>
-        <Button
-          title="Go down"
-          color={SMOKE_WHITE}
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
+        <View style={styles.button}>
+          <Button title="Confirm" color={MAIN_COLOR} onPress={this.onSubmit} />
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -216,14 +212,16 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: MAIN_COLOR,
     flex: 1,
-    padding: 30,
+  },
+  content: {
+    paddingHorizontal: 30,
   },
   appBar: {
-    height: 110,
+    paddingHorizontal: 30,
+    height: 80,
     flexDirection: 'row',
-    // backgroundColor: BG_COLOR,
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     color: SMOKE_WHITE,
@@ -232,6 +230,14 @@ const styles = StyleSheet.create({
   },
   selectInput: {
     flex: 1,
+  },
+  button: {
+    alignSelf: 'center',
+    backgroundColor: BG_COLOR,
+    width: 120,
+    marginTop: 10,
+    borderRadius: 30,
+    padding: 5,
   },
 });
 

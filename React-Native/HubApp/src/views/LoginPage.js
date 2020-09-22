@@ -55,7 +55,6 @@ class LoginPage extends Component {
         <SafeAreaView style={styles.container}>
           <View style={styles.title}>
             <Text style={styles.titleText}>Login</Text>
-            <Text style={styles.error}>{this.state.error}</Text>
           </View>
           <View style={styles.logo}>
             <Image
@@ -63,6 +62,7 @@ class LoginPage extends Component {
               style={styles.image}
               resizeMode="cover"
             />
+            <Text style={styles.error}>{this.state.error}</Text>
           </View>
           <View style={styles.form}>
             <View style={styles.item}>

@@ -27,7 +27,7 @@ export const loadUser = () => (dispatch, getState) => {
       });
     })
     .catch((err) => {
-      if (!err.response.data)
+      if (err.response.data == undefined || err.response.status === 404)
         dispatch(returnErrors({no_internet: err.message}, 500));
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
@@ -56,7 +56,7 @@ export const login = (username, password) => (dispatch) => {
       });
     })
     .catch((err) => {
-      if (err.response == undefined)
+      if (err.response == undefined || err.response.status === 404)
         dispatch(returnErrors({no_internet: err.message}, 500));
       else dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
@@ -86,7 +86,7 @@ export const register = ({username, password, email}) => (dispatch) => {
       });
     })
     .catch((err) => {
-      if (err.response == undefined)
+      if (err.response == undefined || err.response.status === 404)
         dispatch(returnErrors({no_internet: err.message}, 500));
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
@@ -106,7 +106,7 @@ export const logout = () => (dispatch, getState) => {
       });
     })
     .catch((err) => {
-      if (err.response == undefined)
+      if (err.response == undefined || err.response.status === 404)
         dispatch(returnErrors({no_internet: err.message}, 500));
       dispatch(returnErrors(err.response.data, err.response.status));
     });
