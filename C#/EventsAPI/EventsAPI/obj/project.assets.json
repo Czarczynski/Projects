@@ -8759,11 +8759,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mateuszczarczynski/Documents/GitHub/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
+      "projectUniqueName": "/Volumes/czarcz/Repositories/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
       "projectName": "EventsAPI",
-      "projectPath": "/Users/mateuszczarczynski/Documents/GitHub/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
+      "projectPath": "/Volumes/czarcz/Repositories/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
       "packagesPath": "/Users/mateuszczarczynski/.nuget/packages/",
-      "outputPath": "/Users/mateuszczarczynski/Documents/GitHub/Projects/C#/EventsAPI/EventsAPI/obj/",
+      "outputPath": "/Volumes/czarcz/Repositories/Projects/C#/EventsAPI/EventsAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mateuszczarczynski/.config/NuGet/NuGet.Config"
@@ -8843,7 +8843,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
       }
     }
   }

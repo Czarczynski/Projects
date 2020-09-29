@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ts/lZU7d8PIsSkTXG5UTW2psn+ZuB5LR+tFpJMdARS/PsSeRsKtAjUA7Mqs2TVYCX1eFl99xJlpysynnlkAdKA==",
+  "dgSpecHash": "8EUcvcpY7M2kg88Hq8q6JqulkAo0ilcYUoOqVMzvkCJWekbf04SMJyRtW51RdGMgQ6LpfcPgfpE/ghD+B9CR3A==",
   "success": true,
-  "projectFilePath": "/Users/mateuszczarczynski/Documents/GitHub/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
+  "projectFilePath": "/Volumes/czarcz/Repositories/Projects/C#/EventsAPI/EventsAPI/EventsAPI.csproj",
   "expectedPackageFiles": [
     "/Users/mateuszczarczynski/.nuget/packages/automapper/10.0.0/automapper.10.0.0.nupkg.sha512",
     "/Users/mateuszczarczynski/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.0.1/automapper.extensions.microsoft.dependencyinjection.8.0.1.nupkg.sha512",
