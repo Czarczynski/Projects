@@ -19,9 +19,11 @@ export default function (state = initialState, action) {
     case DELETE_RESERVATIONS:
       return {
         ...state,
-        reservations: state.reservations.filter(
-          (reservation) => reservation.id !== action.payload.id,
-        ),
+        reservations: [
+          ...state.reservations.filter(
+            (reservation) => reservation.id !== action.payload,
+          ),
+        ],
       };
     case ADD_RESERVATIONS:
       return {
@@ -32,8 +34,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         reservations: [
-          ...state.reservations.filter((item) => item.id !== action.payload.id),
           action.payload,
+          ...state.reservations.filter((item) => item.id !== action.payload.id),
         ],
       };
     default:

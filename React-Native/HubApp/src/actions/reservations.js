@@ -21,9 +21,12 @@ export const getReservations = () => (dispatch, getState) => {
         payload: res.data,
       });
     })
-    .catch((err) =>
-      dispatch(returnErrors(err.response.data, err.response.status)),
-    );
+    .catch((err) => {
+      console.log({err: err.response.data});
+      if (err.response == undefined)
+        dispatch(returnErrors({no_internet: err.message}, 500));
+      else dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 // DELETE RESERVATIONS
@@ -60,6 +63,7 @@ export const addReservations = (reservation) => (dispatch, getState) => {
       });
     })
     .catch((err) => {
+      console.log({err: err.response.data});
       if (err.response == undefined)
         dispatch(returnErrors({no_internet: err.message}, 500));
       else dispatch(returnErrors(err.response.data, err.response.status));
@@ -73,6 +77,7 @@ export const addRental = (id) => (dispatch, getState) => {
       API_PREFIX + `/api/car_reservation/${id}/`,
       {
         active: true,
+        start_date: new Date().toISOString().substring(0, 16),
       },
       tokenConfig(getState),
     )

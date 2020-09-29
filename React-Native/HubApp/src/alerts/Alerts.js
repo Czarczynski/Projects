@@ -45,6 +45,11 @@ class Alerts extends Component {
           text: 'Wrong username or password was given',
           textColor: ERROR_RED,
         });
+      if (error.msg.comment)
+        Snackbar.show({
+          text: 'Comment field cannot be empty',
+          textColor: ERROR_RED,
+        });
       if (error.msg.username) {
         Snackbar.show({text: error.msg.username.join(), textColor: ERROR_RED});
       }
@@ -55,6 +60,11 @@ class Alerts extends Component {
         Snackbar.show({text: message.invalidDate, textColor: ERROR_RED});
       if (message.reservationAdded)
         Snackbar.show({text: message.reservationAdded, textColor: 'green'});
+      if (message.reservationDeleted)
+        Snackbar.show({
+          text: 'Reservation moved to the archive',
+          textColor: 'green',
+        });
       if (message.passwordNotMatch)
         Snackbar.show({text: message.passwordNotMatch, textColor: ERROR_RED});
       if (message.carRented)
@@ -69,6 +79,8 @@ class Alerts extends Component {
         Snackbar.show({text: message.invalidEndDate, textColor: ERROR_RED});
       if (message.invalidStartDate)
         Snackbar.show({text: message.invalidStartDate, textColor: ERROR_RED});
+      if (message.modalDismiss)
+        Snackbar.show({text: message.modalDismiss, textColor: 'green'});
     }
   }
   render() {

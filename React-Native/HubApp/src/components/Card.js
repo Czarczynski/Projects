@@ -1,17 +1,26 @@
 import React from 'react';
 import {Button, Dimensions, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import {
-  getReservations,
-  deleteReservations,
-  addRental,
-} from '../actions/reservations';
+import {deleteReservations, addRental} from '../actions/reservations';
 import {createMessage} from '../actions/messages';
 import {MAIN_COLOR, SMOKE_WHITE} from '../common/config';
-
+import {useState} from 'react/cjs/react.development';
+import PopUpForm from './PopUpForm';
 function Card({reservation, user, addRental, createMessage, activated}) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View key={reservation.id} style={styles.card}>
+      <PopUpForm
+        visible={modalVisible}
+        item={reservation}
+        dismiss={() => setModalVisible(false)}>
+        <Button
+          title="Hide"
+          color={MAIN_COLOR}
+          onPress={() => setModalVisible(false)}
+        />
+      </PopUpForm>
       <View style={styles.cardHeader}>
         <Text style={styles.cardTitle}>{reservation.car}</Text>
       </View>
@@ -37,15 +46,9 @@ function Card({reservation, user, addRental, createMessage, activated}) {
         {activated ? (
           <Button
             color="white"
-            onPress={() =>
-              user.id == reservation.owner
-                ? addRental(reservation.id)
-                : createMessage({
-                    wrongUser: "You can't rent other people's reservations.",
-                  })
-            }
+            onPress={() => setModalVisible(true)}
             className="btn-success btn-sm btn"
-            title="Submit"
+            title="Return this car"
           />
         ) : (
           <Button
@@ -110,6 +113,17 @@ const styles = StyleSheet.create({
     backgroundColor: MAIN_COLOR,
     borderBottomEndRadius: 20,
     borderBottomStartRadius: 20,
+  },
+  openButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 const mapStateToProps = (state) => ({});

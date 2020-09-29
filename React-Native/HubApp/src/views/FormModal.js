@@ -1,29 +1,27 @@
 import React from 'react';
 import {Component} from 'react';
 import PropTypes from 'prop-types';
-import OutterStyles from '../assets/styles/formStyles';
 import {
   Button,
   Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import {
-  faPen,
-  faPenFancy,
-  faTextHeight,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import {faPenFancy} from '@fortawesome/free-solid-svg-icons';
 import {TextInput} from 'react-native-gesture-handler';
 import {Picker} from '@react-native-community/picker';
 import CalendarPicker from 'react-native-calendar-picker';
+import OutterStyles from '../assets/styles/formStyles';
 import {MAIN_COLOR, SMOKE_WHITE, CAR_CHOICES, BG_COLOR} from '../common/config';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {connect} from 'react-redux';
 import {addReservations} from '../actions/reservations';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {createMessage} from '../actions/messages';
 
 class FormModal extends Component {
   state = {
@@ -31,7 +29,7 @@ class FormModal extends Component {
     start_date: null,
     end_date: null,
     purpose: '',
-    owner: 1,
+    owner: this.props.auth.user.id,
     formValid: false,
     endDateValid: false,
     startDateValid: false,
@@ -80,34 +78,28 @@ class FormModal extends Component {
 
   validateForm() {
     this.setState({
-      formValid: this.state.endDateValid && this.state.startDateValid,
+      formValid:
+        this.state.endDateValid &&
+        this.state.startDateValid &&
+        this.state.purpose.length <= 32,
     });
   }
 
-  // onSubmit function that is run when form is submitted
   onSubmit = () => {
-    const {id} = this.props.auth.user;
-
-    this.setState({owner: id});
-
-    // map state to variables and create reservation object
-    const {car, start_date, end_date, purpose, owner} = this.state;
-    const reservation = {car, start_date, end_date, purpose, owner};
-
-    if (this.state.formValid) {
+    if (this.state.formValid && this.state.purpose.length > 0) {
+      const {car, start_date, end_date, purpose, owner} = this.state;
+      const reservation = {car, start_date, end_date, purpose, owner};
       this.props.addReservations(reservation);
-      this.setState({
-        car: 'Skoda Superb',
-        start_date: new Date().toISOString().substring(0, 16),
-        // start_date: new Date(),
-        end_date: new Date().toISOString().substring(0, 16),
-        purpose: '',
-        owner: id,
-      });
+      this.props.navigation.goBack();
     } else {
-      this.props.createMessage({
-        invalidDate: 'Select proper starting or ending date.',
-      });
+      if (!(this.state.endDateValid && this.state.startDateValid))
+        this.props.createMessage({
+          invalidDate: 'Select proper starting or ending date.',
+        });
+      else
+        this.props.createMessage({
+          invalidDate: 'Purpose field must be between 1 - 32 chars',
+        });
     }
   };
   onDateChange(date, type) {
@@ -127,9 +119,14 @@ class FormModal extends Component {
         () => this.validateField('start_date', this.state.start_date),
       );
     }
-    console.log({STAN: {...this.state}});
-    console.log({DANE_DATY: {date, type}});
   }
+  goToInput = () => {
+    this.input.scrollTo({
+      x: 0,
+      y: Dimensions.get('window').height,
+      animated: true,
+    });
+  };
 
   render() {
     const tomorrow = new Date();
@@ -145,61 +142,74 @@ class FormModal extends Component {
             onPress={() => this.props.navigation.goBack()}
           />
         </View>
-        <ScrollView style={styles.content}>
-          <View style={OutterStyles.item}>
-            <Text style={OutterStyles.field}>Car</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Picker
-                selectedValue={this.state.car}
-                style={styles.selectInput}
-                itemStyle={styles.selectItem}
-                onValueChange={(text) => {
-                  this.setState({...this.state, car: text});
-                }}>
-                {CAR_CHOICES.map((item) => (
-                  <Picker.Item
-                    key={item.value}
-                    label={item.label}
-                    value={item.value}
-                  />
-                ))}
-              </Picker>
+        <KeyboardAvoidingView
+          enabled
+          keyboardVerticalOffset={50}
+          style={{flex: 1, flexDirection: 'column', justifyContent: 'center'}}
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
+          <ScrollView
+            style={styles.content}
+            ref={(c) => {
+              this.input = c;
+            }}>
+            <View style={OutterStyles.item}>
+              <Text style={OutterStyles.field}>Car</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Picker
+                  selectedValue={this.state.car}
+                  style={styles.selectInput}
+                  itemStyle={styles.selectItem}
+                  onValueChange={(text) => {
+                    this.setState({...this.state, car: text});
+                  }}>
+                  {CAR_CHOICES.map((item) => (
+                    <Picker.Item
+                      key={item.value}
+                      label={item.label}
+                      value={item.value}
+                    />
+                  ))}
+                </Picker>
+              </View>
             </View>
-          </View>
-          <View style={OutterStyles.item}>
-            <Text style={OutterStyles.field}>
-              Select reservation date range
-            </Text>
-            <View style={{flexDirection: 'column', alignItems: 'center'}}>
-              <CalendarPicker
-                selectedDayTextColor={BG_COLOR}
-                selectedRangeStyle={{
-                  backgroundColor: MAIN_COLOR,
-                }}
-                minDate={tomorrow}
-                allowRangeSelection
-                onDateChange={(date, type) => this.onDateChange(date, type)}
-                width={Dimensions.get('window').width - 120}
-                height={Dimensions.get('window').width - 120}
-              />
+            <View style={OutterStyles.item}>
+              <Text style={OutterStyles.field}>
+                Select reservation date range
+              </Text>
+              <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                <CalendarPicker
+                  selectedDayTextColor={BG_COLOR}
+                  selectedRangeStyle={{
+                    backgroundColor: MAIN_COLOR,
+                  }}
+                  startFromMonday
+                  minDate={tomorrow}
+                  allowRangeSelection
+                  onDateChange={(date, type) => this.onDateChange(date, type)}
+                  width={Dimensions.get('window').width - 60}
+                  height={Dimensions.get('window').width - 60}
+                />
+              </View>
             </View>
-          </View>
-          <View style={OutterStyles.item}>
-            <Text style={OutterStyles.field}>Purpose</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <FontAwesomeIcon icon={faPenFancy} color={MAIN_COLOR} />
-              <TextInput
-                multiline={true}
-                autoCapitalize="none"
-                onChangeText={(text) => {
-                  this.setState({...this.state, purpose: text});
-                }}
-                value={this.state.purpose}
-                style={OutterStyles.input}
-              />
+            <View style={OutterStyles.item}>
+              <Text style={OutterStyles.field}>Purpose</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <FontAwesomeIcon icon={faPenFancy} color={MAIN_COLOR} />
+                <TextInput
+                  onSubmitEditing={Keyboard.dismiss}
+                  onFocus={this.goToInput}
+                  maxLength={32}
+                  autoCapitalize="none"
+                  onChangeText={(text) => {
+                    this.setState({...this.state, purpose: text});
+                  }}
+                  value={this.state.purpose}
+                  style={OutterStyles.input}
+                />
+              </View>
             </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </KeyboardAvoidingView>
         <View style={styles.button}>
           <Button title="Confirm" color={MAIN_COLOR} onPress={this.onSubmit} />
         </View>
@@ -230,6 +240,10 @@ const styles = StyleSheet.create({
   },
   selectInput: {
     flex: 1,
+    height: 90,
+  },
+  selectItem: {
+    height: 90,
   },
   button: {
     alignSelf: 'center',
@@ -244,4 +258,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, {addReservations})(FormModal);
+export default connect(mapStateToProps, {addReservations, createMessage})(
+  FormModal,
+);

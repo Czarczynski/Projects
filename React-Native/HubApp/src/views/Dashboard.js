@@ -40,7 +40,7 @@ class Dashboard extends Component {
     const notActivated = this.props.reservations.filter((item) => !item.active);
     const activated = this.props.reservations.filter((item) => item.active);
     return (
-      <SafeAreaView style={styles.view}>
+      <View style={styles.view}>
         <ScrollView style={styles.container}>
           <Text style={styles.title}>Rented cars</Text>
           <View style={styles.section}>
@@ -77,7 +77,7 @@ class Dashboard extends Component {
           onPress={() => this.handleClick()}>
           <FontAwesomeIcon color={SMOKE_WHITE} size={20} icon={faPlus} />
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
     );
   }
 }

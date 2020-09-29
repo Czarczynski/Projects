@@ -51,7 +51,6 @@ export default StyleSheet.create({
   input: {
     flex: 1,
     height: Dimensions.get('window').height * 0.04,
-    // height: 40,
     paddingLeft: 10,
     borderRadius: 30,
     borderColor: MAIN_COLOR,
