@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:smart_cooking/app_config.dart';
 import 'package:dio/dio.dart';
+import 'package:smart_cooking/app_config.dart';
 
 import './error/error_handler.dart';
 import '../store/account_manager.dart';
 
 class SmartCookingHttpClient {
-  static final SmartCookingHttpClient _instance = SmartCookingHttpClient._internal();
-  bool external= false;
+  static final SmartCookingHttpClient _instance =
+      SmartCookingHttpClient._internal();
+  bool external = false;
+
   factory SmartCookingHttpClient() => _instance;
   final Dio _dioClient = Dio();
 
@@ -25,11 +27,16 @@ class SmartCookingHttpClient {
   Future<Response> post(url,
           {Map<String, dynamic> body, Map<String, dynamic> headers}) async =>
       ErrorHandler.makeRequestWithErrorHandler(_dioClient.post(url,
-          data: body==null ? null : encodeMap(body), options: Options(headers: headers)));
+          data: body == null ? null : encodeMap(body),
+          options: Options(headers: headers)));
 
   String encodeMap(Map data) {
-    return data.keys.map((key) => "${Uri.encodeComponent(key)}=${Uri.encodeComponent(data[key])}").join("&");
+    return data.keys
+        .map((key) =>
+            "${Uri.encodeComponent(key)}=${Uri.encodeComponent(data[key])}")
+        .join("&");
   }
+
   _handleDioInterceptors() {
     _dioClient.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {

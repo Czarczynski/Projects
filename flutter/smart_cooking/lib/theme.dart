@@ -23,7 +23,7 @@ class CustomThemes {
         color: LightThemeConfig.PURPLE_,
       ),
       textTheme: TextTheme(
-        title: TextStyle(
+          headline6: TextStyle(
           color: LightThemeConfig.BLUE_GRAY,
           fontFamily: 'DMSans',
           fontSize: 20,
@@ -40,32 +40,32 @@ class CustomThemes {
       color: LightThemeConfig.PURPLE_,
     ),
     textTheme: TextTheme(
-        title: TextStyle(
+        headline6: TextStyle(
           color: LightThemeConfig.BLUE_GRAY,
           fontFamily: 'DMSans',
           fontSize: 20,
           fontWeight: FontWeight.w500,
         ),
-        display1: TextStyle(
+        headline4: TextStyle(
           color: LightThemeConfig.WHITE,
           fontFamily: 'DMSans',
           fontSize: 16,
           fontWeight: FontWeight.w500,
           letterSpacing: 0,
         ),
-        display2: TextStyle(
+        headline3: TextStyle(
             color: LightThemeConfig.WHITE,
             fontFamily: 'DMSans',
             fontSize: 20,
             fontWeight: FontWeight.w700),
-        display4: TextStyle(
+        headline1: TextStyle(
           color: LightThemeConfig.ST_TROPAZ,
           fontFamily: 'DMSans',
           fontSize: 12,
           fontWeight: FontWeight.w500,
           letterSpacing: 0,
         ),
-        display3: TextStyle(
+        headline2: TextStyle(
             color: LightThemeConfig.VENETIAN_RED,
             fontFamily: 'DMSans',
             fontSize: 14,
@@ -76,7 +76,7 @@ class CustomThemes {
             fontSize: 20,
             letterSpacing: 0.5,
             fontWeight: FontWeight.w500),
-        body1: TextStyle(
+        bodyText1: TextStyle(
             color: LightThemeConfig.BLUE_GRANADE,
             fontFamily: 'OpenSans',
             fontSize: 12),
@@ -86,7 +86,7 @@ class CustomThemes {
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
-        subhead: TextStyle(
+        subtitle1: TextStyle(
           color: LightThemeConfig.BLACK,
           fontFamily: 'DMSans',
           fontSize: 18,
@@ -114,7 +114,7 @@ class CustomThemes {
         color: DarkThemeConfig.PURPLE_,
       ),
       textTheme: TextTheme(
-        title: TextStyle(
+        headline6: TextStyle(
           color: DarkThemeConfig.BLUE_GRAY,
           fontFamily: 'DMSans',
           fontSize: 20,
@@ -131,32 +131,32 @@ class CustomThemes {
       color: DarkThemeConfig.PURPLE_,
     ),
     textTheme: TextTheme(
-        title: TextStyle(
+        headline6: TextStyle(
           color: DarkThemeConfig.BLUE_GRAY,
           fontFamily: 'DMSans',
           fontSize: 20,
           fontWeight: FontWeight.w500,
         ),
-        display1: TextStyle(
+        headline4: TextStyle(
           color: DarkThemeConfig.GRAY_DARK,
           fontFamily: 'DMSans',
           fontSize: 16,
           fontWeight: FontWeight.w500,
           letterSpacing: 0,
         ),
-        display2: TextStyle(
+        headline3: TextStyle(
             color: DarkThemeConfig.WHITE,
             fontFamily: 'DMSans',
             fontSize: 20,
             fontWeight: FontWeight.w700),
-        display4: TextStyle(
+        headline1: TextStyle(
           color: DarkThemeConfig.ST_TROPAZ,
           fontFamily: 'DMSans',
           fontSize: 12,
           fontWeight: FontWeight.w500,
           letterSpacing: 0,
         ),
-        display3: TextStyle(
+        headline2: TextStyle(
             color: DarkThemeConfig.VENETIAN_RED,
             fontFamily: 'DMSans',
             fontSize: 14,
@@ -167,7 +167,7 @@ class CustomThemes {
             fontSize: 20,
             letterSpacing: 0.5,
             fontWeight: FontWeight.w500),
-        body1: TextStyle(
+        bodyText1: TextStyle(
             color: DarkThemeConfig.BLUE_GRANADE,
             fontFamily: 'OpenSans',
             fontSize: 12),
@@ -177,7 +177,7 @@ class CustomThemes {
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
-        subhead: TextStyle(
+        subtitle1: TextStyle(
           color: DarkThemeConfig.BLACK,
           fontFamily: 'DMSans',
           fontSize: 18,

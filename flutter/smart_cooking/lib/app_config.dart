@@ -42,7 +42,7 @@ class DarkThemeConfig {
   static const Color OLA_COLOR = Color(0xffbfd9cc);
   static const Color BLUE_GRANADE = Color(0xffd5d6b1);
   static const Color GRAY_DARK = Color(0xFFb2b1d6);
-  static const Color PURPLE_ = Color(0xFF8b8d50);
+  static const Color PURPLE_ = Color.fromRGBO(137, 120, 172, 1.0);
   static const Color BLUE_GRAY = Color(0xffdbd4cb);
   static const Color MINT_GREEN = Color(0xffe22049);
   static const Color ST_TROPAZ = Color(0xff887052);

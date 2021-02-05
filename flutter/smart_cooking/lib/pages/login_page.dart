@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage>
                       end: Alignment.bottomCenter,
                       colors: [Color(0xFF2c3541), Color(0xFF475970)])),
               child: Image.asset(
-                "assets/images/logo3.png",
+                "assets/images/logo.png",
                 frameBuilder: (BuildContext context, Widget child, int frame,
                     bool wasSynchronouslyLoaded) {
                   if (wasSynchronouslyLoaded) {
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage>
 }
 
 Column _myColumn(BuildContext context, Widget child, bool changer,
-    {animation = null}) {
+    {animation}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -124,7 +124,7 @@ Column _myColumn(BuildContext context, Widget child, bool changer,
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
-                      color: Theme.of(context).textTheme.display2.color,
+                      color: Theme.of(context).textTheme.headline3.color,
                     ),
                     height: MediaQuery.of(context).size.width * 0.1,
                     width: MediaQuery.of(context).size.width * 0.8,

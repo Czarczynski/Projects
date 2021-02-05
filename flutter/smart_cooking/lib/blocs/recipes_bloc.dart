@@ -29,7 +29,7 @@ class RecipesResultBloc extends ChangeNotifier {
       if (response.statusCode == 200)
         return RecipeModel.fromJson(json.decode(response.body));
       else
-        throw Exception(response.body);
+        throw Exception(response.request.url);
     } catch (error) {
       throw error;
     }
