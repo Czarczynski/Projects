@@ -9,8 +9,8 @@ class CustomThemes {
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
     // primarySwatch: Colors.brown,
-    primaryColor: Color(0xFF755A59),
-    backgroundColor: Color(0xFFE9E2E2),
+    primaryColor: Color(0xFF9B8887),
+    backgroundColor: Color(0xFFF3F3F3),
     accentColor: Color(0xFF332727),
 
   );

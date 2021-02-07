@@ -1,10 +1,9 @@
+import 'package:choffee/Pages/DrawerPage.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
-
-  // always marked "final".
 
   final String title;
 
@@ -30,12 +29,17 @@ class _MyHomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).backgroundColor,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).accentColor,
+        ),
+        elevation: 0,
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).accentColor),
         ),
       ),
+      drawer: DrawerPage(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -53,6 +57,7 @@ class _MyHomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 0,
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         backgroundColor: Theme.of(context).primaryColor,
