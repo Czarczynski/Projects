@@ -1,6 +1,8 @@
 import 'package:choffee/Pages/DrawerPage.dart';
+import 'package:choffee/components/Card.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -40,19 +42,20 @@ class _MyHomePageState extends State<HomePage> {
         ),
       ),
       drawer: DrawerPage(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+
           children: <Widget>[
-            Text('You have pushed the button this many times:',
-                style: TextStyle(color: Theme.of(context).accentColor)),
-            Text(
-              '$_counter',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4
-                  .copyWith(color: Theme.of(context).accentColor),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:20.0),
+              child: Text("Updates", style: Theme.of(context).textTheme.headline3),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40.0),
+              child: CardComponent(title: "Hey Maja!", text: "It's my new mobile App!"),
+            )
           ],
         ),
       ),
