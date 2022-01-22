@@ -36,7 +36,7 @@
     "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
-    "node-fetch": ">=2.6.1",
+    "node-fetch": ">=3.1.1",
     "@babel/core": "7.11.1",
     "@babel/runtime": "7.11.1",
     "@react-native-community/eslint-config": "1.1.0",
